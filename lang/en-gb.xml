@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<locale>
+    <language>
+        
+    </language>
+    
+    <item id_flag = "menu_file">File</item>
+    <item id_flag = "menu_item_new" tooltip="Create a new project" mnemonic = "N">New...</item>
+    <item id_flag = "menu_item_exit">Exit</item>
+    
+    <item id_flag = "menu_help">Help</item>
+    <item id_flag = "menu_item_about" tooltip="About this program..." mnemonic = "A">About...</item>
+    
+    
+</locale>
