@@ -29,6 +29,7 @@ class MainFrame extends JFrame implements Runnable
         this.setLocationRelativeTo(null);
         
         this.setJMenuBar(new MainMenuBar());
+        this.add(new MainPanel());
         
         this.setVisible(true);
     }
