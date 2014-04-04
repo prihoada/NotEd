@@ -8,6 +8,7 @@
     
     <item id_flag = "menu_file">File</item>
     <item id_flag = "menu_item_new" tooltip="Create a new project" mnemonic = "N">New...</item>
+    <item id_flag = "menu_item_open" tooltip="Open an existing project" mnemonic = "O">Open...</item>
     <item id_flag = "menu_item_exit">Exit</item>
     
     <item id_flag = "menu_help">Help</item>
