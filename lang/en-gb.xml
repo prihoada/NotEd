@@ -14,5 +14,8 @@
     <item id_flag = "menu_help">Help</item>
     <item id_flag = "menu_item_about" tooltip="About this program..." mnemonic = "A">About...</item>
     
+    <item id_flag = "xml_file_description">MusicXML file</item>
+    <item id_flag = "error_fileNotFound" tooltip="Selected file/s not found.">Error</item>
+    <item id_flag = "error_fileNotValid" tooltip="Selected file/s not a valid musicXML file.">Error</item>
     
 </locale>

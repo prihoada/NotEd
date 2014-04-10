@@ -1,6 +1,7 @@
 
 package cz.cvut.fit.project.noted.menus;
 
+import cz.cvut.fit.project.noted.menus.actions.OpenProjectAction;
 import cz.cvut.fit.project.noted.localization.LocalizationManager;
 import cz.cvut.fit.project.noted.menus.actions.ExitAction;
 import cz.cvut.fit.project.noted.menus.actions.NewProjectAction;

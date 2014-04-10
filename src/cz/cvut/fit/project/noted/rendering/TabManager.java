@@ -36,6 +36,7 @@ public class TabManager extends JPanel
     public void addTab(String title, Tab tab)
     {
         this.tabs.addTab(title, tab);
+        this.tabs.setSelectedComponent(tab);
     }
     
     /**

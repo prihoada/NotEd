@@ -48,11 +48,11 @@ public class ProxyMusicHandler implements IModelProvider
     
     
     
-
+   
     @Override
-    public Model getModel(String filePath) throws FileNotFoundException
+    public Model getModel(String filePath) throws FileNotFoundException, ParsingException
     {
-        
+
         File file = new File(filePath);
         InputStream in = new FileInputStream(file);
         ScorePartwise part = null;
@@ -62,7 +62,7 @@ public class ProxyMusicHandler implements IModelProvider
         }
         catch (JAXBException | SAXException | ParserConfigurationException ex)
         {
-            Logger.getLogger(ProxyMusicHandler.class.getName()).log(Level.SEVERE, null, ex);
+            throw new ParsingException("Parsing error");
         }
         
         Model model = new Model();
@@ -70,6 +70,10 @@ public class ProxyMusicHandler implements IModelProvider
         model.setFilePath(filePath);
         
         return model;
+    }
+    public Model getModel(File file) throws FileNotFoundException, ParsingException
+    {
+        return getModel(file.getAbsolutePath());
     }
     
     

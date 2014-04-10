@@ -13,8 +13,9 @@ public interface IModelProvider
      * @param filePath path to the file.
      * @return instance of Model containing parsed hierarchy.
      * @throws FileNotFoundException 
+     * @throws ParsingException 
      */
-    public Model getModel(String filePath) throws FileNotFoundException;
+    public Model getModel(String filePath) throws FileNotFoundException, ParsingException;
     
 
 }

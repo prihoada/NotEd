@@ -1,6 +1,7 @@
 
 package cz.cvut.fit.project.noted.rendering;
 
+import cz.cvut.fit.project.noted.model.Model;
 import javax.swing.JPanel;
 
 /**
@@ -9,5 +10,21 @@ import javax.swing.JPanel;
  */
 public class Tab extends JPanel
 {
-    //TODO
+    
+    private Model model;
+    
+    public Tab()
+    {
+    }
+    
+    public Model getModel()
+    {
+        return model;
+    }
+
+    public Tab setModel(Model model)
+    {
+        this.model = model;
+        return this;
+    }
 }
