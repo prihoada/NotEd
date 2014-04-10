@@ -23,6 +23,7 @@ public class MainPanel extends JPanel
         
         //Temporary
         TabManager.getInstance().addTab("Test tab", new Tab());
+        TabManager.getInstance().addTab("Test tab2", new Tab());
     }
     
     

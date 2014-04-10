@@ -20,7 +20,7 @@ import org.xml.sax.SAXException;
  *
  * @author Adam Příhoda
  */
-public class ProxyMusicHandler implements IlModelProvider
+public class ProxyMusicHandler implements IModelProvider
 {
     //Singleton
     private static ProxyMusicHandler instance;

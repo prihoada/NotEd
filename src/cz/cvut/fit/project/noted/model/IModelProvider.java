@@ -6,7 +6,7 @@ import java.io.FileNotFoundException;
  *
  * @author Adam Příhoda
  */
-public interface IlModelProvider
+public interface IModelProvider
 {
     /**
      * Parses a musicXML file on the given path.
