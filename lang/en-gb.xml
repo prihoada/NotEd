@@ -9,6 +9,8 @@
     <item id_flag = "menu_file">File</item>
     <item id_flag = "menu_item_new" tooltip="Create a new project" mnemonic = "N">New...</item>
     <item id_flag = "menu_item_open" tooltip="Open an existing project" mnemonic = "O">Open...</item>
+    <item id_flag = "menu_item_close" tooltip="Close an open project" mnemonic = "C">Close</item>
+    <item id_flag = "tab_close_button">Close the tab</item>
     <item id_flag = "menu_item_exit">Exit</item>
     
     <item id_flag = "menu_help">Help</item>
@@ -17,5 +19,7 @@
     <item id_flag = "xml_file_description">MusicXML file</item>
     <item id_flag = "error_fileNotFound" tooltip="Selected file/s not found.">Error</item>
     <item id_flag = "error_fileNotValid" tooltip="Selected file/s not a valid musicXML file.">Error</item>
+    
+    <item id_flag = "confirm_tab_close" tooltip="Would you like to save the project?">Save project?</item>
     
 </locale>

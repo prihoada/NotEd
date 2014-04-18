@@ -46,6 +46,7 @@ public class OpenProjectAction implements ActionListener
                     {
                         Model model = ProxyMusicHandler.getInstance().getModel(file);
                         Tab newTab = new Tab();
+                        newTab.setSaved(true);
                         newTab.setModel(model);
                         TabManager.getInstance().addTab(file.getName(), newTab);
                     }

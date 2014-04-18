@@ -10,13 +10,15 @@ import javax.swing.JPanel;
  */
 public class Tab extends JPanel
 {
-    
+    private boolean saved;
+
     private Model model;
     
     public Tab()
     {
+        saved = false;
     }
-    
+
     public Model getModel()
     {
         return model;
@@ -26,5 +28,14 @@ public class Tab extends JPanel
     {
         this.model = model;
         return this;
+    }
+    
+    public boolean isSaved()
+    {
+        return saved;
+    }
+    public void setSaved(boolean saved)
+    {
+        this.saved = saved;
     }
 }

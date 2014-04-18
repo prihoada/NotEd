@@ -3,8 +3,10 @@ package cz.cvut.fit.project.noted.menus;
 
 import cz.cvut.fit.project.noted.menus.actions.OpenProjectAction;
 import cz.cvut.fit.project.noted.localization.LocalizationManager;
+import cz.cvut.fit.project.noted.menus.actions.CloseProjectAction;
 import cz.cvut.fit.project.noted.menus.actions.ExitAction;
 import cz.cvut.fit.project.noted.menus.actions.NewProjectAction;
+import cz.cvut.fit.project.noted.rendering.TabManager;
 import java.awt.event.KeyEvent;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -33,6 +35,15 @@ class FileMenu extends JMenu {
         openProject.setMnemonic(LocalizationManager.getInstance().getString("menu_item_open").getMnemonicKeyCode());
         this.add(openProject);
         
+        
+        JMenuItem closeProject = new JMenuItem(LocalizationManager.getInstance().getString("menu_item_close").getName());
+        closeProject.setEnabled(false);
+        CloseProjectAction closeAction = new CloseProjectAction(closeProject);
+        closeProject.addActionListener(closeAction);
+        closeProject.setToolTipText(LocalizationManager.getInstance().getString("menu_item_close").getTooltip());
+        closeProject.setMnemonic(LocalizationManager.getInstance().getString("menu_item_close").getMnemonicKeyCode());
+        TabManager.getInstance().addChangeListener(closeAction);
+        this.add(closeProject);
         
         this.addSeparator();
         
