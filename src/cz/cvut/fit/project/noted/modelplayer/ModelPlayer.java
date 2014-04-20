@@ -129,12 +129,17 @@ public class ModelPlayer
         result.append("[Pitch: ").append(pitch.getStep()).append(pitch.getOctave())
                 .append(", Duration: ").append(duration).append(", Type: ").append(type.getValue()).append("]");
 
+        addNewNote(pitch, type, duration);
+
+        return result.toString();
+    }
+
+    private void addNewNote(Pitch pitch, NoteType type, BigDecimal duration)
+    {
         jm.music.data.Note theNote = new jm.music.data.Note();
         theNote.setPitch(proxyPitchToJMC(pitch.getStep(), pitch.getOctave()));
         theNote.setDuration(proxyTypeToJMCDuration(type.getValue()));
         phrase.addNote(theNote);
-
-        return result.toString();
     }
 
     private int proxyPitchToJMC(Step step, int octave)
