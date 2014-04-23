@@ -7,6 +7,7 @@ import cz.cvut.fit.project.noted.menus.actions.CloseProjectAction;
 import cz.cvut.fit.project.noted.menus.actions.ExitAction;
 import cz.cvut.fit.project.noted.menus.actions.NewProjectAction;
 import cz.cvut.fit.project.noted.rendering.TabManager;
+import cz.cvut.fit.project.noted.utils.TabbedPaneDisableComponentChangeListener;
 import java.awt.event.KeyEvent;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -38,11 +39,10 @@ class FileMenu extends JMenu {
         
         JMenuItem closeProject = new JMenuItem(LocalizationManager.getInstance().getString("menu_item_close").getName());
         closeProject.setEnabled(false);
-        CloseProjectAction closeAction = new CloseProjectAction(closeProject);
-        closeProject.addActionListener(closeAction);
+        closeProject.addActionListener(new CloseProjectAction());
         closeProject.setToolTipText(LocalizationManager.getInstance().getString("menu_item_close").getTooltip());
         closeProject.setMnemonic(LocalizationManager.getInstance().getString("menu_item_close").getMnemonicKeyCode());
-        TabManager.getInstance().addChangeListener(closeAction);
+        TabManager.getInstance().addChangeListener(new TabbedPaneDisableComponentChangeListener(closeProject));
         this.add(closeProject);
         
         this.addSeparator();

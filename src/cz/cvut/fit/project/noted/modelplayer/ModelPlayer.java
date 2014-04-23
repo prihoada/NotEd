@@ -36,13 +36,24 @@ public class ModelPlayer
     private final Phrase phrase;
     private final double newTempo;
 
+    public ModelPlayer(Model model)
+    {
+        proxyMusicHandler = null;
+        filePath = null;
+        this.model = model;
+        newTempo = 120;
+        phrase = new Phrase();
+        phrase.setTempo(newTempo);
+        phrase.setDynamic(JMC.FORTISSIMO);
+    }
+    
     public ModelPlayer(String filePath) throws FileNotFoundException, ParsingException
     {
         /**
          * temporary for testing purpose TestFile...
          */
-        filePath = "assets/musixXMLTest_MORE.xml";
-        newTempo = 130;
+        filePath = "assets/musixXMLTest.xml";
+        newTempo = 120;
 
         this.filePath = filePath;
         proxyMusicHandler = ProxyMusicHandler.getInstance();

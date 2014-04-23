@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
 import jm.JMC;
+import jm.util.View;
 
 /**
  *
@@ -19,7 +20,7 @@ public class PlayTest implements JMC
 {
     public static void main(String[] args) throws FileNotFoundException, ParsingException
     {
-        final ModelPlayer modelPlayer = new ModelPlayer(null);
+        final ModelPlayer modelPlayer = new ModelPlayer("");
         System.out.println(modelPlayer.getReadyToPlay());
        
         JFrame jf = new JFrame();
@@ -39,6 +40,6 @@ public class PlayTest implements JMC
         jf.setSize(200, 100);
         jf.setLocationRelativeTo(null);
         jf.setVisible(true);
-        //View.sketch(modelPlayer.getPhrase());
+        View.sketch(modelPlayer.getPhrase());
     }
 }

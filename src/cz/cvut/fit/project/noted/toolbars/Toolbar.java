@@ -4,6 +4,9 @@ package cz.cvut.fit.project.noted.toolbars;
 
 import cz.cvut.fit.project.noted.model.ParsingException;
 import cz.cvut.fit.project.noted.modelplayer.ModelPlayer;
+import cz.cvut.fit.project.noted.rendering.TabManager;
+import cz.cvut.fit.project.noted.toolbars.actions.PlayAction;
+import cz.cvut.fit.project.noted.utils.TabbedPaneDisableComponentChangeListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FileNotFoundException;
@@ -31,27 +34,8 @@ public class Toolbar extends JToolBar
         JButton playButton = new JButton(new ImageIcon("assets/images/playButton.png"));
         playButton.setFocusPainted(false);
         this.add(playButton);
-        
-        playButton.addActionListener(new ActionListener()
-        {
-
-            public void actionPerformed(ActionEvent e)
-            {
-                try
-                {
-                    ModelPlayer modelPlayer = new ModelPlayer(null);
-                    JOptionPane.showMessageDialog(null, "Score to be played...\n" + modelPlayer.getReadyToPlay(), "Information",
-                            JOptionPane.INFORMATION_MESSAGE);
-                    modelPlayer.play();
-                } catch (FileNotFoundException | ParsingException ex)
-                {
-                    Logger.getLogger(Toolbar.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
-            }
-        });
+        TabManager.getInstance().addChangeListener(new TabbedPaneDisableComponentChangeListener(playButton));
+        playButton.addActionListener(new PlayAction());
     }
-    
-    
     
 }
