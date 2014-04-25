@@ -1,6 +1,7 @@
 
 package cz.cvut.fit.project.noted.menus;
 
+import cz.cvut.fit.project.noted.menus.actions.SaveProjectAction;
 import cz.cvut.fit.project.noted.menus.actions.OpenProjectAction;
 import cz.cvut.fit.project.noted.localization.LocalizationManager;
 import cz.cvut.fit.project.noted.menus.actions.CloseProjectAction;
@@ -35,6 +36,25 @@ class FileMenu extends JMenu {
         openProject.setToolTipText(LocalizationManager.getInstance().getString("menu_item_open").getTooltip());
         openProject.setMnemonic(LocalizationManager.getInstance().getString("menu_item_open").getMnemonicKeyCode());
         this.add(openProject);
+        
+        this.addSeparator();
+        
+        JMenuItem save = new JMenuItem(LocalizationManager.getInstance().getString("menu_item_save").getName());
+        save.addActionListener(new SaveProjectAction(false));
+        save.setToolTipText(LocalizationManager.getInstance().getString("menu_item_save").getTooltip());
+        save.setMnemonic(LocalizationManager.getInstance().getString("menu_item_save").getMnemonicKeyCode());
+        save.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.CTRL_MASK));
+        TabManager.getInstance().addChangeListener(new TabbedPaneDisableComponentChangeListener(save));
+        this.add(save);
+        
+        JMenuItem saveAs = new JMenuItem(LocalizationManager.getInstance().getString("menu_item_saveAs").getName());
+        saveAs.addActionListener(new SaveProjectAction(true));
+        saveAs.setToolTipText(LocalizationManager.getInstance().getString("menu_item_saveAs").getTooltip());
+        saveAs.setMnemonic(LocalizationManager.getInstance().getString("menu_item_saveAs").getMnemonicKeyCode());
+        TabManager.getInstance().addChangeListener(new TabbedPaneDisableComponentChangeListener(saveAs));
+        this.add(saveAs);
+        
+        
         
         
         JMenuItem closeProject = new JMenuItem(LocalizationManager.getInstance().getString("menu_item_close").getName());

@@ -44,7 +44,8 @@ public class TabTitleComponent extends JPanel
                 int i = pane.indexOfTabComponent(TabTitleComponent.this);
                 if (i != -1)
                 {
-                    return pane.getTitleAt(i);
+                    Tab tab = TabManager.getInstance().getTabAt(i);
+                    return pane.getTitleAt(i) + (tab.isSaved() == false ? "*" : "");
                 }
                 return null;
             }

@@ -1,8 +1,10 @@
 package cz.cvut.fit.project.noted.menus.actions;
 
+import cz.cvut.fit.project.noted.localization.LocalizationManager;
+import cz.cvut.fit.project.noted.rendering.Tab;
+import cz.cvut.fit.project.noted.rendering.TabManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,7 +17,7 @@ public class NewProjectAction implements ActionListener
     public void actionPerformed(ActionEvent e)
     {
 
-        JOptionPane.showMessageDialog(null, "Not yet implemented");
+        TabManager.getInstance().addTab(LocalizationManager.getInstance().getString("file_untitled").getName(), new Tab());
     
     }
     

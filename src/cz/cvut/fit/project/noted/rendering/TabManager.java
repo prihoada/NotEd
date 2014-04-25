@@ -1,6 +1,7 @@
 package cz.cvut.fit.project.noted.rendering;
 
 import cz.cvut.fit.project.noted.localization.LocalizationManager;
+import cz.cvut.fit.project.noted.menus.actions.SaveProjectAction;
 import java.awt.BorderLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -53,6 +54,16 @@ public class TabManager extends JPanel
         this.tabs.removeTabAt(index);
     }
     
+    public String getTitleAt(int index)
+    {
+        return tabs.getTitleAt(index);
+    }
+    public void setTitleAt(int index, String title)
+    {
+        tabs.getTabComponentAt(index).invalidate();
+        tabs.setTitleAt(index, title);
+    }
+    
     /**
      * Attempts to close the tab. May prompt for file save.
      * @param index index of the tab to close.
@@ -73,8 +84,7 @@ public class TabManager extends JPanel
             
             if(result == JOptionPane.YES_OPTION)
             {
-                //TODO
-                //open save dialog
+                tab.save(false);
             }
             else if(result == JOptionPane.NO_OPTION)
             {
@@ -100,6 +110,18 @@ public class TabManager extends JPanel
         return this.tabs.getSelectedIndex();
     }
     
+    public Tab getTabAt(int index)
+    {
+        return (Tab) tabs.getComponentAt(index);
+    }
+    public int getTabIndex(Tab tab)
+    {
+        return tabs.indexOfComponent(tab);
+    }
+    public int getTabCount()
+    {
+        return tabs.getTabCount();
+    }
     /**
      * Adds a change listener to the tabbed pane.
      * @param listener listener to add.

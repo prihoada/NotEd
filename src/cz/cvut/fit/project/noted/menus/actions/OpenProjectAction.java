@@ -8,6 +8,7 @@ import cz.cvut.fit.project.noted.model.ParsingException;
 import cz.cvut.fit.project.noted.model.ProxyMusicHandler;
 import cz.cvut.fit.project.noted.rendering.Tab;
 import cz.cvut.fit.project.noted.rendering.TabManager;
+import cz.cvut.fit.project.noted.utils.FileUtils;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -26,12 +27,13 @@ public class OpenProjectAction implements ActionListener
     
     public OpenProjectAction()
     {
-        chooser = new XMLFileChooser();
+        chooser = XMLFileChooser.getInstance();
     }
 
     @Override
     public void actionPerformed(ActionEvent e)
     {
+        chooser.setSelectedFile(new File(""));
         int result = chooser.showOpenDialog(null);
        
         switch(result)
@@ -48,7 +50,7 @@ public class OpenProjectAction implements ActionListener
                         Tab newTab = new Tab();
                         newTab.setSaved(true);
                         newTab.setModel(model);
-                        TabManager.getInstance().addTab(file.getName(), newTab);
+                        TabManager.getInstance().addTab(FileUtils.removeExtension(file.getName()), newTab);
                     }
                     catch (FileNotFoundException ex)
                     {
