@@ -33,7 +33,8 @@ public class ModelPlayer
      private Sequencer sequencer;
      private Synthesizer synthesizer;
      private final float volume = 0.9f;*/
-    private final Phrase phrase;
+    
+    private Phrase phrase;
     private final double newTempo;
 
     public ModelPlayer(Model model)
@@ -70,6 +71,7 @@ public class ModelPlayer
 
     public String getReadyToPlay()
     {
+        phrase = new Phrase();
         ScorePartwise score = model.getModelHierarchy();
         PartList partList = score.getPartList();
         /*List<Object> partListMembers = partList.getPartGroupOrScorePart();
