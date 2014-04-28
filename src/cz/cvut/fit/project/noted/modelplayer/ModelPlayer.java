@@ -71,7 +71,7 @@ public class ModelPlayer
 
     public String getReadyToPlay()
     {
-        phrase = new Phrase();
+        phrase.empty();// = new Phrase();
         ScorePartwise score = model.getModelHierarchy();
         PartList partList = score.getPartList();
         /*List<Object> partListMembers = partList.getPartGroupOrScorePart();
