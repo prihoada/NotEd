@@ -14,7 +14,6 @@ import javax.swing.UnsupportedLookAndFeelException;
  * @author Nguyen, Viet Bach
  * @author David Vavricka
  * @author Karel Smejkal
- * kuggk
  */
 public class Main {
 
