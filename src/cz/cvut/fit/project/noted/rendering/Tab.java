@@ -6,6 +6,8 @@ import cz.cvut.fit.project.noted.model.Model;
 import cz.cvut.fit.project.noted.model.ProxyMusicHandler;
 import cz.cvut.fit.project.noted.modelplayer.ModelPlayer;
 import cz.cvut.fit.project.noted.utils.FileUtils;
+import java.awt.Color;
+import java.awt.FlowLayout;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -23,14 +25,20 @@ public class Tab extends JPanel
 
     private Model model;
     private ModelPlayer player;
-    
+    private RenderPanel renderPanel;
     
     public Tab()
     {
         saved = false;
         saveFile = null;
         model = new Model();
+        renderPanel = new RenderPanel(model);
+        this.add(renderPanel);
         player = new ModelPlayer(model);
+        
+        this.setOpaque(true);
+        this.setBackground(Color.WHITE);
+        this.setLayout(new FlowLayout());
     }
 
     public Model getModel()
@@ -45,6 +53,9 @@ public class Tab extends JPanel
     {
         this.model = model;
         this.player = new ModelPlayer(model);
+        if(renderPanel != null) this.remove(renderPanel);
+        renderPanel = new RenderPanel(model);
+        this.add(renderPanel);
         return this;
     }
     
