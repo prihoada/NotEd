@@ -29,14 +29,14 @@ public class ModelPlayer implements Runnable
     //private volatile boolean isRunning;
     private boolean isPlaying;
     private final Model model;
-    private final ProxyMusicHandler proxyMusicHandler;
+    //private final ProxyMusicHandler proxyMusicHandler;
     private final Phrase phrase;
     private final double newTempo;
     private int from;
 
     public ModelPlayer(Model model)
     {
-        proxyMusicHandler = null;
+        //proxyMusicHandler = null;
         this.model = model;
         newTempo = 120;
         phrase = new Phrase();
