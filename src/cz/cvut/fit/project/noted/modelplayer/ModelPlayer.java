@@ -23,57 +23,74 @@ import jm.JMC;
  *
  * @author Nguyen Viet Bach
  */
-public class ModelPlayer
+public class ModelPlayer implements Runnable
 {
+    private Thread playerThread;
+    //private volatile boolean isRunning;
+    private boolean isPlaying;
     private final Model model;
     private final ProxyMusicHandler proxyMusicHandler;
-    private final String filePath;
-
-    /* private Sequence sequence;
-     private Sequencer sequencer;
-     private Synthesizer synthesizer;
-     private final float volume = 0.9f;*/
-    
-    private Phrase phrase;
+    private final Phrase phrase;
     private final double newTempo;
+    private int from;
 
     public ModelPlayer(Model model)
     {
         proxyMusicHandler = null;
-        filePath = null;
         this.model = model;
         newTempo = 120;
         phrase = new Phrase();
         phrase.setTempo(newTempo);
-        phrase.setDynamic(JMC.FORTISSIMO);
-    }
-    
-    public ModelPlayer(String filePath) throws FileNotFoundException, ParsingException
-    {
-        /**
-         * temporary for testing purpose TestFile...
-         */
-        filePath = "assets/musixXMLTest.xml";
-        newTempo = 120;
-
-        this.filePath = filePath;
-        proxyMusicHandler = ProxyMusicHandler.getInstance();
-        model = proxyMusicHandler.getModel(this.filePath);
-        phrase = new Phrase();
-        phrase.setTempo(newTempo);
-        phrase.setDynamic(JMC.FORTISSIMO);
+        phrase.setDynamic(JMC.PIANISSIMO);
+        from = 0;
+        isPlaying = false;
+        //jm.util.Play.midi();
     }
 
     public void play()
     {
-        jm.util.Play.midi(phrase);
+        if (!isPlaying)
+        {
+            playerThread = new Thread(this);
+            playerThread.start();
+        }
+    }
+
+    public void stop()
+    {
+        if (isPlaying)
+        {
+            jm.util.Play.stopMidi();
+            isPlaying = false;
+        }
+    }
+
+    /**
+     *
+     */
+    @Override
+    public void run()
+    {
+        if (phrase.length() > 0)
+        {            
+            isPlaying = true;
+            jm.util.Play.midi(phrase, false);            
+            isPlaying = false;
+        }
     }
 
     public String getReadyToPlay()
     {
-        phrase.empty();// = new Phrase();
+        return getReadyToPlay(0);
+    }
+
+    public String getReadyToPlay(int from)
+    {
+        this.from = from;
+        phrase.empty();
+        //phrase.setTempo(170);
         ScorePartwise score = model.getModelHierarchy();
-        PartList partList = score.getPartList();
+        //PartList partList = score.getPartList();
         /*List<Object> partListMembers = partList.getPartGroupOrScorePart();
          List<ScorePart> scoreParts = new ArrayList<>();
          List<PartGroup> partGroups = new ArrayList<>();
@@ -104,7 +121,7 @@ public class ModelPlayer
     {
         StringBuilder result = new StringBuilder();
         List<Measure> measures = part.getMeasure();
-        for (int j = 0; j < measures.size(); j++)
+        for (int j = from; j < measures.size(); j++)
         {
             result.append("\n   Measure number: ").append(measures.get(j).getNumber()).append("      ").append(printMeasure(measures.get(j)));
         }
@@ -117,6 +134,7 @@ public class ModelPlayer
         Attributes attributes = null;
         com.audiveris.proxymusic.Note note = null;
         List<Object> objs = measure.getNoteOrBackupOrForward();
+
         for (int k = 0; k < objs.size(); k++)
         {
             Object obj = objs.get(k);

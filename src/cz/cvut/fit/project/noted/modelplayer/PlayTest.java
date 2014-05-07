@@ -18,10 +18,10 @@ import jm.util.View;
  */
 public class PlayTest implements JMC
 {
-    public static void main(String[] args) throws FileNotFoundException, ParsingException
+    /*public static void main(String[] args) throws FileNotFoundException, ParsingException
     {
-        final ModelPlayer modelPlayer = new ModelPlayer("");
-        System.out.println(modelPlayer.getReadyToPlay());
+        final ModelPlayer modelPlayer = new ModelPlayer("assets/musixXMLTest_MORE.xml");
+        System.out.println(modelPlayer.getReadyToPlay(2));
        
         JFrame jf = new JFrame();
         JButton jb = new JButton("Click to play");
@@ -32,6 +32,7 @@ public class PlayTest implements JMC
             public void actionPerformed(ActionEvent ae)
             {
                 modelPlayer.play();
+                
             }
         });
         jf.add(jb);
@@ -41,5 +42,5 @@ public class PlayTest implements JMC
         jf.setLocationRelativeTo(null);
         jf.setVisible(true);
         View.sketch(modelPlayer.getPhrase());
-    }
+    }*/
 }

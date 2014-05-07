@@ -6,6 +6,7 @@ import cz.cvut.fit.project.noted.model.ParsingException;
 import cz.cvut.fit.project.noted.modelplayer.ModelPlayer;
 import cz.cvut.fit.project.noted.rendering.TabManager;
 import cz.cvut.fit.project.noted.toolbars.actions.PlayAction;
+import cz.cvut.fit.project.noted.toolbars.actions.StopAction;
 import cz.cvut.fit.project.noted.utils.TabbedPaneDisableComponentChangeListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -36,6 +37,12 @@ public class Toolbar extends JToolBar
         this.add(playButton);
         TabManager.getInstance().addChangeListener(new TabbedPaneDisableComponentChangeListener(playButton));
         playButton.addActionListener(new PlayAction());
+        
+        JButton stopButton = new JButton(new ImageIcon("assets/images/stopButton.png"));
+        stopButton.setFocusPainted(false);
+        this.add(stopButton);
+        TabManager.getInstance().addChangeListener(new TabbedPaneDisableComponentChangeListener(stopButton));
+        stopButton.addActionListener(new StopAction());
     }
     
 }

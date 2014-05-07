@@ -2,3 +2,9 @@ nbproject/
 .idea/
 
 /build/
+/dist
+build.xml
+manifest.mf
+README.md
+src/cz/cvut/fit/project/noted/modelplayer/test/
+/libs/
