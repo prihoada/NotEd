@@ -16,11 +16,8 @@ import com.audiveris.proxymusic.PartList;
 import com.audiveris.proxymusic.Pitch;
 import com.audiveris.proxymusic.ScorePartwise;
 import cz.cvut.fit.project.noted.model.Model;
-import cz.cvut.fit.project.noted.model.ProxyMusicHandler;
 import java.util.List;
 import javax.swing.JPanel;
-import jm.JMC;
-import jm.music.data.Phrase;
 
 /**
  *
