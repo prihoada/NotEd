@@ -6,6 +6,7 @@ import cz.cvut.fit.project.noted.musicrenderer.model.BeamDirection;
 import cz.cvut.fit.project.noted.musicrenderer.model.Duration;
 import cz.cvut.fit.project.noted.musicrenderer.svg.SVGRepository;
 import cz.cvut.fit.project.noted.musicrenderer.svg.SvgSymbol;
+import java.awt.BasicStroke;
 import java.awt.Graphics2D;
 
 /**

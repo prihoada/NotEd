@@ -18,6 +18,7 @@ import cz.cvut.fit.project.noted.musicrenderer.model.AccidentalType;
 import cz.cvut.fit.project.noted.musicrenderer.model.BeamDirection;
 import cz.cvut.fit.project.noted.musicrenderer.model.Clef;
 import cz.cvut.fit.project.noted.musicrenderer.model.Duration;
+import java.awt.BasicStroke;
 
 /**
  * Main panel for the renderer.
@@ -44,6 +45,20 @@ public class RenderPanel extends JPanel{
         
         
         BarGlyph bar = new BarGlyph();
+        
+        
+        bar.addGlyph(new NoteHeadGlyph(Duration.Whole));
+        bar.addGlyph(new NoteHeadGlyph(Duration.Half));
+        bar.addGlyph(new NoteHeadGlyph(Duration.Quarter));
+        bar.addGlyph(new NoteHeadGlyph(Duration.Eighth));
+        bar.addGlyph(new NoteHeadGlyph(Duration.Sixteenth));
+        bar.addGlyph(new NoteHeadGlyph(Duration.ThirtySecond));
+        bar.addGlyph(new NoteHeadGlyph(Duration.SixtyFourth));
+        
+        
+        
+        
+        
         bar.addGlyph(new ClefGlyph(Clef.G2));
         bar.addGlyph(new ClefGlyph(Clef.F4));
         bar.addGlyph(new ClefGlyph(Clef.Neutral));
@@ -65,14 +80,6 @@ public class RenderPanel extends JPanel{
         bar.addGlyph(new AccidentalGlyph(AccidentalType.DoubleSharp));
 
         
-        
-        bar.addGlyph(new NoteHeadGlyph(Duration.Whole));
-        bar.addGlyph(new NoteHeadGlyph(Duration.Half));
-        bar.addGlyph(new NoteHeadGlyph(Duration.Quarter));
-        bar.addGlyph(new NoteHeadGlyph(Duration.Eighth));
-        bar.addGlyph(new NoteHeadGlyph(Duration.Sixteenth));
-        bar.addGlyph(new NoteHeadGlyph(Duration.ThirtySecond));
-        bar.addGlyph(new NoteHeadGlyph(Duration.SixtyFourth));
         
         
         bar.addGlyph(new FooterGlyph(Duration.Eighth, BeamDirection.DOWN));

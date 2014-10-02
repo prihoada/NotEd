@@ -71,7 +71,7 @@ public class SvgGlyph extends Glyph {
      * @param graphics 
      */
     @Override
-    public void paint(int x, int y, Graphics2D g) {
+    public void paint(int xOrig, int yOrig, Graphics2D g) {
         
         /**
          * previous control point. Used for shorthand curves.
@@ -86,6 +86,8 @@ public class SvgGlyph extends Glyph {
          */
         SvgCommand.TYPE lastCommandType = null;
         
+        float x = xOrig;
+        float y = yOrig;
         //correct for svg symbol positon
         x += offsetX;
         y += offsetY;

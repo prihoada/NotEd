@@ -6,7 +6,10 @@ import cz.cvut.fit.project.noted.musicrenderer.glyphs.NoteHeadGlyph;
 import cz.cvut.fit.project.noted.musicrenderer.glyphs.base.Glyph;
 import cz.cvut.fit.project.noted.musicrenderer.model.BeamDirection;
 import cz.cvut.fit.project.noted.musicrenderer.model.Duration;
+import java.awt.BasicStroke;
 import java.awt.Graphics2D;
+import java.awt.Point;
+import java.awt.Stroke;
 import java.util.ArrayList;
 
 /**
@@ -74,20 +77,48 @@ public class BeamHandler extends Glyph
             if(note.getDuration() != Duration.Whole)
             {
                 
-                //paint the stem
-                g.drawLine(x + note.getSymbolWidth() - 1,
-                           y + note.getY(),
-                           x + note.getSymbolWidth(),
-                           y + note.getY() -30);
+                Stroke originalStroke = g.getStroke();
+                g.setStroke(new BasicStroke(1.5f));
                 
+                //paint the stem
+                if(this.direction == BeamDirection.UP)
+                {
+                    g.drawLine(x + note.getSymbolWidth() - 1,
+                           y + note.getY() + 3,
+                           x + note.getSymbolWidth() - 1,
+                           y + note.getY() - 25);
+                }
+                else
+                {
+                    g.drawLine(x,
+                           y + note.getY() + 5,
+                           x,
+                           y + note.getY() + 35);
+                }
+                
+                g.setStroke(originalStroke);
                 
                 //half and quarter notes don't have a footer
                 if(note.getDuration() != Duration.Half && note.getDuration() != Duration.Quarter)
                 {
                     FooterGlyph footer = new FooterGlyph(note.getDuration(), this.direction);
-                    footer.setY(note.getY() - 30);
-                    footer.doLayout();
-                    footer.paint(x + note.getSymbolWidth(), y - 30, g);
+                    
+                    if(this.direction == BeamDirection.UP)
+                    {
+                        footer.setY(note.getY() - 30);
+                        footer.doLayout();
+                        footer.paint(x + note.getSymbolWidth() - 1, y - 30, g);
+                    }
+                    else
+                    {
+                        footer.setY(note.getY() + 40);
+                        footer.doLayout();
+                        footer.paint(x, y + 40, g);
+                    }
+                    
+                    
+                    
+                    
                 }
                 
                 

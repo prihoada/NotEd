@@ -34,28 +34,56 @@ public class FooterGlyph extends SvgGlyph
     @Override
     public void doLayout() {
 
-        
-        switch (duration)
+
+        switch (beamDirection)
         {
-            case Eighth:
-                offsetY = 0;
-                break;
-            case Sixteenth:
-                offsetY = 0;
-                break;
-            case ThirtySecond:
-                offsetY = -3;
-                break;
-            case SixtyFourth:
-                offsetY = -7;
-                break;
-            
-            
-            default:
+            case UP:
                 
-                break;
-        }
-        
+                switch (duration)
+                {
+                    case Eighth:
+                        offsetY = 0;
+                        offsetX = -0.2f;
+                        break;
+                    case Sixteenth:
+                        offsetY = 0;
+                        offsetX = -0.2f;
+                        break;
+                    case ThirtySecond:
+                        offsetY = -3;
+                        offsetX = -0.5;
+                        break;
+                    case SixtyFourth:
+                        offsetY = -7;
+                        offsetX = -0.5;
+                        break;
+                }
+            break;
+                
+            case DOWN:
+                
+                switch (duration)
+                {
+                    case Eighth:
+                        offsetY = 0;
+                        offsetX = -0.2f;
+                        break;
+                    case Sixteenth:
+                        offsetY = 3;
+                        offsetX = -0.2;
+                        break;
+                    case ThirtySecond:
+                        offsetY = 7;
+                        offsetX = -0.4;
+                        break;
+                    case SixtyFourth:
+                        offsetY = 15;
+                        offsetX = -0.5;
+                        break;
+                }
+            
+            break;
+        }        
         setSymbolWidth(11);
         setGlyphWidth(symbolWidth);
         
