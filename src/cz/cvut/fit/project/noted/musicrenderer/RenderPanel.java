@@ -47,16 +47,19 @@ public class RenderPanel extends JPanel{
         BarGlyph bar = new BarGlyph();
         
         
+        for (int i = -15; i < 15; i++) {
+            
+            bar.addGlyph(new NoteHeadGlyph(Duration.Quarter, i));
+        }
+        
+        
         bar.addGlyph(new NoteHeadGlyph(Duration.Whole));
         bar.addGlyph(new NoteHeadGlyph(Duration.Half));
-        bar.addGlyph(new NoteHeadGlyph(Duration.Quarter));
-        bar.addGlyph(new NoteHeadGlyph(Duration.Eighth));
-        bar.addGlyph(new NoteHeadGlyph(Duration.Sixteenth));
-        bar.addGlyph(new NoteHeadGlyph(Duration.ThirtySecond));
-        bar.addGlyph(new NoteHeadGlyph(Duration.SixtyFourth));
-        
-        
-        
+        bar.addGlyph(new NoteHeadGlyph(Duration.Quarter, -1));
+        bar.addGlyph(new NoteHeadGlyph(Duration.Eighth, -2));
+        bar.addGlyph(new NoteHeadGlyph(Duration.Sixteenth, -3));
+        bar.addGlyph(new NoteHeadGlyph(Duration.ThirtySecond, -4));
+        bar.addGlyph(new NoteHeadGlyph(Duration.SixtyFourth, -5));
         
         
         bar.addGlyph(new ClefGlyph(Clef.G2));

@@ -84,16 +84,16 @@ public class BeamHandler extends Glyph
                 if(this.direction == BeamDirection.UP)
                 {
                     g.drawLine(x + note.getSymbolWidth() - 1,
-                           y + note.getY() + 3,
+                           y + 3,
                            x + note.getSymbolWidth() - 1,
-                           y + note.getY() - 25);
+                           y - 25);
                 }
                 else
                 {
                     g.drawLine(x,
-                           y + note.getY() + 5,
+                           y + 5,
                            x,
-                           y + note.getY() + 35);
+                           y + 35);
                 }
                 
                 g.setStroke(originalStroke);
