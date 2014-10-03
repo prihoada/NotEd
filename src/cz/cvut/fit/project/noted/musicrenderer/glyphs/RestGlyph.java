@@ -23,6 +23,7 @@ public class RestGlyph extends SvgGlyph
     @Override
     public void doLayout() {
         
+        //set the offsets of the symbol. This is done to align the svg to its bounding box.
         switch(duration)
         {
             case Whole:

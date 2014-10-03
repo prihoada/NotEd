@@ -80,7 +80,7 @@ public abstract class Glyph {
     }
     
     /**
-     * Returns the glyph padding. Padding is a space on the sides of the symbol.
+     * Returns the glyph padding. Padding is additional space on the sides of the symbol.
      * @return the glyph padding.
      */
     public int getPadding() {
@@ -88,7 +88,7 @@ public abstract class Glyph {
     }
 
     /**
-     * Sets the glyph padding. Padding is a space on the sides of the symbol.
+     * Sets the glyph padding. Padding is additional space on the sides of the symbol.
      * @param padding 
      */
     public void setPadding(int padding) {

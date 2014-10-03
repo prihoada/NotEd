@@ -30,7 +30,13 @@ public class SvgGlyph extends Glyph {
     protected double scaleX = 1 * SvgScaleFactor;
     protected double scaleY = 1 * SvgScaleFactor;
     
+    /**
+     * SVG symbol Y offset. Used to correct the alignment of the svg.
+     */
     protected double offsetY = 0;
+    /**
+     * SVG symbol X offset. Used to correct the alignment of the svg.
+     */
     protected double offsetX = 0;
     
     public SvgGlyph() {
@@ -66,9 +72,9 @@ public class SvgGlyph extends Glyph {
     /**
      * Paints the glyph to the supplied graphics.
      * 
-     * @param x
-     * @param y
-     * @param graphics 
+     * @param xOrig
+     * @param yOrig
+     * @param g 
      */
     @Override
     public void paint(int xOrig, int yOrig, Graphics2D g) {

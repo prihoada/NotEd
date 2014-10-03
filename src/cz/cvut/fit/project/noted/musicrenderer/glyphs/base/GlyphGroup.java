@@ -36,16 +36,23 @@ public class GlyphGroup extends Glyph
     
     
     
-    
+    /**
+     * Adds a glyph to the end of the bar.
+     * @param glyph 
+     */
     public void addGlyph(Glyph glyph)
     {
         this.glyphs.add(glyph);
         doLayout();
     }
+    /**
+     * Removes the given glyph if present.
+     * @param glyph Glyph to remove.
+     */
     public void removeGlyph(Glyph glyph)
     {
-        this.glyphs.remove(glyph);
-        doLayout();
+        boolean removed = this.glyphs.remove(glyph);
+        if(removed) doLayout();
     }
 
     
@@ -63,10 +70,5 @@ public class GlyphGroup extends Glyph
         }
         
     }
-    
-    
-    
-    
-    
     
 }

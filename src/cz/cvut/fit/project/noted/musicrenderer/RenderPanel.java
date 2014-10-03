@@ -18,7 +18,6 @@ import cz.cvut.fit.project.noted.musicrenderer.model.AccidentalType;
 import cz.cvut.fit.project.noted.musicrenderer.model.BeamDirection;
 import cz.cvut.fit.project.noted.musicrenderer.model.Clef;
 import cz.cvut.fit.project.noted.musicrenderer.model.Duration;
-import java.awt.BasicStroke;
 
 /**
  * Main panel for the renderer.
@@ -106,7 +105,9 @@ public class RenderPanel extends JPanel{
     
     
     
-    
+    /**
+     * Overall scale of the display
+     */
     public double scale = 1;
 
     //override this, so for example a scroll pane knows how big this panel is.

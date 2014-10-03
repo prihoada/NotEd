@@ -8,13 +8,13 @@ import cz.cvut.fit.project.noted.musicrenderer.model.BeamDirection;
 import cz.cvut.fit.project.noted.musicrenderer.model.Duration;
 import java.awt.BasicStroke;
 import java.awt.Graphics2D;
-import java.awt.Point;
 import java.awt.Stroke;
 import java.util.ArrayList;
 
 /**
  * Handler for note beaming. Beams are a method to visually connect notes into groups.
- * On its own it just paints the stem and the footer for a note. If attached to multiple notes, it connects them.
+ * On its own it just paints the stem and the footer for a note. If attached to multiple notes, it connects them. 
+ * Note that one instance of the BeamHandler can be attached to multiple notes, but it gets painted only once.
  * @author Adam Příhoda
  */
 public class BeamHandler extends Glyph
@@ -61,14 +61,14 @@ public class BeamHandler extends Glyph
     @Override
     public void doLayout() {
     
-        
+        //TODO calculate beam position and direction and so on.
     
     }
 
     @Override
     public void paint(int x, int y, Graphics2D g) {
 
-        //paint a simple footer
+        //paint a simple footer, this note is not connected to anything
         if(notes.size() == 1)
         {
             NoteHeadGlyph note = notes.get(0);
@@ -76,7 +76,6 @@ public class BeamHandler extends Glyph
             //a whole note does not have a stem or a footer
             if(note.getDuration() != Duration.Whole)
             {
-                
                 Stroke originalStroke = g.getStroke();
                 g.setStroke(new BasicStroke(1.5f));
                 
@@ -96,6 +95,7 @@ public class BeamHandler extends Glyph
                            y + 35);
                 }
                 
+                //restore the original stroke
                 g.setStroke(originalStroke);
                 
                 //half and quarter notes don't have a footer
@@ -115,17 +115,8 @@ public class BeamHandler extends Glyph
                         footer.doLayout();
                         footer.paint(x, y + 40, g);
                     }
-                    
-                    
-                    
-                    
                 }
-                
-                
             }
-            
-            
-            
         }
         else
         {

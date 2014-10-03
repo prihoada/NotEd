@@ -22,6 +22,7 @@ public class BarGlyph extends GlyphGroup
         double offsetY = y - 2 * LINE_SPACING;
         Path2D.Double lines = new Path2D.Double();
         lines.moveTo(x, y);
+        //there are 5 lines in a staff
         for (int i = 0; i < 5; i++) {
             
             lines.moveTo(x, offsetY + i * LINE_SPACING);
