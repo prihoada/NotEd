@@ -31,6 +31,7 @@ public class MainFrame extends JFrame
         
         
         JScrollPane pane = new JScrollPane(panel);
+        pane.getHorizontalScrollBar().setUnitIncrement(30);
         this.add(pane, BorderLayout.CENTER);
         
         this.setVisible(true);

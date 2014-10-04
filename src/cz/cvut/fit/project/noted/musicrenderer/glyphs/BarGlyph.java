@@ -1,6 +1,7 @@
 
 package cz.cvut.fit.project.noted.musicrenderer.glyphs;
 
+import cz.cvut.fit.project.noted.musicrenderer.glyphs.base.Glyph;
 import java.awt.BasicStroke;
 import java.awt.Graphics2D;
 import java.awt.geom.Path2D;
@@ -10,7 +11,7 @@ import cz.cvut.fit.project.noted.musicrenderer.glyphs.base.GlyphGroup;
  * Single bar. Contains musical symbols. Ends with a bar line.
  * @author Adam Příhoda
  */
-public class BarGlyph extends GlyphGroup
+public class BarGlyph extends GlyphGroup<Glyph>
 {
     private static final int LINE_SPACING = 9;
 

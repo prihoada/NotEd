@@ -18,6 +18,11 @@ public abstract class Glyph {
 
    
     
+    private Glyph parent = null;
+
+   
+    
+    
     public Glyph()
     {
         this(0, 0);
@@ -114,6 +119,34 @@ public abstract class Glyph {
     
     
     
+    /**
+     * Returns the parent of this glyph.
+     * @return Parent glyph or null.
+     */
+    public Glyph getParent() {
+        return parent;
+    }
+
+    /**
+     * Sets the parent of this glyph.
+     * @param parent 
+     */
+    public void setParent(Glyph parent) {
+        this.parent = parent;
+    }
+    
+    
+    
+    
+    /**
+     * Returns the stave this glyph is in.
+     * @return StaveGlyph this glyph belongs to or null.
+     */
+    public StaveGlyph getStave()
+    {
+        if(parent != null) return parent.getStave();
+        else return null;
+    }
     
     
 }
