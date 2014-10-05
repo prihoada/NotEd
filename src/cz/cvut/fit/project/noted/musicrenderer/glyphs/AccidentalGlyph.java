@@ -26,8 +26,6 @@ public class AccidentalGlyph extends SvgGlyph
         //set the offsets of the symbol. This is done to align the svg to its bounding box.
         switch (type)
         {
-            case None:
-                break;
             case Natural:
                 setSymbolWidth(8);
                 offsetY = 5;
@@ -48,15 +46,11 @@ public class AccidentalGlyph extends SvgGlyph
                 
     }
     
-    
-    
 
     private SvgSymbol getAccidentalSymbol(AccidentalType type) {
 
         switch (type)
         {
-            case None:
-                 return null;
             case Natural:
                 return SVGRepository.AccidentalNatural;
             case Sharp:

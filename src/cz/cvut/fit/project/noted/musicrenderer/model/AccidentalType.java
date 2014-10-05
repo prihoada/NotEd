@@ -7,7 +7,6 @@ package cz.cvut.fit.project.noted.musicrenderer.model;
  */
 public enum AccidentalType 
 {
-    None,
     Natural,
     Sharp,
     DoubleSharp,

@@ -12,6 +12,7 @@ import cz.cvut.fit.project.noted.musicrenderer.glyphs.RestGlyph;
 import cz.cvut.fit.project.noted.musicrenderer.glyphs.BarGlyph;
 import cz.cvut.fit.project.noted.musicrenderer.glyphs.BarSeparator;
 import cz.cvut.fit.project.noted.musicrenderer.glyphs.FooterGlyph;
+import cz.cvut.fit.project.noted.musicrenderer.glyphs.NoteGlyph;
 import cz.cvut.fit.project.noted.musicrenderer.glyphs.NoteHeadGlyph;
 import cz.cvut.fit.project.noted.musicrenderer.glyphs.base.ScoreGlyph;
 import cz.cvut.fit.project.noted.musicrenderer.glyphs.base.StaveGlyph;
@@ -58,7 +59,9 @@ public class RenderPanel extends JPanel{
         
         for (int i = -15; i < 15; i++) {
             
-            bar.addGlyph(new NoteHeadGlyph(Duration.Quarter, i));
+            NoteGlyph n = new NoteGlyph(getRandomDuration(), i);
+            n.addAccidental(getRandomAccidental());
+            bar.addGlyph(n);
             
             if(i % 4 == 0) bar.addGlyph(new BarSeparator(BarSeparatorType.SINGLE));
         }
@@ -69,13 +72,13 @@ public class RenderPanel extends JPanel{
         
         BarGlyph bar1 = new BarGlyph();
         
-        bar1.addGlyph(new NoteHeadGlyph(Duration.Whole));
-        bar1.addGlyph(new NoteHeadGlyph(Duration.Half));
-        bar1.addGlyph(new NoteHeadGlyph(Duration.Quarter, -1));
-        bar1.addGlyph(new NoteHeadGlyph(Duration.Eighth, -2));
-        bar1.addGlyph(new NoteHeadGlyph(Duration.Sixteenth, -3));
-        bar1.addGlyph(new NoteHeadGlyph(Duration.ThirtySecond, -4));
-        bar1.addGlyph(new NoteHeadGlyph(Duration.SixtyFourth, -5));
+        bar1.addGlyph(new NoteGlyph(Duration.Whole, 0));
+        bar1.addGlyph(new NoteGlyph(Duration.Half, 0));
+        bar1.addGlyph(new NoteGlyph(Duration.Quarter, -1));
+        bar1.addGlyph(new NoteGlyph(Duration.Eighth, -2));
+        bar1.addGlyph(new NoteGlyph(Duration.Sixteenth, -3));
+        bar1.addGlyph(new NoteGlyph(Duration.ThirtySecond, -4));
+        bar1.addGlyph(new NoteGlyph(Duration.SixtyFourth, -5));
         bar1.addGlyph(new BarSeparator(BarSeparatorType.SINGLE));
         
         stave.addGlyph(bar1);
@@ -124,7 +127,24 @@ public class RenderPanel extends JPanel{
 
     }
     
-    
+    /**
+     * Debug test function for creating accidentals.
+     * @return a random accidental. 
+     */
+    private AccidentalGlyph getRandomAccidental()
+    {
+        int numTypes = AccidentalType.values().length;
+        int type = (int) (Math.random() * numTypes);
+        
+        AccidentalType enumType = AccidentalType.values()[type];
+        
+        return new AccidentalGlyph(enumType);
+    }
+    private Duration getRandomDuration()
+    {
+        int length = Duration.values().length;
+        return Duration.values()[ (int) (Math.random() * length) ];
+    }
     
     /**
      * Overall scale of the display
