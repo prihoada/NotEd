@@ -35,7 +35,7 @@ public class NoteGlyph extends Glyph
     {
         this.duration = duration;
         setPositionY(positionY);
-
+        
         this.noteHead = new NoteHeadGlyph(duration);
         this.beamHandler = new BeamHandler(getPositionY() >= 0 ? BeamDirection.UP : BeamDirection.DOWN, noteHead);
         

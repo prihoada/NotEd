@@ -5,7 +5,9 @@ import cz.cvut.fit.project.noted.menus.XMLFileChooser;
 import cz.cvut.fit.project.noted.model.Model;
 import cz.cvut.fit.project.noted.model.ProxyMusicHandler;
 import cz.cvut.fit.project.noted.modelplayer.ModelPlayer;
+import cz.cvut.fit.project.noted.musicrenderer.RenderPanel;
 import cz.cvut.fit.project.noted.utils.FileUtils;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.io.File;
@@ -13,6 +15,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 /**
  * Panel containing rendered sheet music, associated midi player and model.
@@ -32,13 +35,18 @@ public class Tab extends JPanel
         saved = false;
         saveFile = null;
         model = new Model();
-        renderPanel = new RenderPanel(model);
-        this.add(renderPanel);
-        player = new ModelPlayer(model);
         
         this.setOpaque(true);
         this.setBackground(Color.WHITE);
-        this.setLayout(new FlowLayout());
+        this.setLayout(new BorderLayout());
+        
+        renderPanel = new RenderPanel();
+        JScrollPane pane = new JScrollPane(renderPanel);
+        pane.getHorizontalScrollBar().setUnitIncrement(30);
+        pane.getVerticalScrollBar().setUnitIncrement(25);
+        this.add(pane, BorderLayout.CENTER);
+
+        player = new ModelPlayer(model);
     }
 
     public Model getModel()
@@ -53,9 +61,8 @@ public class Tab extends JPanel
     {
         this.model = model;
         this.player = new ModelPlayer(model);
-        if(renderPanel != null) this.remove(renderPanel);
-        renderPanel = new RenderPanel(model);
-        this.add(renderPanel);
+        renderPanel.buildFromModel(model);
+        
         return this;
     }
     

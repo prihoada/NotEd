@@ -1,6 +1,7 @@
 
 package cz.cvut.fit.project.noted.musicrenderer;
 
+import cz.cvut.fit.project.noted.model.Model;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -33,19 +34,37 @@ public class RenderPanel extends JPanel{
      */
     private ScoreGlyph score = new ScoreGlyph();
     
+    
+    private RenderBuilder builder;
+    
     public RenderPanel() {
+
+        
+        //dummy score
+//        score.setY(150);
+//        StaveGlyph stave = new StaveGlyph();
+//        createDummyBar(stave);
+//        score.addGlyph(stave);
+//        score.doLayout();
+        
+    }
+    
+
+    /**
+     * Completely rebuilds the render.
+     * @param model model to take the data from.
+     */
+    public void buildFromModel(Model model)
+    {
+        score = new ScoreGlyph();
+        builder = new RenderBuilder(score);
+        builder.buildFromModel(model);
         
         score.setY(150);
-        
-        StaveGlyph stave = new StaveGlyph();
-        
-
-        createDummyBar(stave);
-        
-        
-        score.addGlyph(stave);
         score.doLayout();
         
+        this.revalidate();
+        this.repaint();
     }
     
     
@@ -155,10 +174,10 @@ public class RenderPanel extends JPanel{
     @Override
     public Dimension getPreferredSize() {
 
-        int width = score.getGlyphWidth()+ 2 * score.getPadding();
-        return new Dimension((int) (width * scale), 500);
+        int width = score.getGlyphWidth() + 2 * score.getPadding();
+        return new Dimension((int) (width * scale), 300);
     }
-    
+
     
     @Override
     public void paintComponent(Graphics graphics) {
@@ -178,15 +197,8 @@ public class RenderPanel extends JPanel{
         g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
         g.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
         
-        
         g.scale(scale, scale);
-        
-        score.paint(score.getX(), score.getY(), g);
+        if(score != null) score.paint(score.getX(), score.getY(), g);
     }
 
-
-    
-    
-    
-    
 }
