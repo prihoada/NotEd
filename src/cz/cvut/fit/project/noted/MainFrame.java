@@ -28,10 +28,16 @@ class MainFrame extends JFrame implements Runnable
     @Override
     public void run()
     {
+        /*
+         * Services setup, can be replaced with proper DI Container
+         */
         LocalizationManager localizationManager = new LocalizationManager();
         TabManager tabManager = new TabManager(localizationManager);
         XMLFileChooser xmlFileChooser = new XMLFileChooser(localizationManager);
         ProxyMusicHandler proxyMusicHandler = new ProxyMusicHandler();
+        /*
+         * end of setup
+         */
 
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         this.setMinimumSize(new Dimension(800, 600));
