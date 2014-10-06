@@ -1,6 +1,7 @@
 nbproject/
 .idea/
-
+out/
+NotEd.iml
 /build/
 /dist
 build.xml
