@@ -12,11 +12,16 @@ import java.awt.event.ActionListener;
  */
 public class StopAction implements ActionListener
 {
+    private final TabManager tabManager;
+
+    public StopAction(TabManager tabManager) {
+        this.tabManager = tabManager;
+    }
 
     @Override
     public void actionPerformed(ActionEvent e)
     {
-        Tab activeTab = TabManager.getInstance().getActiveTab();
+        Tab activeTab = tabManager.getActiveTab();
         if(activeTab != null)
         {            
             activeTab.getPlayer().stop();

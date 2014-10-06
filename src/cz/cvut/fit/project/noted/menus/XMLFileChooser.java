@@ -19,12 +19,14 @@ public class XMLFileChooser extends JFileChooser
     private int state;
     private static final int STATE_SAVE = 0;
     private static final int STATE_OPEN = 1;
-    
-    public XMLFileChooser()
+
+    private final LocalizationManager localizationManager;
+
+    public XMLFileChooser(LocalizationManager localizationManager)
     {
-        
+        this.localizationManager = localizationManager;
         this.setAcceptAllFileFilterUsed(false);
-        this.setFileFilter(new XMLFileFilter());
+        this.setFileFilter(new XMLFileFilter(localizationManager));
     }
 
     @Override
@@ -63,7 +65,7 @@ public class XMLFileChooser extends JFileChooser
 
             if (f.exists())
             {
-                int option = JOptionPane.showConfirmDialog(null, LocalizationManager.getInstance().getString("file_overwrite_confirm").getTooltip(), LocalizationManager.getInstance().getString("file_overwrite_confirm").getName(), JOptionPane.YES_NO_OPTION);
+                int option = JOptionPane.showConfirmDialog(null, localizationManager.getString("file_overwrite_confirm").getTooltip(), localizationManager.getString("file_overwrite_confirm").getName(), JOptionPane.YES_NO_OPTION);
                 if (option == JOptionPane.NO_OPTION)
                 {
                     return;
@@ -77,6 +79,12 @@ public class XMLFileChooser extends JFileChooser
     
     private static class XMLFileFilter extends FileFilter
     {
+
+        private final LocalizationManager localizationManager;
+
+        public XMLFileFilter(LocalizationManager localizationManager) {
+            this.localizationManager = localizationManager;
+        }
 
         @Override
         public boolean accept(File f)
@@ -94,7 +102,7 @@ public class XMLFileChooser extends JFileChooser
         @Override
         public String getDescription()
         {
-            return LocalizationManager.getInstance().getString("xml_file_description").getName();
+            return localizationManager.getString("xml_file_description").getName();
         }
     }
 }

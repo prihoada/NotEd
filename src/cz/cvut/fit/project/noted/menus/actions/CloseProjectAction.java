@@ -11,11 +11,16 @@ import java.awt.event.ActionListener;
  */
 public class CloseProjectAction implements ActionListener
 {
+    private final TabManager tabManager;
+
+    public CloseProjectAction (TabManager tabManager) {
+        this.tabManager = tabManager;
+    }
 
     @Override
     public void actionPerformed(ActionEvent e)
     {
-        TabManager.getInstance().closeTab(TabManager.getInstance().getActiveTabIndex());
+        tabManager.closeTab(tabManager.getActiveTabIndex());
     }
 
 }

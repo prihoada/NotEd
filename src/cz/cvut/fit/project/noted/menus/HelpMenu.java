@@ -12,16 +12,16 @@ import javax.swing.JMenuItem;
 class HelpMenu extends JMenu
 {
 
-    public HelpMenu()
+    public HelpMenu(LocalizationManager localizationManager)
     {
-        this.setText(LocalizationManager.getInstance().getString("menu_help").getName());
+        this.setText(localizationManager.getString("menu_help").getName());
         
         this.addSeparator();
         
-        JMenuItem about = new JMenuItem(LocalizationManager.getInstance().getString("menu_item_about").getName());
+        JMenuItem about = new JMenuItem(localizationManager.getString("menu_item_about").getName());
         about.addActionListener(new OpenAboutAction());
-        about.setToolTipText(LocalizationManager.getInstance().getString("menu_item_about").getTooltip());
-        about.setMnemonic(LocalizationManager.getInstance().getString("menu_item_about").getMnemonicKeyCode());
+        about.setToolTipText(localizationManager.getString("menu_item_about").getTooltip());
+        about.setMnemonic(localizationManager.getString("menu_item_about").getMnemonicKeyCode());
         this.add(about);
         
         

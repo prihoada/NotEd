@@ -22,55 +22,57 @@ import javax.swing.KeyStroke;
 class FileMenu extends JMenu {
 
     public FileMenu(XMLFileChooser xmlFileChooser,
-                    ProxyMusicHandler proxyMusicHandler)
+                    ProxyMusicHandler proxyMusicHandler,
+                    LocalizationManager localizationManager,
+                    TabManager tabManager)
     {
-        this.setText(LocalizationManager.getInstance().getString("menu_file").getName());
+        this.setText(localizationManager.getString("menu_file").getName());
         
-        
-        JMenuItem newProject = new JMenuItem(LocalizationManager.getInstance().getString("menu_item_new").getName());
-        newProject.addActionListener(new NewProjectAction(xmlFileChooser, proxyMusicHandler));
-        newProject.setToolTipText(LocalizationManager.getInstance().getString("menu_item_new").getTooltip());
-        newProject.setMnemonic(LocalizationManager.getInstance().getString("menu_item_new").getMnemonicKeyCode());
+
+        JMenuItem newProject = new JMenuItem(localizationManager.getString("menu_item_new").getName());
+        newProject.addActionListener(new NewProjectAction(xmlFileChooser, proxyMusicHandler, localizationManager, tabManager));
+        newProject.setToolTipText(localizationManager.getString("menu_item_new").getTooltip());
+        newProject.setMnemonic(localizationManager.getString("menu_item_new").getMnemonicKeyCode());
         this.add(newProject);
         
-        JMenuItem openProject = new JMenuItem(LocalizationManager.getInstance().getString("menu_item_open").getName());
-        openProject.addActionListener(new OpenProjectAction(xmlFileChooser,proxyMusicHandler));
-        openProject.setToolTipText(LocalizationManager.getInstance().getString("menu_item_open").getTooltip());
-        openProject.setMnemonic(LocalizationManager.getInstance().getString("menu_item_open").getMnemonicKeyCode());
+        JMenuItem openProject = new JMenuItem(localizationManager.getString("menu_item_open").getName());
+        openProject.addActionListener(new OpenProjectAction(xmlFileChooser,proxyMusicHandler, localizationManager, tabManager));
+        openProject.setToolTipText(localizationManager.getString("menu_item_open").getTooltip());
+        openProject.setMnemonic(localizationManager.getString("menu_item_open").getMnemonicKeyCode());
         this.add(openProject);
         
         this.addSeparator();
         
-        JMenuItem save = new JMenuItem(LocalizationManager.getInstance().getString("menu_item_save").getName());
-        save.addActionListener(new SaveProjectAction(false));
-        save.setToolTipText(LocalizationManager.getInstance().getString("menu_item_save").getTooltip());
-        save.setMnemonic(LocalizationManager.getInstance().getString("menu_item_save").getMnemonicKeyCode());
+        JMenuItem save = new JMenuItem(localizationManager.getString("menu_item_save").getName());
+        save.addActionListener(new SaveProjectAction(tabManager, false));
+        save.setToolTipText(localizationManager.getString("menu_item_save").getTooltip());
+        save.setMnemonic(localizationManager.getString("menu_item_save").getMnemonicKeyCode());
         save.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.CTRL_MASK));
-        TabManager.getInstance().addChangeListener(new TabbedPaneDisableComponentChangeListener(save));
+        tabManager.addChangeListener(new TabbedPaneDisableComponentChangeListener(save));
         this.add(save);
         
-        JMenuItem saveAs = new JMenuItem(LocalizationManager.getInstance().getString("menu_item_saveAs").getName());
-        saveAs.addActionListener(new SaveProjectAction(true));
-        saveAs.setToolTipText(LocalizationManager.getInstance().getString("menu_item_saveAs").getTooltip());
-        saveAs.setMnemonic(LocalizationManager.getInstance().getString("menu_item_saveAs").getMnemonicKeyCode());
-        TabManager.getInstance().addChangeListener(new TabbedPaneDisableComponentChangeListener(saveAs));
+        JMenuItem saveAs = new JMenuItem(localizationManager.getString("menu_item_saveAs").getName());
+        saveAs.addActionListener(new SaveProjectAction(tabManager, true));
+        saveAs.setToolTipText(localizationManager.getString("menu_item_saveAs").getTooltip());
+        saveAs.setMnemonic(localizationManager.getString("menu_item_saveAs").getMnemonicKeyCode());
+        tabManager.addChangeListener(new TabbedPaneDisableComponentChangeListener(saveAs));
         this.add(saveAs);
         
         
         
         
-        JMenuItem closeProject = new JMenuItem(LocalizationManager.getInstance().getString("menu_item_close").getName());
+        JMenuItem closeProject = new JMenuItem(localizationManager.getString("menu_item_close").getName());
         closeProject.setEnabled(false);
-        closeProject.addActionListener(new CloseProjectAction());
-        closeProject.setToolTipText(LocalizationManager.getInstance().getString("menu_item_close").getTooltip());
-        closeProject.setMnemonic(LocalizationManager.getInstance().getString("menu_item_close").getMnemonicKeyCode());
-        TabManager.getInstance().addChangeListener(new TabbedPaneDisableComponentChangeListener(closeProject));
+        closeProject.addActionListener(new CloseProjectAction(tabManager));
+        closeProject.setToolTipText(localizationManager.getString("menu_item_close").getTooltip());
+        closeProject.setMnemonic(localizationManager.getString("menu_item_close").getMnemonicKeyCode());
+        tabManager.addChangeListener(new TabbedPaneDisableComponentChangeListener(closeProject));
         this.add(closeProject);
         
         this.addSeparator();
         
-        JMenuItem exit = new JMenuItem(LocalizationManager.getInstance().getString("menu_item_exit").getName());
-        exit.addActionListener(new ExitAction());
+        JMenuItem exit = new JMenuItem(localizationManager.getString("menu_item_exit").getName());
+        exit.addActionListener(new ExitAction(localizationManager, tabManager));
         exit.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, KeyEvent.ALT_MASK));
 
         this.add(exit);

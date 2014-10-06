@@ -23,21 +23,10 @@ import javax.xml.stream.events.XMLEvent;
  */
 public class LocalizationManager
 {
-    ///////////////////////
-    //SINGLETON
-    ///////////////////////
-    private static LocalizationManager instance;
-    public static LocalizationManager getInstance()
-    {
-        if (instance == null)
-            instance = new LocalizationManager();
-        return instance;
-    }
 
-    
     private HashMap<String, LocaleString> stringMap;
 
-    private LocalizationManager()
+    public LocalizationManager()
     {
         stringMap = new HashMap<String, LocaleString>();
         

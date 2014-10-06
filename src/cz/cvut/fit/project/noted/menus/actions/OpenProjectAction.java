@@ -25,12 +25,18 @@ public class OpenProjectAction implements ActionListener
     
     private final XMLFileChooser xmlFileChooser;
     private final ProxyMusicHandler proxyMusicHandler;
+    private final LocalizationManager localizationManager;
+    private final TabManager tabManager;
     
     public OpenProjectAction(XMLFileChooser xmlFileChooser,
-                             ProxyMusicHandler proxyMusicHandler)
+                             ProxyMusicHandler proxyMusicHandler,
+                             LocalizationManager localizationManager,
+                             TabManager tabManager)
     {
         this.xmlFileChooser = xmlFileChooser;
         this.proxyMusicHandler = proxyMusicHandler;
+        this.localizationManager = localizationManager;
+        this.tabManager = tabManager;
     }
 
     @Override
@@ -50,20 +56,20 @@ public class OpenProjectAction implements ActionListener
                     try
                     {
                         Model model = proxyMusicHandler.getModel(file);
-                        Tab newTab = new Tab(xmlFileChooser,proxyMusicHandler);
+                        Tab newTab = new Tab(xmlFileChooser,proxyMusicHandler, tabManager);
                         newTab.setSaved(true);
                         newTab.setModel(model);
-                        TabManager.getInstance().addTab(FileUtils.removeExtension(file.getName()), newTab);
+                        tabManager.addTab(FileUtils.removeExtension(file.getName()), newTab);
                     }
                     catch (FileNotFoundException ex)
                     {
-                        LocaleString string = LocalizationManager.getInstance().getString("error_fileNotFound");
+                        LocaleString string = localizationManager.getString("error_fileNotFound");
                         JOptionPane.showMessageDialog(null, string.getTooltip(), string.getName(), JOptionPane.ERROR_MESSAGE);
                         return;
                     }
                     catch (ParsingException ex)
                     {
-                        LocaleString string = LocalizationManager.getInstance().getString("error_fileNotValid");
+                        LocaleString string = localizationManager.getString("error_fileNotValid");
                         JOptionPane.showMessageDialog(null, string.getTooltip(), string.getName(), JOptionPane.ERROR_MESSAGE);
                         return;
                     }

@@ -30,7 +30,9 @@ public class TabTitleComponent extends JPanel
 
     private final JTabbedPane pane;
 
-    public TabTitleComponent(final JTabbedPane pane)
+    public TabTitleComponent(final JTabbedPane pane,
+                             final TabManager tabManager,
+                             final LocalizationManager localizationManager)
     {
         super(new FlowLayout(FlowLayout.LEFT, 0, 0));
         this.pane = pane;
@@ -44,8 +46,8 @@ public class TabTitleComponent extends JPanel
                 int i = pane.indexOfTabComponent(TabTitleComponent.this);
                 if (i != -1)
                 {
-                    Tab tab = TabManager.getInstance().getTabAt(i);
-                    return pane.getTitleAt(i) + (tab.isSaved() == false ? "*" : "");
+                    Tab tab = tabManager.getTabAt(i);
+                    return pane.getTitleAt(i) + (!tab.isSaved() ? "*" : "");
                 }
                 return null;
             }
@@ -54,7 +56,7 @@ public class TabTitleComponent extends JPanel
         this.add(label);
         label.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 5));
 
-        JButton button = new TabButton(pane, this);
+        JButton button = new TabButton(pane, this, localizationManager, tabManager);
         this.add(button);
         this.setBorder(BorderFactory.createEmptyBorder(2, 0, 0, 0));
     }
@@ -68,12 +70,18 @@ class TabButton extends JButton implements ActionListener
     private final JPanel component;
     private static final int size = 17;
 
-    public TabButton(JTabbedPane pane, JPanel component)
+    private final TabManager tabManager;
+
+    public TabButton(JTabbedPane pane,
+                     JPanel component,
+                     LocalizationManager localizationManager,
+                     TabManager tabManager)
     {
+        this.tabManager = tabManager;
         this.pane = pane;
         this.component = component;
         this.setPreferredSize(new Dimension(size, size));
-        setToolTipText(LocalizationManager.getInstance().getString("tab_close_button").getName());
+        setToolTipText(localizationManager.getString("tab_close_button").getName());
         setUI(new BasicButtonUI());
         setContentAreaFilled(false);
         setFocusable(false);
@@ -91,7 +99,7 @@ class TabButton extends JButton implements ActionListener
         int i = pane.indexOfTabComponent(component);
         if (i != -1)
         {
-            TabManager.getInstance().closeTab(i);
+            tabManager.closeTab(i);
         }
     }
 

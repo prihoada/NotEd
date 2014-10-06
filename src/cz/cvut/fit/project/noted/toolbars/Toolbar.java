@@ -17,7 +17,7 @@ import javax.swing.JToolBar;
 public class Toolbar extends JToolBar
 {
 
-    public Toolbar(String name)
+    public Toolbar(TabManager tabManager, String name)
     {
         super(name);
         
@@ -27,14 +27,14 @@ public class Toolbar extends JToolBar
         JButton playButton = new JButton(new ImageIcon("assets/images/playButton.png"));
         playButton.setFocusPainted(false);
         this.add(playButton);
-        TabManager.getInstance().addChangeListener(new TabbedPaneDisableComponentChangeListener(playButton));
-        playButton.addActionListener(new PlayAction());
+        tabManager.addChangeListener(new TabbedPaneDisableComponentChangeListener(playButton));
+        playButton.addActionListener(new PlayAction(tabManager));
         
         JButton stopButton = new JButton(new ImageIcon("assets/images/stopButton.png"));
         stopButton.setFocusPainted(false);
         this.add(stopButton);
-        TabManager.getInstance().addChangeListener(new TabbedPaneDisableComponentChangeListener(stopButton));
-        stopButton.addActionListener(new StopAction());
+        tabManager.addChangeListener(new TabbedPaneDisableComponentChangeListener(stopButton));
+        stopButton.addActionListener(new StopAction(tabManager));
     }
     
 }

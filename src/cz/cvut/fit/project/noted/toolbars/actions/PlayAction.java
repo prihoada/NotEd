@@ -12,11 +12,16 @@ import java.awt.event.ActionListener;
  */
 public class PlayAction implements ActionListener
 {
+    private final TabManager tabManager;
+
+    public PlayAction(TabManager tabManager) {
+        this.tabManager = tabManager;
+    }
 
     @Override
     public void actionPerformed(ActionEvent e)
     {
-        Tab activeTab = TabManager.getInstance().getActiveTab();
+        Tab activeTab = tabManager.getActiveTab();
         if(activeTab != null)
         {
             activeTab.getPlayer().getReadyToPlay();

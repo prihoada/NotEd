@@ -16,16 +16,17 @@ public class MainPanel extends JPanel
 {
 
     public MainPanel(XMLFileChooser xmlFileChooser,
-                     ProxyMusicHandler proxyMusicHandler)
+                     ProxyMusicHandler proxyMusicHandler,
+                     TabManager tabManager)
     {
         
         this.setLayout(new BorderLayout());
-        this.add(new Toolbar("Test toolbar"), BorderLayout.NORTH);
-        this.add(TabManager.getInstance(), BorderLayout.CENTER);
+        this.add(new Toolbar(tabManager,"Test toolbar"), BorderLayout.NORTH);
+        this.add(tabManager, BorderLayout.CENTER);
         
         
         //Temporary
-        TabManager.getInstance().addTab("Test tab", new Tab(xmlFileChooser,proxyMusicHandler));
+        tabManager.addTab("Test tab", new Tab(xmlFileChooser,proxyMusicHandler,tabManager));
         //TabManager.getInstance().addTab("Test tab2", new Tab());
     }
     

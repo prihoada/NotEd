@@ -14,19 +14,15 @@ import javax.swing.event.ChangeListener;
  */
 public class TabManager extends JPanel
 {
-    
-    private static TabManager instance;
-    public static TabManager getInstance()
-    {
-        if(instance == null) instance = new TabManager();
-        return instance;
-    }
 
-    
     private final JTabbedPane tabs;
-    
-    private TabManager()
+
+    private final LocalizationManager localizationManager;
+
+    public TabManager(LocalizationManager localizationManager)
     {
+        this.localizationManager = localizationManager;
+
         this.setLayout(new BorderLayout());
         this.tabs = new JTabbedPane();
         this.tabs.setTabLayoutPolicy(JTabbedPane.WRAP_TAB_LAYOUT);
@@ -42,7 +38,7 @@ public class TabManager extends JPanel
     {
         this.tabs.addTab(title, tab);
         this.tabs.setSelectedComponent(tab);
-        this.tabs.setTabComponentAt(this.tabs.getSelectedIndex(), new TabTitleComponent(tabs));
+        this.tabs.setTabComponentAt(this.tabs.getSelectedIndex(), new TabTitleComponent(tabs, this, localizationManager));
     }
     
     /**
@@ -77,9 +73,9 @@ public class TabManager extends JPanel
         }
         else
         {
-            int result = JOptionPane.showConfirmDialog(this, 
-                    LocalizationManager.getInstance().getString("confirm_tab_close").getTooltip(),
-                    LocalizationManager.getInstance().getString("confirm_tab_close").getName(),
+            int result = JOptionPane.showConfirmDialog(this,
+                    localizationManager.getString("confirm_tab_close").getTooltip(),
+                    localizationManager.getString("confirm_tab_close").getName(),
                     JOptionPane.YES_NO_CANCEL_OPTION);
             
             if(result == JOptionPane.YES_OPTION)

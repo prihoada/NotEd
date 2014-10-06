@@ -32,12 +32,15 @@ public class Tab extends JPanel
 
     private final XMLFileChooser xmlFileChooser;
     private final ProxyMusicHandler proxyMusicHandler;
+    private final TabManager tabManager;
 
     public Tab(XMLFileChooser xmlFileChooser,
-               ProxyMusicHandler proxyMusicHandler)
+               ProxyMusicHandler proxyMusicHandler,
+               TabManager tabManager)
     {
         this.xmlFileChooser = xmlFileChooser;
         this.proxyMusicHandler = proxyMusicHandler;
+        this.tabManager = tabManager;
 
         saved = false;
         saveFile = null;
@@ -108,7 +111,7 @@ public class Tab extends JPanel
         
         //SAVE AS
         if(saveFile != null) xmlFileChooser.setSelectedFile(saveFile);
-        else xmlFileChooser.setSelectedFile(new File(TabManager.getInstance().getTitleAt(TabManager.getInstance().getTabIndex(this)) + ".xml"));
+        else xmlFileChooser.setSelectedFile(new File(tabManager.getTitleAt(tabManager.getTabIndex(this)) + ".xml"));
         int result = xmlFileChooser.showSaveDialog(null);
         
         switch(result)
@@ -129,7 +132,7 @@ public class Tab extends JPanel
                     }
                     this.setSaved(true);
                     this.saveFile = new File(fileName);
-                    TabManager.getInstance().setTitleAt(TabManager.getInstance().getTabIndex(this), newTitle);
+                    tabManager.setTitleAt(tabManager.getTabIndex(this), newTitle);
                     
                 }
                 catch (IOException ex)

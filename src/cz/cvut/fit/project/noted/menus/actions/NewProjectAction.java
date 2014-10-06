@@ -17,18 +17,24 @@ public class NewProjectAction implements ActionListener
 
     private final XMLFileChooser xmlFileChooser;
     private final ProxyMusicHandler proxyMusicHandler;
+    private final LocalizationManager localizationManager;
+    private final TabManager tabManager;
 
     public NewProjectAction(XMLFileChooser xmlFileChooser,
-                            ProxyMusicHandler proxyMusicHandler) {
+                            ProxyMusicHandler proxyMusicHandler,
+                            LocalizationManager localizationManager,
+                            TabManager tabManager) {
         this.xmlFileChooser = xmlFileChooser;
         this.proxyMusicHandler = proxyMusicHandler;
+        this.localizationManager = localizationManager;
+        this.tabManager = tabManager;
     }
 
     @Override
     public void actionPerformed(ActionEvent e)
     {
 
-        TabManager.getInstance().addTab(LocalizationManager.getInstance().getString("file_untitled").getName(), new Tab(xmlFileChooser, proxyMusicHandler));
+        tabManager.addTab(localizationManager.getString("file_untitled").getName(), new Tab(xmlFileChooser, proxyMusicHandler,tabManager));
     
     }
     

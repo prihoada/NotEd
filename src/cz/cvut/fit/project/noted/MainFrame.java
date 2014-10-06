@@ -2,10 +2,12 @@
 
 package cz.cvut.fit.project.noted;
 
+import cz.cvut.fit.project.noted.localization.LocalizationManager;
 import cz.cvut.fit.project.noted.menus.MainMenuBar;
 import cz.cvut.fit.project.noted.menus.XMLFileChooser;
 import cz.cvut.fit.project.noted.menus.actions.ExitAction;
 import cz.cvut.fit.project.noted.model.ProxyMusicHandler;
+import cz.cvut.fit.project.noted.rendering.TabManager;
 
 import java.awt.Dimension;
 import javax.swing.JFrame;
@@ -26,17 +28,19 @@ class MainFrame extends JFrame implements Runnable
     @Override
     public void run()
     {
-        XMLFileChooser xmlFileChooser = new XMLFileChooser();
+        LocalizationManager localizationManager = new LocalizationManager();
+        TabManager tabManager = new TabManager(localizationManager);
+        XMLFileChooser xmlFileChooser = new XMLFileChooser(localizationManager);
         ProxyMusicHandler proxyMusicHandler = new ProxyMusicHandler();
 
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         this.setMinimumSize(new Dimension(800, 600));
         this.setPreferredSize(new Dimension(800, 600));
         this.setLocationRelativeTo(null);
-        this.addWindowListener(new ExitAction());
+        this.addWindowListener(new ExitAction(localizationManager, tabManager));
         
-        this.setJMenuBar(new MainMenuBar(xmlFileChooser, proxyMusicHandler));
-        this.add(new MainPanel(xmlFileChooser, proxyMusicHandler));
+        this.setJMenuBar(new MainMenuBar(xmlFileChooser, proxyMusicHandler, localizationManager, tabManager));
+        this.add(new MainPanel(xmlFileChooser, proxyMusicHandler, tabManager));
         
         this.setVisible(true);
     }

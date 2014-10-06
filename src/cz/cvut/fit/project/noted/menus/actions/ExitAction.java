@@ -17,6 +17,17 @@ import javax.swing.JOptionPane;
  */
 public class ExitAction extends WindowAdapter implements ActionListener{
 
+    private final LocalizationManager localizationManager;
+    private final TabManager tabManager;
+
+    public ExitAction (LocalizationManager localizationManager,
+                       TabManager tabManager)
+    {
+        this.localizationManager = localizationManager;
+        this.tabManager = tabManager;
+
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) 
     {
@@ -34,14 +45,14 @@ public class ExitAction extends WindowAdapter implements ActionListener{
     
     private void exitApplication()
     {
-        int tabCount = TabManager.getInstance().getTabCount();
+        int tabCount = tabManager.getTabCount();
         for (int i = 0; i < tabCount; i++)
         {
-            Tab tab = TabManager.getInstance().getTabAt(i);
+            Tab tab = tabManager.getTabAt(i);
             if(!tab.isSaved())
             {
-                int result = JOptionPane.showConfirmDialog(null, LocalizationManager.getInstance().getString("confirm_application_close").getTooltip(),
-                                                                 LocalizationManager.getInstance().getString("confirm_application_close").getName(),
+                int result = JOptionPane.showConfirmDialog(null, localizationManager.getString("confirm_application_close").getTooltip(),
+                                                                 localizationManager.getString("confirm_application_close").getName(),
                                                                  JOptionPane.OK_CANCEL_OPTION);
                 if(result == JOptionPane.OK_OPTION)
                 {
