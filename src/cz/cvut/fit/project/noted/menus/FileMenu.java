@@ -20,19 +20,19 @@ import javax.swing.KeyStroke;
  */
 class FileMenu extends JMenu {
 
-    public FileMenu()
+    public FileMenu(XMLFileChooser xmlFileChooser)
     {
         this.setText(LocalizationManager.getInstance().getString("menu_file").getName());
         
         
         JMenuItem newProject = new JMenuItem(LocalizationManager.getInstance().getString("menu_item_new").getName());
-        newProject.addActionListener(new NewProjectAction());
+        newProject.addActionListener(new NewProjectAction(xmlFileChooser));
         newProject.setToolTipText(LocalizationManager.getInstance().getString("menu_item_new").getTooltip());
         newProject.setMnemonic(LocalizationManager.getInstance().getString("menu_item_new").getMnemonicKeyCode());
         this.add(newProject);
         
         JMenuItem openProject = new JMenuItem(LocalizationManager.getInstance().getString("menu_item_open").getName());
-        openProject.addActionListener(new OpenProjectAction());
+        openProject.addActionListener(new OpenProjectAction(xmlFileChooser));
         openProject.setToolTipText(LocalizationManager.getInstance().getString("menu_item_open").getTooltip());
         openProject.setMnemonic(LocalizationManager.getInstance().getString("menu_item_open").getMnemonicKeyCode());
         this.add(openProject);

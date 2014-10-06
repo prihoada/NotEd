@@ -1,5 +1,6 @@
 package cz.cvut.fit.project.noted;
 
+import cz.cvut.fit.project.noted.menus.XMLFileChooser;
 import cz.cvut.fit.project.noted.rendering.Tab;
 import cz.cvut.fit.project.noted.rendering.TabManager;
 import cz.cvut.fit.project.noted.toolbars.Toolbar;
@@ -13,7 +14,7 @@ import javax.swing.JPanel;
 public class MainPanel extends JPanel
 {
 
-    public MainPanel()
+    public MainPanel(XMLFileChooser xmlFileChooser)
     {
         
         this.setLayout(new BorderLayout());
@@ -22,7 +23,7 @@ public class MainPanel extends JPanel
         
         
         //Temporary
-        TabManager.getInstance().addTab("Test tab", new Tab());
+        TabManager.getInstance().addTab("Test tab", new Tab(xmlFileChooser));
         //TabManager.getInstance().addTab("Test tab2", new Tab());
     }
     

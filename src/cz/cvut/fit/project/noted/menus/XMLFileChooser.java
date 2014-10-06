@@ -15,19 +15,12 @@ import javax.swing.filechooser.FileFilter;
  */
 public class XMLFileChooser extends JFileChooser
 {
-
-    private static XMLFileChooser instance;
-    public static XMLFileChooser getInstance()
-    {
-        if(instance == null) instance = new XMLFileChooser();
-        return instance;
-    }
     
     private int state;
     private static final int STATE_SAVE = 0;
     private static final int STATE_OPEN = 1;
     
-    private XMLFileChooser()
+    public XMLFileChooser()
     {
         
         this.setAcceptAllFileFilterUsed(false);

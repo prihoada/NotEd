@@ -29,9 +29,13 @@ public class Tab extends JPanel
     private Model model;
     private ModelPlayer player;
     private RenderPanel renderPanel;
-    
-    public Tab()
+
+    private final XMLFileChooser xmlFileChooser;
+
+    public Tab(XMLFileChooser xmlFileChooser)
     {
+        this.xmlFileChooser = xmlFileChooser;
+
         saved = false;
         saveFile = null;
         model = new Model();
@@ -100,16 +104,15 @@ public class Tab extends JPanel
         }
         
         //SAVE AS
-        XMLFileChooser chooser = XMLFileChooser.getInstance();
-        if(saveFile != null) chooser.setSelectedFile(saveFile);
-        else chooser.setSelectedFile(new File(TabManager.getInstance().getTitleAt(TabManager.getInstance().getTabIndex(this)) + ".xml"));
-        int result = chooser.showSaveDialog(null);
+        if(saveFile != null) xmlFileChooser.setSelectedFile(saveFile);
+        else xmlFileChooser.setSelectedFile(new File(TabManager.getInstance().getTitleAt(TabManager.getInstance().getTabIndex(this)) + ".xml"));
+        int result = xmlFileChooser.showSaveDialog(null);
         
         switch(result)
         {
             case XMLFileChooser.APPROVE_OPTION:
                 
-                File file = chooser.getSelectedFile();
+                File file = xmlFileChooser.getSelectedFile();
                 try
                 {
                     String fileName = file.getAbsolutePath();

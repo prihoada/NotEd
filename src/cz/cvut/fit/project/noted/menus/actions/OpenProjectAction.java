@@ -23,31 +23,31 @@ import javax.swing.JOptionPane;
 public class OpenProjectAction implements ActionListener
 {
     
-    private final XMLFileChooser chooser;
+    private final XMLFileChooser xmlFileChooser;
     
-    public OpenProjectAction()
+    public OpenProjectAction(XMLFileChooser xmlFileChooser)
     {
-        chooser = XMLFileChooser.getInstance();
+        this.xmlFileChooser = xmlFileChooser;
     }
 
     @Override
     public void actionPerformed(ActionEvent e)
     {
-        chooser.setSelectedFile(new File(""));
-        int result = chooser.showOpenDialog(null);
+        xmlFileChooser.setSelectedFile(new File(""));
+        int result = xmlFileChooser.showOpenDialog(null);
        
         switch(result)
         {
             case JFileChooser.APPROVE_OPTION:
                 
-                File [] files = chooser.getSelectedFiles();
+                File [] files = xmlFileChooser.getSelectedFiles();
                 for (File file : files)
                 {
                     
                     try
                     {
                         Model model = ProxyMusicHandler.getInstance().getModel(file);
-                        Tab newTab = new Tab();
+                        Tab newTab = new Tab(xmlFileChooser);
                         newTab.setSaved(true);
                         newTab.setModel(model);
                         TabManager.getInstance().addTab(FileUtils.removeExtension(file.getName()), newTab);

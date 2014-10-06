@@ -11,10 +11,10 @@ import javax.swing.JMenuBar;
 public class MainMenuBar extends JMenuBar 
 {
 
-    public MainMenuBar()
+    public MainMenuBar(XMLFileChooser xmlFileChooser)
     {
     
-        this.add(new FileMenu());
+        this.add(new FileMenu(xmlFileChooser));
         this.add(new HelpMenu());
     
     }
