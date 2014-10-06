@@ -1,6 +1,8 @@
 
 package cz.cvut.fit.project.noted.menus;
 
+import cz.cvut.fit.project.noted.model.ProxyMusicHandler;
+
 import java.awt.Component;
 import javax.swing.JMenuBar;
 
@@ -11,10 +13,11 @@ import javax.swing.JMenuBar;
 public class MainMenuBar extends JMenuBar 
 {
 
-    public MainMenuBar(XMLFileChooser xmlFileChooser)
+    public MainMenuBar(XMLFileChooser xmlFileChooser,
+                       ProxyMusicHandler proxyMusicHandler)
     {
     
-        this.add(new FileMenu(xmlFileChooser));
+        this.add(new FileMenu(xmlFileChooser, proxyMusicHandler));
         this.add(new HelpMenu());
     
     }

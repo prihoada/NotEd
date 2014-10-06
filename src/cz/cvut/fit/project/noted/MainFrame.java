@@ -5,6 +5,8 @@ package cz.cvut.fit.project.noted;
 import cz.cvut.fit.project.noted.menus.MainMenuBar;
 import cz.cvut.fit.project.noted.menus.XMLFileChooser;
 import cz.cvut.fit.project.noted.menus.actions.ExitAction;
+import cz.cvut.fit.project.noted.model.ProxyMusicHandler;
+
 import java.awt.Dimension;
 import javax.swing.JFrame;
 
@@ -25,6 +27,7 @@ class MainFrame extends JFrame implements Runnable
     public void run()
     {
         XMLFileChooser xmlFileChooser = new XMLFileChooser();
+        ProxyMusicHandler proxyMusicHandler = new ProxyMusicHandler();
 
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         this.setMinimumSize(new Dimension(800, 600));
@@ -32,8 +35,8 @@ class MainFrame extends JFrame implements Runnable
         this.setLocationRelativeTo(null);
         this.addWindowListener(new ExitAction());
         
-        this.setJMenuBar(new MainMenuBar(xmlFileChooser));
-        this.add(new MainPanel(xmlFileChooser));
+        this.setJMenuBar(new MainMenuBar(xmlFileChooser, proxyMusicHandler));
+        this.add(new MainPanel(xmlFileChooser, proxyMusicHandler));
         
         this.setVisible(true);
     }

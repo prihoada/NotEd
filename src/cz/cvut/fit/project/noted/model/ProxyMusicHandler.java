@@ -22,16 +22,8 @@ import org.xml.sax.SAXException;
  */
 public class ProxyMusicHandler implements IModelProvider
 {
-    //Singleton
-    private static ProxyMusicHandler instance;
-    public static ProxyMusicHandler getInstance()
-    {
-        if(instance == null) instance = new ProxyMusicHandler();
-        return instance;
-    }
     
-    
-    private ProxyMusicHandler()
+    public ProxyMusicHandler()
     {
         
         //Create the context for marshalling.

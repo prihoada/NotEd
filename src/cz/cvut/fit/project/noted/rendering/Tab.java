@@ -31,10 +31,13 @@ public class Tab extends JPanel
     private RenderPanel renderPanel;
 
     private final XMLFileChooser xmlFileChooser;
+    private final ProxyMusicHandler proxyMusicHandler;
 
-    public Tab(XMLFileChooser xmlFileChooser)
+    public Tab(XMLFileChooser xmlFileChooser,
+               ProxyMusicHandler proxyMusicHandler)
     {
         this.xmlFileChooser = xmlFileChooser;
+        this.proxyMusicHandler = proxyMusicHandler;
 
         saved = false;
         saveFile = null;
@@ -93,7 +96,7 @@ public class Tab extends JPanel
         {
             try
             {
-                ProxyMusicHandler.getInstance().saveModel(model, saveFile.getAbsolutePath());
+                proxyMusicHandler.saveModel(model, saveFile.getAbsolutePath());
                 this.setSaved(true);
             }
             catch (IOException ex)
@@ -117,7 +120,7 @@ public class Tab extends JPanel
                 {
                     String fileName = file.getAbsolutePath();
                     if(!FileUtils.getExtension(fileName).equals("xml")) fileName = fileName.concat(".xml");
-                    ProxyMusicHandler.getInstance().saveModel(model, fileName);
+                    proxyMusicHandler.saveModel(model, fileName);
                     
                     String newTitle = file.getName();
                     if(FileUtils.getExtension(newTitle).equals("xml"))

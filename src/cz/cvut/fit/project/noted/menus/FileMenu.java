@@ -7,6 +7,7 @@ import cz.cvut.fit.project.noted.localization.LocalizationManager;
 import cz.cvut.fit.project.noted.menus.actions.CloseProjectAction;
 import cz.cvut.fit.project.noted.menus.actions.ExitAction;
 import cz.cvut.fit.project.noted.menus.actions.NewProjectAction;
+import cz.cvut.fit.project.noted.model.ProxyMusicHandler;
 import cz.cvut.fit.project.noted.rendering.TabManager;
 import cz.cvut.fit.project.noted.utils.TabbedPaneDisableComponentChangeListener;
 import java.awt.event.KeyEvent;
@@ -20,19 +21,20 @@ import javax.swing.KeyStroke;
  */
 class FileMenu extends JMenu {
 
-    public FileMenu(XMLFileChooser xmlFileChooser)
+    public FileMenu(XMLFileChooser xmlFileChooser,
+                    ProxyMusicHandler proxyMusicHandler)
     {
         this.setText(LocalizationManager.getInstance().getString("menu_file").getName());
         
         
         JMenuItem newProject = new JMenuItem(LocalizationManager.getInstance().getString("menu_item_new").getName());
-        newProject.addActionListener(new NewProjectAction(xmlFileChooser));
+        newProject.addActionListener(new NewProjectAction(xmlFileChooser, proxyMusicHandler));
         newProject.setToolTipText(LocalizationManager.getInstance().getString("menu_item_new").getTooltip());
         newProject.setMnemonic(LocalizationManager.getInstance().getString("menu_item_new").getMnemonicKeyCode());
         this.add(newProject);
         
         JMenuItem openProject = new JMenuItem(LocalizationManager.getInstance().getString("menu_item_open").getName());
-        openProject.addActionListener(new OpenProjectAction(xmlFileChooser));
+        openProject.addActionListener(new OpenProjectAction(xmlFileChooser,proxyMusicHandler));
         openProject.setToolTipText(LocalizationManager.getInstance().getString("menu_item_open").getTooltip());
         openProject.setMnemonic(LocalizationManager.getInstance().getString("menu_item_open").getMnemonicKeyCode());
         this.add(openProject);

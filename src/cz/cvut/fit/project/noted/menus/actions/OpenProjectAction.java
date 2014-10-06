@@ -24,10 +24,13 @@ public class OpenProjectAction implements ActionListener
 {
     
     private final XMLFileChooser xmlFileChooser;
+    private final ProxyMusicHandler proxyMusicHandler;
     
-    public OpenProjectAction(XMLFileChooser xmlFileChooser)
+    public OpenProjectAction(XMLFileChooser xmlFileChooser,
+                             ProxyMusicHandler proxyMusicHandler)
     {
         this.xmlFileChooser = xmlFileChooser;
+        this.proxyMusicHandler = proxyMusicHandler;
     }
 
     @Override
@@ -46,8 +49,8 @@ public class OpenProjectAction implements ActionListener
                     
                     try
                     {
-                        Model model = ProxyMusicHandler.getInstance().getModel(file);
-                        Tab newTab = new Tab(xmlFileChooser);
+                        Model model = proxyMusicHandler.getModel(file);
+                        Tab newTab = new Tab(xmlFileChooser,proxyMusicHandler);
                         newTab.setSaved(true);
                         newTab.setModel(model);
                         TabManager.getInstance().addTab(FileUtils.removeExtension(file.getName()), newTab);
