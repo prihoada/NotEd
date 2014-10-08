@@ -12,6 +12,7 @@ import cz.cvut.fit.project.noted.musicrenderer.glyphs.ClefGlyph;
 import cz.cvut.fit.project.noted.musicrenderer.glyphs.RestGlyph;
 import cz.cvut.fit.project.noted.musicrenderer.glyphs.BarGlyph;
 import cz.cvut.fit.project.noted.musicrenderer.glyphs.BarSeparator;
+import cz.cvut.fit.project.noted.musicrenderer.glyphs.CursorGlyph;
 import cz.cvut.fit.project.noted.musicrenderer.glyphs.FooterGlyph;
 import cz.cvut.fit.project.noted.musicrenderer.glyphs.NoteGlyph;
 import cz.cvut.fit.project.noted.musicrenderer.glyphs.NoteHeadGlyph;
@@ -40,13 +41,8 @@ public class RenderPanel extends JPanel{
     public RenderPanel() {
 
         
-        //dummy score
-//        score.setY(150);
-//        StaveGlyph stave = new StaveGlyph();
-//        createDummyBar(stave);
-//        score.addGlyph(stave);
-//        score.doLayout();
         
+        //createDummyScore();
     }
     
 
@@ -68,6 +64,19 @@ public class RenderPanel extends JPanel{
     }
     
     
+    
+    private void createDummyScore()
+    {
+    
+        //dummy score
+        score = new ScoreGlyph();
+        score.setY(150);
+        StaveGlyph stave = new StaveGlyph();
+        createDummyBar(stave);
+        score.addGlyph(stave);
+        score.doLayout();
+    }
+    
     /**
      * Creates a set of test bars.
      */
@@ -75,6 +84,9 @@ public class RenderPanel extends JPanel{
     {
         BarGlyph bar = new BarGlyph();
         bar.addGlyph(new ClefGlyph(Clef.G2));
+        
+        CursorGlyph cursor = new CursorGlyph(-10);
+        bar.addGlyph(cursor);
         
         for (int i = -15; i < 15; i++) {
             

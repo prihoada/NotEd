@@ -80,7 +80,7 @@ public abstract class Glyph {
      * Sets the width of the symbol. Symbol is the graphical element itself.
      * @param symbolWidth 
      */
-    protected void setSymbolWidth(int symbolWidth) {
+    public void setSymbolWidth(int symbolWidth) {
         this.symbolWidth = symbolWidth;
     }
     
