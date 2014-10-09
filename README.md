@@ -1,1 +1,1 @@
-prihoada
+SP2 project with Slack integration
