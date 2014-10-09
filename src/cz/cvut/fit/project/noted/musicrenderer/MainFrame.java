@@ -29,6 +29,7 @@ public class MainFrame extends JFrame
         RenderPanel panel = new RenderPanel();
         this.add(new ToolsPanel(panel), BorderLayout.NORTH);
         
+        panel.createDummyScore();
         
         JScrollPane pane = new JScrollPane(panel);
         pane.getHorizontalScrollBar().setUnitIncrement(30);

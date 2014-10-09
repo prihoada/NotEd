@@ -65,7 +65,7 @@ public class RenderPanel extends JPanel{
     
     
     
-    private void createDummyScore()
+    public void createDummyScore()
     {
     
         //dummy score
