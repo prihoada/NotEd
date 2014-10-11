@@ -1,7 +1,6 @@
 /*
- * what to do next?
- * 1. exceptions?
- * 2.
+ CO CHYBI:
+ upravit metody ve kterych je TODO
  */
 package cz.cvut.fit.project.noted.editor;
 
@@ -147,19 +146,7 @@ public class Cursor
         //TODO if(measure <0)  throw neco..
             
     }
-    
-    
-    //return true/false if is on the position Partwise
-    /*
-    public boolean checkCursorPartwise(int part)
-    {
-        return true;
-    }
-    */
-    //return true/false if is on the position Part
-    
-    //return true/false if is on the position some Measure
-    
+   
     
     
     

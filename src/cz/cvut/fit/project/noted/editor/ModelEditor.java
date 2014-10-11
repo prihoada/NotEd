@@ -1,9 +1,7 @@
 /*
- * what to do next?
- * 1. presun posunX/Y -> modelEditor z Cursor
- * 2. addNote
-   3. MAYBE: measures-> udelat pole a ulozit measures pro vsechny parts
-    4. addNote pridelat pro vsechny znaky all..
+ CO CHYBI:
+ DEBUGNOUT TO
+ upravit metody ve kterych je TODO
  */
 package cz.cvut.fit.project.noted.editor;
 
@@ -44,16 +42,20 @@ public class ModelEditor
         
         this.model = model;
         this.modelHierarchy = model.getModelHierarchy();
-        
+       
         // TO WHERE PUT THE NOTE
         this.partPos = cursor.getPart();
         this.measurePos = cursor.getMeasure();
         this.x = cursor.getPosition_x();
         this.y = cursor.getPosition_y();
         
-        this.parts = modelHierarchy.getPart(); 
+        this.parts = modelHierarchy.getPart();
+        
+        //TODO   ZDE JE CHYBA ARRAY INDEX OUT OF BOUND  - PartPos
         this.measures = parts.get(partPos).getMeasure();
+        //TODO   ZDE JE CHYBA ARRAY INDEX OUT OF BOUND  - measurePos
         this.notes = measures.get(measurePos).getNoteOrBackupOrForward();
+       
         
         
      
@@ -64,45 +66,33 @@ public class ModelEditor
     
     
     
-    //TODO mozna ne string ale primo nota?
+    //TODO ???? predavat typ noty ve Stringu nebo jinak ?????
     private Note createNote(String noteType)
     {
         ObjectFactory factory = new ObjectFactory();
-        
         Note note = factory.createNote();
         
-        //nastaveni noty. - switch podle STRING NOTETYPE... TODO !!!!
-        //note.setPitch(blalala);
-        //set type,,,..
+        //TODO
+        //Zde bude switch a podle typu noty se nastavy dana nota !!!!
+        // !!!!!!!
         
         
         return note;
     }
     
-    //TODO pridat parametry jakou notu atd....
     public void addNote(String noteType)
     {
         
-        //CREATE NOTE 
-        Note note = createNote(noteType);
-        
-
-        //FINALLY PUT IT THERE  TODO
-        
-        
+        Note note = createNote(noteType);  
         this.notes.add(this.x, note);
-        
-        //this.notes.add(0, note);
 
-//nota bude z measures(measure) .... x,y
-        //measures.get(measurePos).adddnota(,.mdfdfsd)
     }
     
     //moves Note on current cursor right,
     //the cursor moves right also
     public void moveToRight()
     {
-        //move to right TODO
+        //TODO move to right TODO
         
         
         //if done, move cursor to this position too
