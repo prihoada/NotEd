@@ -35,6 +35,12 @@ public class Toolbar extends JToolBar
         this.add(stopButton);
         tabManager.addChangeListener(new TabbedPaneDisableComponentChangeListener(stopButton));
         stopButton.addActionListener(new StopAction(tabManager));
+        
+        JButton addNote = new JButton(new ImageIcon("assets/images/noteButton.png"));
+        addNote.setFocusPainted(false);
+        this.add(addNote);
+        tabManager.addChangeListener(new TabbedPaneDisableComponentChangeListener(addNote));
+        //addNote.addActionListener(new AddNote(tabManager));
     }
     
 }
