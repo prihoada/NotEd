@@ -26,6 +26,7 @@ public class ModelEditor
     
     private final List<ScorePartwise.Part> parts;
     private final List<ScorePartwise.Part.Measure> measures;
+    private final List<Object> notes;
     
     private final int partPos;
     private final int measurePos;
@@ -50,7 +51,10 @@ public class ModelEditor
         this.y = cursor.getPosition_y();
         
         this.parts = modelHierarchy.getPart(); 
-        this.measures = parts.get(partPos).getMeasure(); //CHECK
+        this.measures = parts.get(partPos).getMeasure();
+        this.notes = measures.get(measurePos).getNoteOrBackupOrForward();
+        
+        
      
     }
     
@@ -83,7 +87,13 @@ public class ModelEditor
         
 
         //FINALLY PUT IT THERE  TODO
-        //nota bude z measures(measure) .... x,y
+        
+        
+        this.notes.add(this.x, note);
+        
+        //this.notes.add(0, note);
+
+//nota bude z measures(measure) .... x,y
         //measures.get(measurePos).adddnota(,.mdfdfsd)
     }
     
