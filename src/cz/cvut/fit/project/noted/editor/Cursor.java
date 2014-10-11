@@ -1,9 +1,13 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * what to do next?
+ * 1. exceptions?
+ * 2.
  */
 package cz.cvut.fit.project.noted.editor;
+
+import com.audiveris.proxymusic.ScorePartwise;
+import cz.cvut.fit.project.noted.model.Model;
+import java.util.List;
 
 /**
  *
@@ -16,20 +20,24 @@ public class Cursor
     int position_x;
     int position_y;
 
+    private final Model model;
+    private final ScorePartwise modelHierarchy;
+    List<ScorePartwise.Part> parts;
     
     
     
-    
-    public Cursor()
+    public Cursor(Model model)
     {
+        this.setCursor(0, 0, 0, 0);
+        
+        this.model = model;
+        this.modelHierarchy = model.getModelHierarchy();
+        parts = modelHierarchy.getPart();
+        
         
     }
     
-    public Cursor(int part, int measure,
-            int position_x, int position_y)
-    {
-        this.setCursor(part, measure, position_x, position_y);
-    }
+    
     
     
    
@@ -58,7 +66,7 @@ public class Cursor
 
     
     
-    void setCursor(int part, int measure,
+    public void setCursor(int part, int measure,
             int position_x, int position_y)
     {
         this.part = part;
@@ -94,15 +102,11 @@ public class Cursor
     public void moveToRight()
     {
         position_x++;
-        
-        //TODO
-        //osetrit spoustu veci.
-        
     }
     
     public void moveToLeft()
     {
-        //TODO
+        position_x++;
     }
     
     public void moveUp()
@@ -114,6 +118,18 @@ public class Cursor
     {
         position_y--;
     }
+    
+    
+    //return true/false if is on the position Partwise
+    public boolean checkCursorPartwise(int part)
+    {
+        return true;
+    }
+    
+    //return true/false if is on the position Part
+    
+    //return true/false if is on the position some Measure
+    
     
     
     
