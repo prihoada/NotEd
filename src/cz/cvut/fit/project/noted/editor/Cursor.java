@@ -15,14 +15,14 @@ import java.util.List;
  */
 public class Cursor
 {
-    int part;
-    int measure;
-    int position_x;
-    int position_y;
+    private int part;
+    private int measure;
+    private int position_x;
+    private int position_y;
 
     private final Model model;
     private final ScorePartwise modelHierarchy;
-    List<ScorePartwise.Part> parts;
+    private final List<ScorePartwise.Part> parts;
     
     
     
@@ -34,10 +34,7 @@ public class Cursor
         this.modelHierarchy = model.getModelHierarchy();
         parts = modelHierarchy.getPart();
         
-        
     }
-    
-    
     
     
    
@@ -48,6 +45,7 @@ public class Cursor
         return measure;
     }
 
+    
     public int getPart()
     {
         return part;
@@ -99,15 +97,31 @@ public class Cursor
     
     
     
+    
+    
+    
     public void moveToRight()
     {
+        
+        //TODO if we are on last position in measure
+        //go to the first position in next measure
+        
+        //else
         position_x++;
+        
     }
     
     public void moveToLeft()
     {
-        position_x++;
+        
+        //TODO if we are on last position in measure
+        //go to the first position in next measure
+        
+        //else
+        position_x--;
+        
     }
+    
     
     public void moveUp()
     {
@@ -120,12 +134,28 @@ public class Cursor
     }
     
     
+    
+    public void moveToRightMeasure()
+    {
+        measure++;
+    }
+    
+    public void moveToLeftMeasure()
+    {
+        measure--;
+        
+        //TODO if(measure <0)  throw neco..
+            
+    }
+    
+    
     //return true/false if is on the position Partwise
+    /*
     public boolean checkCursorPartwise(int part)
     {
         return true;
     }
-    
+    */
     //return true/false if is on the position Part
     
     //return true/false if is on the position some Measure

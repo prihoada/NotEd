@@ -20,6 +20,7 @@ import java.util.List;
 public class ModelEditor
 {
 
+    
     private final Cursor cursor;
     private final Model model;
     private final ScorePartwise modelHierarchy;

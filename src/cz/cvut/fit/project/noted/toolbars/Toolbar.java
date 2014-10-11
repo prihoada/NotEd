@@ -3,6 +3,7 @@
 package cz.cvut.fit.project.noted.toolbars;
 
 import cz.cvut.fit.project.noted.rendering.TabManager;
+import cz.cvut.fit.project.noted.toolbars.actions.AddNote;
 import cz.cvut.fit.project.noted.toolbars.actions.PlayAction;
 import cz.cvut.fit.project.noted.toolbars.actions.StopAction;
 import cz.cvut.fit.project.noted.utils.TabbedPaneDisableComponentChangeListener;
@@ -40,7 +41,7 @@ public class Toolbar extends JToolBar
         addNote.setFocusPainted(false);
         this.add(addNote);
         tabManager.addChangeListener(new TabbedPaneDisableComponentChangeListener(addNote));
-        //addNote.addActionListener(new AddNote(tabManager));
+        addNote.addActionListener(new AddNote(tabManager));
     }
     
 }
