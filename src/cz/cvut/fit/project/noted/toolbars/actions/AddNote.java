@@ -5,6 +5,7 @@ import cz.cvut.fit.project.noted.editor.ModelEditor;
 import cz.cvut.fit.project.noted.model.Model;
 import cz.cvut.fit.project.noted.model.IModelProvider;
 import cz.cvut.fit.project.noted.musicrenderer.RenderBuilder;
+import cz.cvut.fit.project.noted.musicrenderer.RenderPanel;
 import cz.cvut.fit.project.noted.rendering.Tab;
 import cz.cvut.fit.project.noted.rendering.TabManager;
 import java.awt.event.ActionEvent;
@@ -17,10 +18,12 @@ public class AddNote implements ActionListener
 {
 
     private final TabManager tabManager;
-    private RenderBuilder builder;
+    private final RenderPanel renderPanel;
+    
     
     public AddNote(TabManager tabManager) {
         this.tabManager = tabManager;
+        this.renderPanel = new RenderPanel();
         
     }
 
@@ -39,7 +42,7 @@ public class AddNote implements ActionListener
            modelEditor.addNote("A");
            
            //znovu vykresleni.
-           builder.buildFromModel(model);
+           renderPanel.buildFromModel(model);
             
         }
         
