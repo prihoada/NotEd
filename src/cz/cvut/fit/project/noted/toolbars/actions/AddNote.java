@@ -18,12 +18,9 @@ public class AddNote implements ActionListener
 {
 
     private final TabManager tabManager;
-    private final RenderPanel renderPanel;
-    
     
     public AddNote(TabManager tabManager) {
         this.tabManager = tabManager;
-        this.renderPanel = new RenderPanel();
         
     }
 
@@ -36,13 +33,14 @@ public class AddNote implements ActionListener
         {            
            
            Model model = activeTab.getModel();
-           ModelEditor modelEditor = new ModelEditor(model); 
+           ModelEditor modelEditor = activeTab.getEditor();
             
            //TODO Vyber typu NOTY udelat PAK!!!!!!!!!!
            modelEditor.addNote("A");
+           modelEditor.getCursor().moveToRight();
            
            //znovu vykresleni.
-           renderPanel.buildFromModel(model);
+           activeTab.getRenderPanel().rebuild();
             
         }
         

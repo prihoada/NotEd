@@ -105,8 +105,20 @@ public class Cursor
         //TODO if we are on last position in measure
         //go to the first position in next measure
         
-        //else
-        position_x++;
+        //example
+        ScorePartwise.Part staff = model.getModelHierarchy().getPart().get(part);
+        ScorePartwise.Part.Measure bar = staff.getMeasure().get(measure);
+        List<Object> symbols = bar.getNoteOrBackupOrForward();
+        
+        //check if there is a space on the right
+        if(position_x + 1 > symbols.size())
+        {
+            moveToRightMeasure();
+        }
+        else
+        {
+            position_x++;
+        }
         
     }
     

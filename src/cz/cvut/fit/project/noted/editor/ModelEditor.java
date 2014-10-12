@@ -6,8 +6,11 @@
 package cz.cvut.fit.project.noted.editor;
 
 import com.audiveris.proxymusic.Note;
+import com.audiveris.proxymusic.NoteType;
 import com.audiveris.proxymusic.ObjectFactory;
+import com.audiveris.proxymusic.Pitch;
 import com.audiveris.proxymusic.ScorePartwise;
+import com.audiveris.proxymusic.Step;
 import cz.cvut.fit.project.noted.model.Model;
 import java.util.List;
 
@@ -27,14 +30,6 @@ public class ModelEditor
     private final List<ScorePartwise.Part.Measure> measures;
     private final List<Object> notes;
     
-    private final int partPos;
-    private final int measurePos;
-    private final int x;
-    private final int y;
-    
-    
-    
-    
     
     public ModelEditor(Model model)
     {
@@ -43,18 +38,12 @@ public class ModelEditor
         this.model = model;
         this.modelHierarchy = model.getModelHierarchy();
        
-        // TO WHERE PUT THE NOTE
-        this.partPos = cursor.getPart();
-        this.measurePos = cursor.getMeasure();
-        this.x = cursor.getPosition_x();
-        this.y = cursor.getPosition_y();
-        
         this.parts = modelHierarchy.getPart();
         
         //TODO   ZDE JE CHYBA ARRAY INDEX OUT OF BOUND  - PartPos
-        this.measures = parts.get(partPos).getMeasure();
+        this.measures = parts.get(cursor.getPart()).getMeasure();
         //TODO   ZDE JE CHYBA ARRAY INDEX OUT OF BOUND  - measurePos
-        this.notes = measures.get(measurePos).getNoteOrBackupOrForward();
+        this.notes = measures.get(cursor.getMeasure()).getNoteOrBackupOrForward();
        
         
         
@@ -72,6 +61,16 @@ public class ModelEditor
         ObjectFactory factory = new ObjectFactory();
         Note note = factory.createNote();
         
+        //debug params
+        
+        //IMPORTANT - every note must have a pitch (with a step and octave) and a type. Renderer needs these values.
+        note.setPitch(new Pitch());
+        note.getPitch().setStep(Step.A);
+        note.getPitch().setOctave(4);
+        NoteType type = new NoteType();
+        type.setValue("quarter");
+        note.setType(type);
+        
         //TODO
         //Zde bude switch a podle typu noty se nastavy dana nota !!!!
         // !!!!!!!
@@ -84,25 +83,33 @@ public class ModelEditor
     {
         
         Note note = createNote(noteType);  
-        this.notes.add(this.x, note);
+        this.notes.add(this.cursor.getPosition_x(), note);
 
     }
     
-    //moves Note on current cursor right,
-    //the cursor moves right also
-    public void moveToRight()
-    {
-        //TODO move to right TODO
-        
-        
-        //if done, move cursor to this position too
-        cursor.moveToRight();
+    
+    //THIS IS NOT NEEDED - we can call getCursor().moveX
+//    //moves Note on current cursor right,
+//    //the cursor moves right also
+//    public void moveToRight()
+//    {
+//        //TODO move to right TODO
+//        
+//        
+//        //if done, move cursor to this position too
+//        cursor.moveToRight();
+//    }
+//    
+//    public void moveToLeft()
+//    {
+//        //TODO
+//    }
+
+    public Cursor getCursor() {
+        return cursor;
     }
     
-    public void moveToLeft()
-    {
-        //TODO
-    }
+    
     
     
 }

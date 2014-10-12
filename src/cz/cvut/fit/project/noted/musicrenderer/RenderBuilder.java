@@ -13,6 +13,7 @@ import cz.cvut.fit.project.noted.model.Model;
 import cz.cvut.fit.project.noted.musicrenderer.glyphs.BarGlyph;
 import cz.cvut.fit.project.noted.musicrenderer.glyphs.BarSeparator;
 import cz.cvut.fit.project.noted.musicrenderer.glyphs.ClefGlyph;
+import cz.cvut.fit.project.noted.musicrenderer.glyphs.CursorGlyph;
 import cz.cvut.fit.project.noted.musicrenderer.glyphs.NoteGlyph;
 import cz.cvut.fit.project.noted.musicrenderer.glyphs.RestGlyph;
 import cz.cvut.fit.project.noted.musicrenderer.glyphs.base.ScoreGlyph;
@@ -70,6 +71,22 @@ public class RenderBuilder {
 
         
         
+    }
+    
+    /**
+     * Creates a cursor on the specified position.
+     * @param staff
+     * @param measure
+     * @param x
+     * @param y 
+     */
+    public void addCursor(int staff, int measure, int x, int y)
+    {
+        CursorGlyph cursor = new CursorGlyph(y);
+        StaveGlyph stave = score.getGlyphs().get(0);
+        BarGlyph bar = stave.getGlyphs().get(measure);
+        
+        bar.addGlyphAt(cursor, x);
     }
 
     /**

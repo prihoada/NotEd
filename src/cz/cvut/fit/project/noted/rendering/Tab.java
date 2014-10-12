@@ -1,6 +1,7 @@
 
 package cz.cvut.fit.project.noted.rendering;
 
+import cz.cvut.fit.project.noted.editor.ModelEditor;
 import cz.cvut.fit.project.noted.menus.XMLFileChooser;
 import cz.cvut.fit.project.noted.model.Model;
 import cz.cvut.fit.project.noted.model.ProxyMusicHandler;
@@ -29,6 +30,7 @@ public class Tab extends JPanel
     private Model model;
     private ModelPlayer player;
     private RenderPanel renderPanel;
+    private ModelEditor editor;
 
     private final XMLFileChooser xmlFileChooser;
     private final ProxyMusicHandler proxyMusicHandler;
@@ -67,11 +69,20 @@ public class Tab extends JPanel
     {
         return player;
     }
+    public RenderPanel getRenderPanel() {
+        return renderPanel;
+    }
+    public ModelEditor getEditor() {
+        return editor;
+    }
+    
+    
     public Tab setModel(Model model)
     {
         this.model = model;
         this.player = new ModelPlayer(model);
-        renderPanel.buildFromModel(model);
+        this.editor = new ModelEditor(model);
+        renderPanel.buildFromModel(model, editor.getCursor());
         
         return this;
     }

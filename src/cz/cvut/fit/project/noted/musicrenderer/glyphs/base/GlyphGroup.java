@@ -47,6 +47,20 @@ public class GlyphGroup<T extends Glyph> extends Glyph
         glyph.setParent(this);
         doLayout();
     }
+    
+    /**
+     * Adds the glyph on the specified index.
+     * @param glyph
+     * @param index 
+     */
+    public void addGlyphAt(T glyph, int index)
+    {
+        this.glyphs.add(index, glyph);
+        glyph.setParent(this);
+        doLayout();
+    }
+    
+    
     /**
      * Removes the given glyph if present.
      * @param glyph Glyph to remove.

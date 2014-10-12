@@ -1,6 +1,7 @@
 
 package cz.cvut.fit.project.noted.musicrenderer;
 
+import cz.cvut.fit.project.noted.editor.Cursor;
 import cz.cvut.fit.project.noted.model.Model;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -37,6 +38,8 @@ public class RenderPanel extends JPanel{
     
     
     private RenderBuilder builder;
+    private Model model;
+    private Cursor cursor;
     
     public RenderPanel() {
 
@@ -49,12 +52,18 @@ public class RenderPanel extends JPanel{
     /**
      * Completely rebuilds the render.
      * @param model model to take the data from.
+     * @param cursor editor caret
      */
-    public void buildFromModel(Model model)
+    public void buildFromModel(Model model, Cursor cursor)
     {
+        this.model = model;
+        this.cursor = cursor;
+        
         score = new ScoreGlyph();
         builder = new RenderBuilder(score);
         builder.buildFromModel(model);
+
+        builder.addCursor(cursor.getPart(), cursor.getMeasure(), cursor.getPosition_x(), cursor.getPosition_y());
         
         score.setY(150);
         score.doLayout();
@@ -63,6 +72,13 @@ public class RenderPanel extends JPanel{
         this.repaint();
     }
     
+    /**
+     * Rebuild the hierarchy using the last model and cursor.
+     */
+    public void rebuild()
+    {
+        buildFromModel(model, cursor);
+    }
     
     
     public void createDummyScore()
@@ -75,6 +91,9 @@ public class RenderPanel extends JPanel{
         createDummyBar(stave);
         score.addGlyph(stave);
         score.doLayout();
+        
+        builder = new RenderBuilder(score);
+        builder.addCursor(0,0,0,0);
     }
     
     /**
@@ -85,8 +104,8 @@ public class RenderPanel extends JPanel{
         BarGlyph bar = new BarGlyph();
         bar.addGlyph(new ClefGlyph(Clef.G2));
         
-        CursorGlyph cursor = new CursorGlyph(-10);
-        bar.addGlyph(cursor);
+//        CursorGlyph cursor = new CursorGlyph(-10);
+//        bar.addGlyph(cursor);
         
         for (int i = -15; i < 15; i++) {
             
