@@ -1,14 +1,18 @@
 package cz.cvut.fit.project.noted.musicrenderer;
 
 import com.audiveris.proxymusic.Attributes;
+import com.audiveris.proxymusic.Clef;
+import com.audiveris.proxymusic.Key;
 import com.audiveris.proxymusic.Note;
 import com.audiveris.proxymusic.Pitch;
 import com.audiveris.proxymusic.Rest;
 import com.audiveris.proxymusic.ScorePartwise;
 import com.audiveris.proxymusic.Step;
+import com.audiveris.proxymusic.Time;
 import cz.cvut.fit.project.noted.model.Model;
 import cz.cvut.fit.project.noted.musicrenderer.glyphs.BarGlyph;
 import cz.cvut.fit.project.noted.musicrenderer.glyphs.BarSeparator;
+import cz.cvut.fit.project.noted.musicrenderer.glyphs.ClefGlyph;
 import cz.cvut.fit.project.noted.musicrenderer.glyphs.NoteGlyph;
 import cz.cvut.fit.project.noted.musicrenderer.glyphs.RestGlyph;
 import cz.cvut.fit.project.noted.musicrenderer.glyphs.base.ScoreGlyph;
@@ -104,8 +108,10 @@ public class RenderBuilder {
             {
                 Attributes attributes = (Attributes) object;
                 divisions = attributes.getDivisions().intValue();
-                
-                System.out.println("Divisions: " + divisions);
+                       
+                buildClefs(bar, attributes.getClef());
+                buildKeySignature(bar, attributes.getKey());
+                buildTimeSignature(bar, attributes.getTime());
             }
             //parse a note, contains rests as well
             if(object instanceof Note)
@@ -169,7 +175,6 @@ public class RenderBuilder {
             }
 
             convertedOffset += octaveShift;
-            //NoteGlyph noteGlyph = new NoteGlyph(convertDuration(note.getDuration()), convertedOffset);
             NoteGlyph noteGlyph = new NoteGlyph(convertDurationType(note.getType().getValue()), convertedOffset);
             bar.addGlyph(noteGlyph);
         }
@@ -219,8 +224,6 @@ public class RenderBuilder {
     {
         Duration rendererDuration = Duration.Quarter;
         
-        System.out.println("Type: " + type);
-        
         switch (type)
         {
             case "quarter":
@@ -251,6 +254,66 @@ public class RenderBuilder {
         }
         
         return rendererDuration;
+    }
+
+    /**
+     * Builds the clefs.
+     * @param clefs list of clefs of a measure
+     */
+    private void buildClefs(BarGlyph bar, List<Clef> clefs) {
+        
+        if(clefs == null) return;
+        
+        for (Clef clef : clefs)
+        {
+            switch (clef.getSign())
+            {
+                case G:
+                    bar.addGlyph(new ClefGlyph(cz.cvut.fit.project.noted.musicrenderer.model.Clef.G2));
+                    break;
+                    
+                //TODO other clefs
+                    
+                default:
+                    LOG.warning("Unknown clef type: " + clef.getSign());
+                    break;
+                    
+            }
+        }
+        
+    }
+
+    /**
+     * Build the key signature. This is the set of accidentals determining overall half-tone modifiers.
+     * @param bar bar to put the signature in
+     * @param keys list of keys to build
+     */
+    private void buildKeySignature(BarGlyph bar, List<Key> keys) {
+        
+        if(keys == null) return;
+        
+        for (Key key : keys) {
+            
+        //TODO
+            
+        }
+    }
+
+    /**
+     * Build the time signatures. Bottom number represents the duration of the note. Top number represents the number of notes in the bar.
+     * @param bar
+     * @param times 
+     */
+    private void buildTimeSignature(BarGlyph bar, List<Time> times) {
+
+        if(times == null) return;
+        
+        for (Time time : times) {
+            
+            //TODO
+            
+        }
+        
     }
     
 }
