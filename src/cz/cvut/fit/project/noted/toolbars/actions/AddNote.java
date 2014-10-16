@@ -35,8 +35,7 @@ public class AddNote implements ActionListener
            Model model = activeTab.getModel();
            ModelEditor modelEditor = activeTab.getEditor();
             
-           //TODO Vyber typu NOTY udelat PAK!!!!!!!!!!
-           modelEditor.addNote("A");
+           modelEditor.addNote();
            modelEditor.getCursor().moveToRight();
            
            //znovu vykresleni.

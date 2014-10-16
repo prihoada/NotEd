@@ -107,7 +107,7 @@ public class RenderPanel extends JPanel{
 //        CursorGlyph cursor = new CursorGlyph(-10);
 //        bar.addGlyph(cursor);
         
-        for (int i = -15; i < 15; i++) {
+        for (int i = 0; i < 10; i++) {
             
             NoteGlyph n = new NoteGlyph(getRandomDuration(), i);
             n.addAccidental(getRandomAccidental());

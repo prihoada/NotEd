@@ -12,6 +12,8 @@ import com.audiveris.proxymusic.Pitch;
 import com.audiveris.proxymusic.ScorePartwise;
 import com.audiveris.proxymusic.Step;
 import cz.cvut.fit.project.noted.model.Model;
+import cz.cvut.fit.project.noted.musicrenderer.ProxymusicConverter;
+import cz.cvut.fit.project.noted.musicrenderer.model.Duration;
 import java.util.List;
 
 /**
@@ -55,36 +57,33 @@ public class ModelEditor
     
     
     
-    //TODO ???? predavat typ noty ve Stringu nebo jinak ?????
-    private Note createNote(String noteType)
+    private Note createNote(int cursorY)
     {
         ObjectFactory factory = new ObjectFactory();
         Note note = factory.createNote();
         
-        //debug params
-        
+        //take the pitch from the cursor
         //IMPORTANT - every note must have a pitch (with a step and octave) and a type. Renderer needs these values.
-        note.setPitch(new Pitch());
-        note.getPitch().setStep(Step.A);
-        note.getPitch().setOctave(4);
-        NoteType type = new NoteType();
-        type.setValue("quarter");
-        note.setType(type);
+        Pitch pitch = ProxymusicConverter.renderYtoNoteY(cursorY);
+        note.setPitch(pitch);
+
+        //set the duration
         
-        //TODO
-        //Zde bude switch a podle typu noty se nastavy dana nota !!!!
-        // !!!!!!!
+        //this should be taken from the toolbar
+        Duration currentDuration = Duration.Quarter;
         
+        
+        note.setType(ProxymusicConverter.durationToType(currentDuration));
         
         return note;
     }
     
-    public void addNote(String noteType)
+    public void addNote()
     {
         
-        Note note = createNote(noteType);  
+        Note note = createNote(this.getCursor().getPosition_y());  
         this.notes.add(this.cursor.getPosition_x(), note);
-
+        
     }
     
     

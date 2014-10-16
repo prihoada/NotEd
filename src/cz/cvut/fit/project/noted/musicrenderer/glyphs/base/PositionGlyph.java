@@ -31,8 +31,9 @@ public abstract class PositionGlyph extends Glyph {
      * @param positionY 
      */
     public void setPositionY(int positionY) {
-        this.positionY = positionY;
-        this.setY((int) (positionY * positionSpacing));
+        
+        this.positionY = positionY -2; // is to make the c note position 0
+        this.setY((int) (this.positionY * positionSpacing));
     }
     
 }

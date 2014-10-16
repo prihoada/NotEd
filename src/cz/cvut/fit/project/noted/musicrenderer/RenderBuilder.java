@@ -151,48 +151,14 @@ public class RenderBuilder {
         Rest rest = note.getRest();
         if(rest != null)
         {
-            RestGlyph restGlyph = new RestGlyph(convertDurationType(note.getType().getValue()));
+            RestGlyph restGlyph = new RestGlyph(ProxymusicConverter.typeToDuration(note.getType().getValue()));
             bar.addGlyph(restGlyph);
         }
         else
         {
           
-            Pitch pitch = note.getPitch();
-            Step step = pitch.getStep();
-
-            //convert model octave to renderer octave
-            int octave = pitch.getOctave() - 5; //model has c1 as octave 4
-            int octaveShift = -octave * 7; //7 positions in an octave
-
-            //convert model pitch to renderer pitch
-            int convertedOffset = 0;
-            switch (step)
-            {
-                case A:
-                    convertedOffset = -7;
-                    break;
-                case B:
-                    convertedOffset = -8;
-                    break;
-                case C:
-                    convertedOffset = -2;
-                    break;
-                case D:
-                    convertedOffset = -3;
-                    break;
-                case E:
-                    convertedOffset = -4;
-                    break;
-                case F:
-                    convertedOffset = -5;
-                    break;
-                case G:
-                    convertedOffset = -6;
-                    break;
-            }
-
-            convertedOffset += octaveShift;
-            NoteGlyph noteGlyph = new NoteGlyph(convertDurationType(note.getType().getValue()), convertedOffset);
+            int convertedIndex = ProxymusicConverter.noteYtoRendererY(note);
+            NoteGlyph noteGlyph = new NoteGlyph(ProxymusicConverter.typeToDuration(note.getType().getValue()), convertedIndex);
             bar.addGlyph(noteGlyph);
         }
     }
@@ -237,42 +203,6 @@ public class RenderBuilder {
         return rendererDuration;
     }
     
-    public Duration convertDurationType(String type)
-    {
-        Duration rendererDuration = Duration.Quarter;
-        
-        switch (type)
-        {
-            case "quarter":
-                rendererDuration = Duration.Quarter;
-                break;
-            case "half":
-                rendererDuration = Duration.Half;
-                break;
-            case "eighth":
-                rendererDuration = Duration.Eighth;
-                break;
-            case "whole":
-                rendererDuration = Duration.Whole;
-                break;
-            case "16th":
-                rendererDuration = Duration.Sixteenth;
-                break;
-            case "32nd":
-                rendererDuration = Duration.ThirtySecond;
-                break;
-            case "64th":
-                rendererDuration = Duration.SixtyFourth;
-                break;
-                
-            default:
-                LOG.warning("Unknown note duration type: " + type);
-                break;
-        }
-        
-        return rendererDuration;
-    }
-
     /**
      * Builds the clefs.
      * @param clefs list of clefs of a measure
