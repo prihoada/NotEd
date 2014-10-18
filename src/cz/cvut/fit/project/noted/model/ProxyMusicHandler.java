@@ -69,6 +69,19 @@ public class ProxyMusicHandler implements IModelProvider
     }
     
     
+    public Model createEmptyModel()
+    {
+        Model model = null;
+        
+        try {
+            model = getModel("assets/unnamed.xml");
+            model.setFilePath(null);
+        } catch (FileNotFoundException | ParsingException ex) {
+        }
+       
+       return model;
+    }
+    
     /**
      * Saves the supplied model to a file. Creates the file if necessary.
      * @param model instance of Model to save.

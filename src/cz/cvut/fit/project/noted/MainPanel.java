@@ -25,9 +25,11 @@ public class MainPanel extends JPanel
         this.add(tabManager, BorderLayout.CENTER);
         
         
-        //Temporary
-        tabManager.addTab("Test tab", new Tab(xmlFileChooser,proxyMusicHandler,tabManager));
-        //TabManager.getInstance().addTab("Test tab2", new Tab());
+        //Temporary - create an empty file
+        Tab tab = new Tab(xmlFileChooser, proxyMusicHandler, tabManager);
+        tab.setModel(proxyMusicHandler.createEmptyModel());
+        tabManager.addTab("Unnamed song", tab);
+        
     }
     
     
