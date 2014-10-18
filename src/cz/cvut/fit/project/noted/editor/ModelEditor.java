@@ -7,6 +7,7 @@ package cz.cvut.fit.project.noted.editor;
 
 import com.audiveris.proxymusic.Note;
 import com.audiveris.proxymusic.Clef;
+import com.audiveris.proxymusic.ClefSign;
 import com.audiveris.proxymusic.NoteType;
 import com.audiveris.proxymusic.ObjectFactory;
 import com.audiveris.proxymusic.Pitch;
@@ -74,6 +75,9 @@ public class ModelEditor
     {
             ObjectFactory factory = new ObjectFactory();
             Clef clef = factory.createClef();
+            
+            //add a standard violin G clef for now
+            clef.setSign(ClefSign.G);
             this.notes.add(this.cursor.getPosition_x(), clef); 
     }
     
@@ -81,7 +85,7 @@ public class ModelEditor
         
         
         
-    private Note createSpace(Duration duration)
+    private Note createRest(Duration duration)
     {
         ObjectFactory factory = new ObjectFactory();
         Note note = factory.createNote();
@@ -92,9 +96,9 @@ public class ModelEditor
         return note;
     }
     
-    public void addSpace(Duration duration)
+    public void addRest(Duration duration)
     {
-        Note space = createSpace(duration);  
+        Note space = createRest(duration);  
         this.notes.add(this.cursor.getPosition_x(), space); 
     }
     

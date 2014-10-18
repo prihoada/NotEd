@@ -63,7 +63,7 @@ public class Toolbar extends JToolBar
         addNote.setFocusPainted(false);
         this.add(addNote);
         tabManager.addChangeListener(new TabbedPaneDisableComponentChangeListener(addNote));
-        addNote.addActionListener(new AddNote(tabManager, duration));
+        addNote.addActionListener(new AddNote(tabManager, this));
         
         //ADD CLEF
         JButton addClef = new JButton(new ImageIcon("assets/images/key.png"));
@@ -72,18 +72,23 @@ public class Toolbar extends JToolBar
         tabManager.addChangeListener(new TabbedPaneDisableComponentChangeListener(addClef));
         addClef.addActionListener(new AddClef(tabManager));
         
-        //ADD SPACE
-        JButton addSpace = new JButton(new ImageIcon("assets/images/space.png"));
-        addSpace.setFocusPainted(false);
-        this.add(addSpace);
-        tabManager.addChangeListener(new TabbedPaneDisableComponentChangeListener(addSpace));
-        addSpace.addActionListener(new AddSpace(tabManager, duration));
+        //ADD REST
+        JButton addRest = new JButton(new ImageIcon("assets/images/space.png"));
+        addRest.setFocusPainted(false);
+        this.add(addRest);
+        tabManager.addChangeListener(new TabbedPaneDisableComponentChangeListener(addRest));
+        addRest.addActionListener(new AddSpace(tabManager, duration));
     }
   
     
     public void setDuration(Duration duration)
     {
         this.duration = duration;
+    }
+    
+    public Duration getDuration()
+    {
+        return this.duration;
     }
     
 }

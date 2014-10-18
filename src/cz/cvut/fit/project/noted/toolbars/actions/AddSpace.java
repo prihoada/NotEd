@@ -38,7 +38,7 @@ public class AddSpace implements ActionListener
            Model model = activeTab.getModel();
            ModelEditor modelEditor = activeTab.getEditor();
             
-           modelEditor.addSpace(duration);
+           modelEditor.addRest(duration);
            modelEditor.getCursor().moveToRight();
            
            activeTab.getRenderPanel().rebuild();
