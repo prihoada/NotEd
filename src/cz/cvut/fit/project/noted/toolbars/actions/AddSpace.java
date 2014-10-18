@@ -12,19 +12,21 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
+ *
  * @author david
  */
-public class AddNote implements ActionListener
+public class AddSpace implements ActionListener
 {
-
+    
     private final TabManager tabManager;
     private final Duration duration;
-    
-    public AddNote(TabManager tabManager, Duration duration) {
+
+    public AddSpace(TabManager tabManager, Duration duration)
+    {
         this.tabManager = tabManager;
         this.duration = duration;
     }
-
+    
     @Override
     public void actionPerformed(ActionEvent e)
     {
@@ -36,7 +38,7 @@ public class AddNote implements ActionListener
            Model model = activeTab.getModel();
            ModelEditor modelEditor = activeTab.getEditor();
             
-           modelEditor.addNote(duration);
+           modelEditor.addSpace(duration);
            modelEditor.getCursor().moveToRight();
            
            activeTab.getRenderPanel().rebuild();
@@ -44,5 +46,6 @@ public class AddNote implements ActionListener
         }
         
     }
-      
+    
+    
 }

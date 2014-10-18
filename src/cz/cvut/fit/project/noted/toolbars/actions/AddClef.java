@@ -11,18 +11,18 @@ import cz.cvut.fit.project.noted.rendering.TabManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+
 /**
+ *
  * @author david
  */
-public class AddNote implements ActionListener
+public class AddClef implements ActionListener
 {
-
     private final TabManager tabManager;
-    private final Duration duration;
-    
-    public AddNote(TabManager tabManager, Duration duration) {
+
+    public AddClef(TabManager tabManager)
+    {
         this.tabManager = tabManager;
-        this.duration = duration;
     }
 
     @Override
@@ -36,7 +36,7 @@ public class AddNote implements ActionListener
            Model model = activeTab.getModel();
            ModelEditor modelEditor = activeTab.getEditor();
             
-           modelEditor.addNote(duration);
+           modelEditor.addClef();
            modelEditor.getCursor().moveToRight();
            
            activeTab.getRenderPanel().rebuild();
@@ -44,5 +44,9 @@ public class AddNote implements ActionListener
         }
         
     }
-      
+    
+    
+    
+    
+    
 }

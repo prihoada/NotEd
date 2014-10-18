@@ -6,9 +6,11 @@
 package cz.cvut.fit.project.noted.editor;
 
 import com.audiveris.proxymusic.Note;
+import com.audiveris.proxymusic.Clef;
 import com.audiveris.proxymusic.NoteType;
 import com.audiveris.proxymusic.ObjectFactory;
 import com.audiveris.proxymusic.Pitch;
+import com.audiveris.proxymusic.Rest;
 import com.audiveris.proxymusic.ScorePartwise;
 import com.audiveris.proxymusic.Step;
 import cz.cvut.fit.project.noted.model.Model;
@@ -22,8 +24,7 @@ import java.util.List;
  */
 public class ModelEditor
 {
-
-    
+  
     private final Cursor cursor;
     private final Model model;
     private final ScorePartwise modelHierarchy;
@@ -39,25 +40,14 @@ public class ModelEditor
         
         this.model = model;
         this.modelHierarchy = model.getModelHierarchy();
-       
-        this.parts = modelHierarchy.getPart();
-        
-        //TODO   ZDE JE CHYBA ARRAY INDEX OUT OF BOUND  - PartPos
+        this.parts = modelHierarchy.getPart();   
         this.measures = parts.get(cursor.getPart()).getMeasure();
-        //TODO   ZDE JE CHYBA ARRAY INDEX OUT OF BOUND  - measurePos
         this.notes = measures.get(cursor.getMeasure()).getNoteOrBackupOrForward();
-       
-        
-        
      
     }
     
     
-    
-    
-    
-    
-    private Note createNote(int cursorY)
+    private Note createNote(int cursorY, Duration duration)
     {
         ObjectFactory factory = new ObjectFactory();
         Note note = factory.createNote();
@@ -66,49 +56,56 @@ public class ModelEditor
         //IMPORTANT - every note must have a pitch (with a step and octave) and a type. Renderer needs these values.
         Pitch pitch = ProxymusicConverter.renderYtoNoteY(cursorY);
         note.setPitch(pitch);
-
-        //set the duration
         
-        //this should be taken from the toolbar
-        Duration currentDuration = Duration.Quarter;
-        
-        
-        note.setType(ProxymusicConverter.durationToType(currentDuration));
+        note.setType(ProxymusicConverter.durationToType(duration));
         
         return note;
     }
     
-    public void addNote()
+    public void addNote(Duration duration)
     {
+        Note note = createNote(this.getCursor().getPosition_y(), duration);  
+        this.notes.add(this.cursor.getPosition_x(), note);  
+    }
+    
+
+ 
+    public void addClef()
+    {
+            ObjectFactory factory = new ObjectFactory();
+            Clef clef = factory.createClef();
+            this.notes.add(this.cursor.getPosition_x(), clef); 
+    }
+    
         
-        Note note = createNote(this.getCursor().getPosition_y());  
-        this.notes.add(this.cursor.getPosition_x(), note);
         
+        
+        
+    private Note createSpace(Duration duration)
+    {
+        ObjectFactory factory = new ObjectFactory();
+        Note note = factory.createNote();
+        
+        note.setRest(new Rest());
+        note.setType(ProxymusicConverter.durationToType(duration));
+        
+        return note;
+    }
+    
+    public void addSpace(Duration duration)
+    {
+        Note space = createSpace(duration);  
+        this.notes.add(this.cursor.getPosition_x(), space); 
     }
     
     
-    //THIS IS NOT NEEDED - we can call getCursor().moveX
-//    //moves Note on current cursor right,
-//    //the cursor moves right also
-//    public void moveToRight()
-//    {
-//        //TODO move to right TODO
-//        
-//        
-//        //if done, move cursor to this position too
-//        cursor.moveToRight();
-//    }
-//    
-//    public void moveToLeft()
-//    {
-//        //TODO
-//    }
-
+    
+    
+    
+    
     public Cursor getCursor() {
         return cursor;
     }
     
-    
-    
-    
+        
 }
