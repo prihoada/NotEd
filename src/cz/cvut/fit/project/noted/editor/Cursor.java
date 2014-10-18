@@ -1,7 +1,3 @@
-/*
- CO CHYBI:
- upravit metody ve kterych je TODO
- */
 package cz.cvut.fit.project.noted.editor;
 
 import com.audiveris.proxymusic.ScorePartwise;
@@ -101,11 +97,7 @@ public class Cursor
     
     public void moveToRight()
     {
-        
-        //TODO if we are on last position in measure
-        //go to the first position in next measure
-        
-        //example
+
         ScorePartwise.Part staff = model.getModelHierarchy().getPart().get(part);
         ScorePartwise.Part.Measure bar = staff.getMeasure().get(measure);
         List<Object> symbols = bar.getNoteOrBackupOrForward();
@@ -125,14 +117,18 @@ public class Cursor
     public void moveToLeft()
     {
         
-        //TODO if we are on last position in measure
-        //go to the first position in next measure
-        
-        //else
-        position_x--;
+        //check if there is a space on the left
+        if(position_x <= 0)
+        {
+            moveToLeftMeasure();
+        }
+        else
+        {
+            position_x--;
+        }
         
     }
-    
+ 
     
     public void moveUp()
     {
@@ -145,17 +141,33 @@ public class Cursor
     }
     
     
-    
     public void moveToRightMeasure()
     {
-        measure++;
+        ScorePartwise.Part staff = model.getModelHierarchy().getPart().get(part);
+        ScorePartwise.Part.Measure bar = staff.getMeasure().get(measure + 1);
+        
+        if(bar == null)
+        {
+            //do nothing
+        }
+        else
+        {
+            measure++;
+        }
+        
     }
     
     public void moveToLeftMeasure()
     {
-        measure--;
-        
-        //TODO if(measure <0)  throw neco..
+    
+        if(measure <= 0)
+        {
+            //do nothing
+        }
+        else
+        {
+            measure--;
+        }
             
     }
    
