@@ -144,17 +144,17 @@ public class Cursor
     public void moveToRightMeasure()
     {
         ScorePartwise.Part staff = model.getModelHierarchy().getPart().get(part);
-        ScorePartwise.Part.Measure bar = staff.getMeasure().get(measure + 1);
         
-        if(bar == null)
+        if(measure + 1 >= staff.getMeasure().size())
         {
-            //do nothing
+            //end of staff, do nothing
         }
         else
         {
             measure++;
+            position_x = 0;
         }
-        
+
     }
     
     public void moveToLeftMeasure()
@@ -167,6 +167,11 @@ public class Cursor
         else
         {
             measure--;
+            
+            //move the position_x to the last element in the bar
+            ScorePartwise.Part staff = model.getModelHierarchy().getPart().get(part);
+            ScorePartwise.Part.Measure bar = staff.getMeasure().get(measure);
+            position_x = bar.getNoteOrBackupOrForward().size();
         }
             
     }
