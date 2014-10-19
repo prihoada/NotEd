@@ -4,18 +4,14 @@ import cz.cvut.fit.project.noted.musicrenderer.model.Duration;
 import cz.cvut.fit.project.noted.rendering.TabManager;
 import cz.cvut.fit.project.noted.toolbars.actions.AddClef;
 import cz.cvut.fit.project.noted.toolbars.actions.AddNote;
-import cz.cvut.fit.project.noted.toolbars.actions.AddSpace;
-import cz.cvut.fit.project.noted.toolbars.actions.PlayAction;
-import cz.cvut.fit.project.noted.toolbars.actions.StopAction;
+import cz.cvut.fit.project.noted.toolbars.actions.AddRest;
 import cz.cvut.fit.project.noted.toolbars.actions.SetDuration;
 import cz.cvut.fit.project.noted.utils.TabbedPaneDisableComponentChangeListener;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JRadioButton;
 import javax.swing.JToolBar;
-import static jm.music.tools.ga.NormalDistributionFE.duration;
 
 /**
  *
@@ -23,7 +19,7 @@ import static jm.music.tools.ga.NormalDistributionFE.duration;
  */
 public class DurationToolbar extends JToolBar
 {
-    Duration duration;
+    private Duration duration;
 
     public DurationToolbar(TabManager tabManager, String name)
     {
@@ -41,9 +37,8 @@ public class DurationToolbar extends JToolBar
         JRadioButton ThirtySecond = new JRadioButton(new ImageIcon("assets/images/1d32.png"));
         JRadioButton SixtyFourth = new JRadioButton(new ImageIcon("assets/images/1d64.png"));        
         
-        //NASTAVENI NEJCASTEJI POUZIVANE NOTY JAKO DEFAULT-Adame prenastav, nevim ktera..
         Whole.setSelected(true);
-        this.setDuration(Duration.Whole);
+        this.setDuration(Duration.Quarter);
         
         ButtonGroup group = new ButtonGroup();
         group.add(Whole);
@@ -89,7 +84,7 @@ public class DurationToolbar extends JToolBar
         addRest.setFocusPainted(false);
         this.add(addRest);
         tabManager.addChangeListener(new TabbedPaneDisableComponentChangeListener(addRest));
-        addRest.addActionListener(new AddSpace(tabManager, duration));
+        addRest.addActionListener(new AddRest(tabManager, this));
         
     }
     
