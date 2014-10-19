@@ -37,7 +37,7 @@ public class DurationToolbar extends JToolBar
         JRadioButton ThirtySecond = new JRadioButton(new ImageIcon("assets/images/1d32.png"));
         JRadioButton SixtyFourth = new JRadioButton(new ImageIcon("assets/images/1d64.png"));        
         
-        Whole.setSelected(true);
+        Quarter.setSelected(true);
         this.setDuration(Duration.Quarter);
         
         ButtonGroup group = new ButtonGroup();
