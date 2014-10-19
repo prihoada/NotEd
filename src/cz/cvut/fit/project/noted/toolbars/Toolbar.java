@@ -10,9 +10,11 @@ import cz.cvut.fit.project.noted.toolbars.actions.PlayAction;
 import cz.cvut.fit.project.noted.toolbars.actions.StopAction;
 import cz.cvut.fit.project.noted.toolbars.actions.SetDuration;
 import cz.cvut.fit.project.noted.utils.TabbedPaneDisableComponentChangeListener;
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JRadioButton;
 import javax.swing.JToolBar;
 
 /**
@@ -45,18 +47,51 @@ public class Toolbar extends JToolBar
         this.add(stopButton);
         tabManager.addChangeListener(new TabbedPaneDisableComponentChangeListener(stopButton));
         stopButton.addActionListener(new StopAction(tabManager));
+
         
         
-        //DURATION OF THE NOTE
-        String[] durations = { "Eighth", "Half", "Quarter", "Sixteenth",
-            "SixtyFourth", "ThirtySecond", "Whole" };
         
-        JComboBox durationsBox = new JComboBox(durations);
-        durationsBox.setSelectedIndex(2); // nastaveni defaultni (nejcasteji pouzivane noty) Adame prenastav!
-        this.add(durationsBox);
-        tabManager.addChangeListener(new TabbedPaneDisableComponentChangeListener(durationsBox));
-        durationsBox.addActionListener(new SetDuration(this));
+        //DURATION
+        JRadioButton Whole = new JRadioButton(new ImageIcon("assets/images/1.png"));
+        JRadioButton Half = new JRadioButton(new ImageIcon("assets/images/1d2.png"));
+        JRadioButton Quarter = new JRadioButton(new ImageIcon("assets/images/1d4.png"));
+        JRadioButton Eighth = new JRadioButton(new ImageIcon("assets/images/1d8.png"));
+        JRadioButton Sixteenth = new JRadioButton(new ImageIcon("assets/images/1d16.png"));
+        JRadioButton ThirtySecond = new JRadioButton(new ImageIcon("assets/images/1d32.png"));
+        JRadioButton SixtyFourth = new JRadioButton(new ImageIcon("assets/images/1d64.png"));        
         
+        //NASTAVENI NEJCASTEJI POUZIVANE NOTY JAKO DEFAULT-Adame prenastav, nevim ktera..
+        Whole.setSelected(true);
+        this.setDuration(Duration.Whole);
+        
+        ButtonGroup group = new ButtonGroup();
+        group.add(Whole);
+        group.add(Half);
+        group.add(Quarter);
+        group.add(Eighth);
+        group.add(Sixteenth);
+        group.add(ThirtySecond);
+        group.add(SixtyFourth);
+        
+        this.add(Whole);
+        this.add(Half);
+        this.add(Quarter);
+        this.add(Eighth);
+        this.add(Sixteenth);
+        this.add(ThirtySecond);
+        this.add(SixtyFourth);
+        
+        Whole.addActionListener(new SetDuration(this, "Whole"));
+        Half.addActionListener(new SetDuration(this,"Half"));
+        Quarter.addActionListener(new SetDuration(this,"Quarter"));
+        Eighth.addActionListener(new SetDuration(this,"Eighth"));
+        Sixteenth.addActionListener(new SetDuration(this,"Sixteenth"));
+        ThirtySecond.addActionListener(new SetDuration(this,"ThirtySecond"));
+        SixtyFourth.addActionListener(new SetDuration(this,"SixtyFourth"));
+        
+        
+        
+       
         
         //ADD NOTE
         JButton addNote = new JButton(new ImageIcon("assets/images/note.png"));
