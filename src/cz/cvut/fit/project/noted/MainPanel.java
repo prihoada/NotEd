@@ -4,6 +4,7 @@ import cz.cvut.fit.project.noted.menus.XMLFileChooser;
 import cz.cvut.fit.project.noted.model.ProxyMusicHandler;
 import cz.cvut.fit.project.noted.rendering.Tab;
 import cz.cvut.fit.project.noted.rendering.TabManager;
+import cz.cvut.fit.project.noted.toolbars.DurationToolbar;
 import cz.cvut.fit.project.noted.toolbars.Toolbar;
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
@@ -21,7 +22,8 @@ public class MainPanel extends JPanel
     {
         
         this.setLayout(new BorderLayout());
-        this.add(new Toolbar(tabManager,"Test toolbar"), BorderLayout.NORTH);
+        this.add(new Toolbar(tabManager,"Main toolbar"), BorderLayout.NORTH);
+        this.add(new DurationToolbar(tabManager,"Duration toolbar"), BorderLayout.SOUTH);
         this.add(tabManager, BorderLayout.CENTER);
         
         
@@ -30,8 +32,6 @@ public class MainPanel extends JPanel
         tab.setModel(proxyMusicHandler.createEmptyModel());
         tabManager.addTab("Unnamed song", tab);
         
-    }
-    
-    
+    }  
     
 }

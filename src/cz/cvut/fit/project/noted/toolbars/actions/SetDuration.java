@@ -2,10 +2,9 @@
 package cz.cvut.fit.project.noted.toolbars.actions;
 
 import cz.cvut.fit.project.noted.musicrenderer.model.Duration;
-import cz.cvut.fit.project.noted.toolbars.Toolbar;
+import cz.cvut.fit.project.noted.toolbars.DurationToolbar;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JComboBox;
 
 /**
  *
@@ -13,20 +12,20 @@ import javax.swing.JComboBox;
  */
 public class SetDuration implements ActionListener
 {
-    private final Toolbar toolbar;
+    private final DurationToolbar toolbar;
+    private final String duration;
     
-    public SetDuration(Toolbar toolbar)
+    public SetDuration(DurationToolbar toolbar, String duration)
     {
         this.toolbar = toolbar;
+        this.duration = duration;
     }
     
     @Override
     public void actionPerformed(ActionEvent e)
     {
-        JComboBox jcmbType = (JComboBox) e.getSource();
-	String cmbType = (String) jcmbType.getSelectedItem();
-
-         switch (cmbType) {
+        
+         switch (duration) {
             case "Eighth":          toolbar.setDuration(Duration.Eighth);
                      break;
             case "Half":            toolbar.setDuration(Duration.Half);
