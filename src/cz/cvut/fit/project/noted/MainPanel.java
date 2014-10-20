@@ -1,5 +1,6 @@
 package cz.cvut.fit.project.noted;
 
+import cz.cvut.fit.project.noted.keyboard.KeyHandling;
 import cz.cvut.fit.project.noted.menus.XMLFileChooser;
 import cz.cvut.fit.project.noted.model.ProxyMusicHandler;
 import cz.cvut.fit.project.noted.rendering.Tab;
@@ -31,6 +32,9 @@ public class MainPanel extends JPanel
         Tab tab = new Tab(xmlFileChooser, proxyMusicHandler, tabManager);
         tab.setModel(proxyMusicHandler.createEmptyModel());
         tabManager.addTab("Unnamed song", tab);
+        
+        this.setFocusable(true);
+        this.addKeyListener(new KeyHandling(null, tabManager));
         
     }  
     
