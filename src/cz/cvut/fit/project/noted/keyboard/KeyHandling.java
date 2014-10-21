@@ -16,7 +16,7 @@ public class KeyHandling extends KeyAdapter {
     private final TabManager tabManager;
     private final DurationToolbar durationToolbar;
     
-    public KeyHandling(Cursor cursor, TabManager tabManager, DurationToolbar durationToolbar){   
+    public KeyHandling(TabManager tabManager, DurationToolbar durationToolbar){   
         this.tabManager = tabManager;
         this.durationToolbar = durationToolbar;
     }
