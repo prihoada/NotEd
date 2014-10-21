@@ -1,5 +1,6 @@
 package cz.cvut.fit.project.noted;
 
+import cz.cvut.fit.project.noted.keyboard.KeyHandling;
 import cz.cvut.fit.project.noted.menus.XMLFileChooser;
 import cz.cvut.fit.project.noted.model.ProxyMusicHandler;
 import cz.cvut.fit.project.noted.rendering.Tab;
@@ -21,9 +22,11 @@ public class MainPanel extends JPanel
                      TabManager tabManager)
     {
         
+        DurationToolbar durationToolbar = new DurationToolbar(tabManager,"Duration toolbar");
+        
         this.setLayout(new BorderLayout());
         this.add(new Toolbar(tabManager,"Main toolbar"), BorderLayout.NORTH);
-        this.add(new DurationToolbar(tabManager,"Duration toolbar"), BorderLayout.SOUTH);
+        this.add(durationToolbar, BorderLayout.SOUTH);
         this.add(tabManager, BorderLayout.CENTER);
         
         
@@ -31,6 +34,9 @@ public class MainPanel extends JPanel
         Tab tab = new Tab(xmlFileChooser, proxyMusicHandler, tabManager);
         tab.setModel(proxyMusicHandler.createEmptyModel());
         tabManager.addTab("Unnamed song", tab);
+        
+        this.setFocusable(true);
+        this.addKeyListener(new KeyHandling(null, tabManager, durationToolbar));
         
     }  
     

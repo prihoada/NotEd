@@ -132,12 +132,12 @@ public class Cursor
     
     public void moveUp()
     {
-        position_y++;
+        position_y--;
     }
     
     public void moveDown()
     {
-        position_y--;
+        position_y++;
     }
     
     

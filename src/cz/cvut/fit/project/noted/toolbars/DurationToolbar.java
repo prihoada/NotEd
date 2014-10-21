@@ -7,6 +7,7 @@ import cz.cvut.fit.project.noted.toolbars.actions.AddNote;
 import cz.cvut.fit.project.noted.toolbars.actions.AddRest;
 import cz.cvut.fit.project.noted.toolbars.actions.SetDuration;
 import cz.cvut.fit.project.noted.utils.TabbedPaneDisableComponentChangeListener;
+import java.awt.Component;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -85,6 +86,12 @@ public class DurationToolbar extends JToolBar
         this.add(addRest);
         tabManager.addChangeListener(new TabbedPaneDisableComponentChangeListener(addRest));
         addRest.addActionListener(new AddRest(tabManager, this));
+        
+        
+        Component[] components = getComponents();
+        for (Component component : components) {
+            component.setFocusable(false);
+        }
         
     }
     
