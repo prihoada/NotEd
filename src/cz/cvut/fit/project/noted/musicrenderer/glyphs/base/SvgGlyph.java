@@ -7,6 +7,7 @@ import java.awt.geom.Point2D;
 import java.util.logging.Logger;
 import cz.cvut.fit.project.noted.musicrenderer.svg.SvgCommand;
 import cz.cvut.fit.project.noted.musicrenderer.svg.SvgSymbol;
+import java.awt.Color;
 
 /**
  * A base class for an actual graphics symbol painted on screen.

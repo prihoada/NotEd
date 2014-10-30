@@ -17,6 +17,8 @@ import cz.cvut.fit.project.noted.musicrenderer.glyphs.CursorGlyph;
 import cz.cvut.fit.project.noted.musicrenderer.glyphs.FooterGlyph;
 import cz.cvut.fit.project.noted.musicrenderer.glyphs.NoteGlyph;
 import cz.cvut.fit.project.noted.musicrenderer.glyphs.NoteHeadGlyph;
+import cz.cvut.fit.project.noted.musicrenderer.glyphs.NumberGlyph;
+import cz.cvut.fit.project.noted.musicrenderer.glyphs.TimeSignatureGlyph;
 import cz.cvut.fit.project.noted.musicrenderer.glyphs.base.ScoreGlyph;
 import cz.cvut.fit.project.noted.musicrenderer.glyphs.base.StaveGlyph;
 import cz.cvut.fit.project.noted.musicrenderer.model.AccidentalType;
@@ -106,6 +108,14 @@ public class RenderPanel extends JPanel{
         
 //        CursorGlyph cursor = new CursorGlyph(-10);
 //        bar.addGlyph(cursor);
+        
+        
+        TimeSignatureGlyph time = new TimeSignatureGlyph(4, 4);
+        bar.addGlyph(time);
+        
+        NumberGlyph number = new NumberGlyph(5);
+        bar.addGlyph(number);
+        
         
         for (int i = 0; i < 10; i++) {
             
