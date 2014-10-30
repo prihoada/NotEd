@@ -52,6 +52,7 @@ public class NoteGlyph extends PositionGlyph
         helperLines.setSymbolWidth(noteHead.getSymbolWidth());
         
         setGlyphWidth(noteHead.getGlyphWidth() + accidentalsWidth);
+        setSymbolWidth(accidentalsWidth + noteHead.getSymbolWidth());
 
         //calculate the properties of the footer/beam, but only for the last note in the beam group. This prevents unnecessary calculations.
         if(beamHandler.isNoteLast(noteHead)) beamHandler.doLayout();
