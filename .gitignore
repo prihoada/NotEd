@@ -5,7 +5,7 @@ NotEd.iml
 /build/
 /dist
 build.xml
+nbbuild.xml
 manifest.mf
-README.md
-src/cz/cvut/fit/project/noted/modelplayer/test/
 /libs/
+.jacocoverage/
