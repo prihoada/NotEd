@@ -14,6 +14,7 @@ import com.audiveris.proxymusic.Pitch;
 import com.audiveris.proxymusic.Rest;
 import com.audiveris.proxymusic.ScorePartwise;
 import com.audiveris.proxymusic.Step;
+import com.audiveris.proxymusic.YesNo;
 import cz.cvut.fit.project.noted.model.Model;
 import cz.cvut.fit.project.noted.musicrenderer.ProxymusicConverter;
 import cz.cvut.fit.project.noted.musicrenderer.model.Duration;
@@ -35,9 +36,12 @@ public class ModelEditor
     private final List<Object> notes;
     
     
+    private ObjectFactory factory;
+    
     public ModelEditor(Model model)
     {
         cursor = new Cursor(model);
+        factory = new ObjectFactory();
         
         this.model = model;
         this.modelHierarchy = model.getModelHierarchy();
@@ -50,7 +54,6 @@ public class ModelEditor
     
     private Note createNote(int cursorY, Duration duration)
     {
-        ObjectFactory factory = new ObjectFactory();
         Note note = factory.createNote();
         
         //take the pitch from the cursor
@@ -73,21 +76,16 @@ public class ModelEditor
  
     public void addClef()
     {
-            ObjectFactory factory = new ObjectFactory();
             Clef clef = factory.createClef();
             
             //add a standard violin G clef for now
             clef.setSign(ClefSign.G);
             this.notes.add(this.cursor.getPosition_x(), clef); 
     }
-    
-        
-        
         
         
     private Note createRest(Duration duration)
     {
-        ObjectFactory factory = new ObjectFactory();
         Note note = factory.createNote();
         
         note.setRest(new Rest());

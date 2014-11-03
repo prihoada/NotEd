@@ -21,6 +21,7 @@ import cz.cvut.fit.project.noted.musicrenderer.glyphs.base.StaveGlyph;
 import cz.cvut.fit.project.noted.musicrenderer.model.BarSeparatorType;
 import cz.cvut.fit.project.noted.musicrenderer.model.Duration;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -134,6 +135,12 @@ public class RenderBuilder {
             if(object instanceof Note)
             {
                 buildNote(bar, (Note) object);
+            }
+            if(object instanceof Clef)
+            {
+                ArrayList<Clef> clefs = new ArrayList<>();
+                clefs.add((Clef) object);
+                buildClefs(bar, clefs);
             }
         }
 
