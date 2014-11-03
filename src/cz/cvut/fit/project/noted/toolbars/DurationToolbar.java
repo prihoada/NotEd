@@ -13,14 +13,13 @@ import java.awt.Dimension;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JRadioButton;
 import javax.swing.JToolBar;
 
 /**
  *
  * @author david
  */
-public class DurationToolbar extends JToolBar
+public final class DurationToolbar extends JToolBar
 {
     private Duration duration;
 
@@ -96,32 +95,6 @@ public class DurationToolbar extends JToolBar
         Sixteenth.addActionListener(new SetDuration(this,"Sixteenth"));
         ThirtySecond.addActionListener(new SetDuration(this,"ThirtySecond"));
         SixtyFourth.addActionListener(new SetDuration(this,"SixtyFourth"));
-        
-        
-        
-        //TODO move this to another toolbar
-        
-        //ADD NOTE
-        JButton addNote = new JButton(new ImageIcon("assets/images/note.png"));
-        addNote.setFocusPainted(false);
-        this.add(addNote);
-        tabManager.addChangeListener(new TabbedPaneDisableComponentChangeListener(addNote));
-        addNote.addActionListener(new AddNote(tabManager, this));
-        
-        //ADD CLEF
-        JButton addClef = new JButton(new ImageIcon("assets/images/key.png"));
-        addClef.setFocusPainted(false);
-        this.add(addClef);
-        tabManager.addChangeListener(new TabbedPaneDisableComponentChangeListener(addClef));
-        addClef.addActionListener(new AddClef(tabManager));
-        
-        //ADD REST
-        JButton addRest = new JButton(new ImageIcon("assets/images/space.png"));
-        addRest.setFocusPainted(false);
-        this.add(addRest);
-        tabManager.addChangeListener(new TabbedPaneDisableComponentChangeListener(addRest));
-        addRest.addActionListener(new AddRest(tabManager, this));
-        
         
         Component[] components = getComponents();
         for (Component component : components) {

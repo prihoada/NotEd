@@ -5,8 +5,10 @@ import cz.cvut.fit.project.noted.menus.XMLFileChooser;
 import cz.cvut.fit.project.noted.model.ProxyMusicHandler;
 import cz.cvut.fit.project.noted.rendering.Tab;
 import cz.cvut.fit.project.noted.rendering.TabManager;
+import cz.cvut.fit.project.noted.toolbars.AccidentalToolbar;
 import cz.cvut.fit.project.noted.toolbars.DurationToolbar;
 import cz.cvut.fit.project.noted.toolbars.Toolbar;
+import cz.cvut.fit.project.noted.toolbars.actions.AddToolbar;
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
 
@@ -21,13 +23,24 @@ public class MainPanel extends JPanel
                      ProxyMusicHandler proxyMusicHandler,
                      TabManager tabManager)
     {
-        
-        DurationToolbar durationToolbar = new DurationToolbar(tabManager,"Duration toolbar");
-        
+
         this.setLayout(new BorderLayout());
+        
         this.add(new Toolbar(tabManager,"Main toolbar"), BorderLayout.NORTH);
-        this.add(durationToolbar, BorderLayout.SOUTH);
         this.add(tabManager, BorderLayout.CENTER);
+        
+        
+        JPanel bottomToolbars = new JPanel();
+        this.add(bottomToolbars, BorderLayout.SOUTH);
+
+            DurationToolbar durationToolbar = new DurationToolbar(tabManager, "Set duration");
+            bottomToolbars.add(durationToolbar);
+
+            AccidentalToolbar accidentalToolbar = new AccidentalToolbar(tabManager, "Set accidental");
+            bottomToolbars.add(accidentalToolbar);
+            
+            AddToolbar addToolbar = new AddToolbar(tabManager, durationToolbar, "Add symbols");
+            bottomToolbars.add(addToolbar);
         
         
         //Temporary - create an empty file

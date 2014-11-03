@@ -44,25 +44,6 @@ public class Toolbar extends JToolBar
         tabManager.addChangeListener(new TabbedPaneDisableComponentChangeListener(stopButton));
         stopButton.addActionListener(new StopAction(tabManager));
 
-        
-        GlyphButton button = new GlyphButton();
-        button.setGlyph(new ClefGlyph(Clef.G2));
-        button.setGlyphScale(0.5f);
-        button.setPreferredSize(new Dimension(40, 40));
-        
-        this.add(button);
-        
-        GlyphButton button1 = new GlyphButton();
-        NoteGlyph noteGlyph = new NoteGlyph(Duration.Quarter, 2);
-        noteGlyph.setY(9);
-        noteGlyph.setX(-4);
-        button1.setGlyph(noteGlyph);
-        button1.setPreferredSize(new Dimension(40, 40));
-        button1.setGlyphScale(0.8f);
-        
-        this.add(button1);
-        
-        
     }
   
     
