@@ -1,15 +1,13 @@
 
 package cz.cvut.fit.project.noted.toolbars;
 
-import cz.cvut.fit.project.noted.musicrenderer.glyphs.ClefGlyph;
-import cz.cvut.fit.project.noted.musicrenderer.glyphs.NoteGlyph;
-import cz.cvut.fit.project.noted.musicrenderer.model.Clef;
-import cz.cvut.fit.project.noted.musicrenderer.model.Duration;
 import cz.cvut.fit.project.noted.rendering.TabManager;
 import cz.cvut.fit.project.noted.toolbars.actions.PlayAction;
 import cz.cvut.fit.project.noted.toolbars.actions.StopAction;
+import cz.cvut.fit.project.noted.toolbars.actions.ZoomAction;
 import cz.cvut.fit.project.noted.utils.TabbedPaneDisableComponentChangeListener;
 import java.awt.Dimension;
+import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JToolBar;
@@ -44,6 +42,24 @@ public class Toolbar extends JToolBar
         tabManager.addChangeListener(new TabbedPaneDisableComponentChangeListener(stopButton));
         stopButton.addActionListener(new StopAction(tabManager));
 
+        
+        addSeparator();
+        
+        
+        Image zoomInIcon = new ImageIcon("assets/images/ic_zoom_in.png").getImage().getScaledInstance(32,32, Image.SCALE_SMOOTH);
+        JButton zoomIn = new JButton();
+        tabManager.addChangeListener(new TabbedPaneDisableComponentChangeListener(zoomIn));
+        zoomIn.setAction(new ZoomAction(tabManager, ZoomAction.TYPE.Zoom_in, new ImageIcon(zoomInIcon)));
+        zoomIn.setText("");
+        this.add(zoomIn);
+        
+        Image zoomOutIcon = new ImageIcon("assets/images/ic_zoom_out.png").getImage().getScaledInstance(32,32, Image.SCALE_SMOOTH);
+        JButton zoomOut = new JButton();
+        tabManager.addChangeListener(new TabbedPaneDisableComponentChangeListener(zoomOut));
+        zoomOut.setAction(new ZoomAction(tabManager, ZoomAction.TYPE.Zoom_out, new ImageIcon(zoomOutIcon)));
+        zoomOut.setText("");
+        this.add(zoomOut);
+        
     }
   
     
