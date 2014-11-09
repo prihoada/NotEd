@@ -5,6 +5,7 @@ import cz.cvut.fit.project.noted.musicrenderer.glyphs.BarSeparator;
 import cz.cvut.fit.project.noted.musicrenderer.glyphs.ClefGlyph;
 import cz.cvut.fit.project.noted.musicrenderer.glyphs.NoteGlyph;
 import cz.cvut.fit.project.noted.musicrenderer.glyphs.RestGlyph;
+import cz.cvut.fit.project.noted.musicrenderer.glyphs.base.StaveGlyph;
 import cz.cvut.fit.project.noted.musicrenderer.model.BarSeparatorType;
 import cz.cvut.fit.project.noted.musicrenderer.model.Clef;
 import cz.cvut.fit.project.noted.musicrenderer.model.Duration;
@@ -69,13 +70,11 @@ public class AddToolbar extends JToolBar
             
         //MEASURE
          GlyphButton addMeasure = new GlyphButton();
-         
-            //rozbite
-            //addMeasure.setGlyph(new BarSeparator(BarSeparatorType.SINGLE));
-         
-            //docasne cizi ikonka
-            addMeasure.setGlyph(new ClefGlyph(Clef.G2));
+
+            BarSeparator barSeparator = new BarSeparator(BarSeparatorType.SINGLE);
+            barSeparator.setParent(new StaveGlyph());
             
+            addMeasure.setGlyph(barSeparator);
             addMeasure.setGlyphScale(0.5f);
             addMeasure.setPreferredSize(new Dimension(40, 40));
             this.add(addMeasure);
