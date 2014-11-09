@@ -1,15 +1,10 @@
 
 package cz.cvut.fit.project.noted.toolbars;
 
-import cz.cvut.fit.project.noted.musicrenderer.glyphs.ClefGlyph;
-import cz.cvut.fit.project.noted.musicrenderer.glyphs.NoteGlyph;
-import cz.cvut.fit.project.noted.musicrenderer.model.Clef;
-import cz.cvut.fit.project.noted.musicrenderer.model.Duration;
 import cz.cvut.fit.project.noted.rendering.TabManager;
 import cz.cvut.fit.project.noted.toolbars.actions.PlayAction;
 import cz.cvut.fit.project.noted.toolbars.actions.StopAction;
 import cz.cvut.fit.project.noted.utils.TabbedPaneDisableComponentChangeListener;
-import java.awt.Dimension;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JToolBar;
@@ -43,7 +38,7 @@ public class Toolbar extends JToolBar
         this.add(stopButton);
         tabManager.addChangeListener(new TabbedPaneDisableComponentChangeListener(stopButton));
         stopButton.addActionListener(new StopAction(tabManager));
-
+     
     }
   
     

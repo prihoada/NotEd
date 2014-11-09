@@ -3,16 +3,10 @@ package cz.cvut.fit.project.noted.toolbars;
 import cz.cvut.fit.project.noted.musicrenderer.glyphs.NoteGlyph;
 import cz.cvut.fit.project.noted.musicrenderer.model.Duration;
 import cz.cvut.fit.project.noted.rendering.TabManager;
-import cz.cvut.fit.project.noted.toolbars.actions.AddClef;
-import cz.cvut.fit.project.noted.toolbars.actions.AddNote;
-import cz.cvut.fit.project.noted.toolbars.actions.AddRest;
 import cz.cvut.fit.project.noted.toolbars.actions.SetDuration;
-import cz.cvut.fit.project.noted.utils.TabbedPaneDisableComponentChangeListener;
 import java.awt.Component;
 import java.awt.Dimension;
 import javax.swing.ButtonGroup;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JToolBar;
 
 /**

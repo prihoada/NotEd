@@ -8,7 +8,7 @@ import cz.cvut.fit.project.noted.rendering.TabManager;
 import cz.cvut.fit.project.noted.toolbars.AccidentalToolbar;
 import cz.cvut.fit.project.noted.toolbars.DurationToolbar;
 import cz.cvut.fit.project.noted.toolbars.Toolbar;
-import cz.cvut.fit.project.noted.toolbars.actions.AddToolbar;
+import cz.cvut.fit.project.noted.toolbars.AddToolbar;
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
 

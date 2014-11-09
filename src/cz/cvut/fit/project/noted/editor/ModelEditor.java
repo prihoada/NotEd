@@ -1,8 +1,4 @@
-/*
- CO CHYBI:
- DEBUGNOUT TO
- upravit metody ve kterych je TODO
- */
+
 package cz.cvut.fit.project.noted.editor;
 
 import com.audiveris.proxymusic.Note;
@@ -13,6 +9,7 @@ import com.audiveris.proxymusic.ObjectFactory;
 import com.audiveris.proxymusic.Pitch;
 import com.audiveris.proxymusic.Rest;
 import com.audiveris.proxymusic.ScorePartwise;
+import com.audiveris.proxymusic.ScorePartwise.Part.Measure;
 import com.audiveris.proxymusic.Step;
 import com.audiveris.proxymusic.YesNo;
 import cz.cvut.fit.project.noted.model.Model;
@@ -29,12 +26,11 @@ public class ModelEditor
   
     private final Cursor cursor;
     private final Model model;
-    private final ScorePartwise modelHierarchy;
+    private ScorePartwise modelHierarchy;
     
-    private final List<ScorePartwise.Part> parts;
-    private final List<ScorePartwise.Part.Measure> measures;
-    private final List<Object> notes;
-    
+    private List<ScorePartwise.Part> parts;
+    private List<ScorePartwise.Part.Measure> measures;
+    private List<Object> notes;
     
     private ObjectFactory factory;
     
@@ -44,11 +40,14 @@ public class ModelEditor
         factory = new ObjectFactory();
         
         this.model = model;
+    }
+    
+    private void loadStuff()
+    {
         this.modelHierarchy = model.getModelHierarchy();
         this.parts = modelHierarchy.getPart();   
         this.measures = parts.get(cursor.getPart()).getMeasure();
         this.notes = measures.get(cursor.getMeasure()).getNoteOrBackupOrForward();
-     
     }
     
     
@@ -68,7 +67,8 @@ public class ModelEditor
     
     public void addNote(Duration duration)
     {
-        Note note = createNote(this.getCursor().getPosition_y(), duration);  
+        this.loadStuff();
+        Note note = createNote(this.getCursor().getPosition_y(), duration); 
         this.notes.add(this.cursor.getPosition_x(), note);  
     }
     
@@ -76,11 +76,12 @@ public class ModelEditor
  
     public void addClef()
     {
-            Clef clef = factory.createClef();
+        this.loadStuff();
+        Clef clef = factory.createClef();
             
-            //add a standard violin G clef for now
-            clef.setSign(ClefSign.G);
-            this.notes.add(this.cursor.getPosition_x(), clef); 
+        //add a standard violin G clef for now
+        clef.setSign(ClefSign.G);
+        this.notes.add(this.cursor.getPosition_x(), clef); 
     }
         
         
@@ -96,13 +97,28 @@ public class ModelEditor
     
     public void addRest(Duration duration)
     {
+        this.loadStuff();
         Note space = createRest(duration);  
         this.notes.add(this.cursor.getPosition_x(), space); 
     }
     
-    
-    
-    
+    public void addMeasure()
+    {
+        this.loadStuff();
+ 
+        //new measure, on the left of the current one
+        Measure measure = new ScorePartwise.Part.Measure();
+        this.measures.add(cursor.getMeasure(), measure);        
+        
+        List<Object> newMeasure = measures.get(cursor.getMeasure()).getNoteOrBackupOrForward();
+        
+        for(int pos = 0; pos < cursor.getPosition_x(); pos++)
+        {
+            newMeasure.add(pos, this.notes.get(pos));
+            this.notes.remove(0);
+        }
+        
+    }
     
     
     public Cursor getCursor() {

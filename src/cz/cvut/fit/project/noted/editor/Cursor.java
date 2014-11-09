@@ -144,7 +144,7 @@ public class Cursor
     public void moveToRightMeasure()
     {
         ScorePartwise.Part staff = model.getModelHierarchy().getPart().get(part);
-        
+             
         if(measure + 1 >= staff.getMeasure().size())
         {
             //end of staff, do nothing

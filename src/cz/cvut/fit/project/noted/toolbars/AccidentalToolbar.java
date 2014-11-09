@@ -71,7 +71,7 @@ public class AccidentalToolbar extends JToolBar
             doubleFlat.addActionListener(new SelectAccidentalListener(AccidentalType.DoubleFlat, this));
             this.add(doubleFlat);
             group.add(doubleFlat);
-        
+            
 
         Component[] components = getComponents();
         for (Component component : components) {
