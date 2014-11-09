@@ -1,6 +1,7 @@
 
 package cz.cvut.fit.project.noted.editor;
 
+import com.audiveris.proxymusic.Attributes;
 import com.audiveris.proxymusic.Note;
 import com.audiveris.proxymusic.Clef;
 import com.audiveris.proxymusic.ClefSign;
@@ -107,16 +108,17 @@ public class ModelEditor
         this.loadStuff();
  
         //new measure, on the left of the current one
-        Measure measure = new ScorePartwise.Part.Measure();
-        this.measures.add(cursor.getMeasure(), measure);        
+        Measure measure = factory.createScorePartwisePartMeasure();
+        this.measures.add(cursor.getMeasure(), measure);
         
         List<Object> newMeasure = measures.get(cursor.getMeasure()).getNoteOrBackupOrForward();
         
         for(int pos = 0; pos < cursor.getPosition_x(); pos++)
         {
-            newMeasure.add(pos, this.notes.get(pos));
+            newMeasure.add(pos, this.notes.get(0));
             this.notes.remove(0);
         }
+        
         
     }
     

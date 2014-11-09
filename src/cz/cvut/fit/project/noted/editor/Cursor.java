@@ -103,7 +103,7 @@ public class Cursor
         List<Object> symbols = bar.getNoteOrBackupOrForward();
         
         //check if there is a space on the right
-        if(position_x + 1 > symbols.size())
+        if(position_x  >= symbols.size())
         {
             moveToRightMeasure();
         }
@@ -175,7 +175,13 @@ public class Cursor
         }
             
     }
+
+    @Override
+    public String toString() {
+        return "Cursor{" + "part=" + part + ", measure=" + measure + ", position_x=" + position_x + ", position_y=" + position_y + ", model=" + model + ", modelHierarchy=" + modelHierarchy + ", parts=" + parts + '}';
+    }
    
+    
     
     
     

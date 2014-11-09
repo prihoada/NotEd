@@ -11,7 +11,7 @@
     <part id="P1">
         <measure 
             number="1">
-               <attributes>
+<!--               <attributes>
                 <divisions>4</divisions>
 		<key>
                     <fifths>0</fifths>
@@ -22,7 +22,7 @@
                     <beat-type>4</beat-type>
                 </time>
                 
-            </attributes>   
+            </attributes>   -->
         </measure>
         </part>  
 </score-partwise>

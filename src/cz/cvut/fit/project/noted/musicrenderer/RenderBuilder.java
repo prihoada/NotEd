@@ -125,7 +125,6 @@ public class RenderBuilder {
             if(object instanceof Attributes)
             {
                 Attributes attributes = (Attributes) object;
-                divisions = attributes.getDivisions().intValue();
                        
                 buildClefs(bar, attributes.getClef());
                 buildKeySignature(bar, attributes.getKey());

@@ -45,7 +45,6 @@ public class MainPanel extends JPanel
         
         //Temporary - create an empty file
         Tab tab = new Tab(xmlFileChooser, proxyMusicHandler, tabManager);
-        tab.setModel(proxyMusicHandler.createEmptyModel());
         tabManager.addTab("Unnamed song", tab);
         
         this.setFocusable(true);

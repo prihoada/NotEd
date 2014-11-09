@@ -38,7 +38,11 @@ public class Model
     {
         this.filePath = filePath;
     }
-    
+
+    @Override
+    public String toString() {
+        return "Model{" + "filePath=" + filePath + '}';
+    }
     
     
 }

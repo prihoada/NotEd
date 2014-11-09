@@ -46,7 +46,6 @@ public class Tab extends JPanel
 
         saved = false;
         saveFile = null;
-        model = new Model();
         
         this.setOpaque(true);
         this.setBackground(Color.WHITE);
@@ -59,6 +58,8 @@ public class Tab extends JPanel
         this.add(pane, BorderLayout.CENTER);
 
         player = new ModelPlayer(model);
+        
+        this.setModel(proxyMusicHandler.createEmptyModel());
     }
 
     public Model getModel()
