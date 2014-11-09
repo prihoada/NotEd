@@ -1,18 +1,14 @@
 
 package cz.cvut.fit.project.noted.editor;
 
-import com.audiveris.proxymusic.Attributes;
 import com.audiveris.proxymusic.Note;
 import com.audiveris.proxymusic.Clef;
 import com.audiveris.proxymusic.ClefSign;
-import com.audiveris.proxymusic.NoteType;
 import com.audiveris.proxymusic.ObjectFactory;
 import com.audiveris.proxymusic.Pitch;
 import com.audiveris.proxymusic.Rest;
 import com.audiveris.proxymusic.ScorePartwise;
 import com.audiveris.proxymusic.ScorePartwise.Part.Measure;
-import com.audiveris.proxymusic.Step;
-import com.audiveris.proxymusic.YesNo;
 import cz.cvut.fit.project.noted.model.Model;
 import cz.cvut.fit.project.noted.musicrenderer.ProxymusicConverter;
 import cz.cvut.fit.project.noted.musicrenderer.model.Duration;
