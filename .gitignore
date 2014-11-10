@@ -6,5 +6,4 @@ NotEd.iml
 /dist
 nbbuild.xml
 manifest.mf
-/libs/
 .jacocoverage/
