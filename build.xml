@@ -58,35 +58,6 @@
     <exclude name="**/?*.clj"/>
   </patternset>
   
-  <!-- JDK definitions -->
-  
-  <property name="jdk.bin.1.7" value="${jdk.home.1.7}/bin"/>
-  <path id="jdk.classpath.1.7">
-    <fileset dir="${jdk.home.1.7}">
-      <include name="jre/lib/charsets.jar"/>
-      <include name="jre/lib/management-agent.jar"/>
-      <include name="jre/lib/jfxrt.jar"/>
-      <include name="jre/lib/jfr.jar"/>
-      <include name="jre/lib/resources.jar"/>
-      <include name="jre/lib/jce.jar"/>
-      <include name="jre/lib/deploy.jar"/>
-      <include name="jre/lib/plugin.jar"/>
-      <include name="jre/lib/rt.jar"/>
-      <include name="jre/lib/javaws.jar"/>
-      <include name="jre/lib/jsse.jar"/>
-      <include name="jre/lib/ext/sunpkcs11.jar"/>
-      <include name="jre/lib/ext/zipfs.jar"/>
-      <include name="jre/lib/ext/localedata.jar"/>
-      <include name="jre/lib/ext/dnsns.jar"/>
-      <include name="jre/lib/ext/sunjce_provider.jar"/>
-      <include name="jre/lib/ext/sunec.jar"/>
-    </fileset>
-  </path>
-  
-  <property name="project.jdk.home" value="${jdk.home.1.7}"/>
-  <property name="project.jdk.bin" value="${jdk.bin.1.7}"/>
-  <property name="project.jdk.classpath" value="jdk.classpath.1.7"/>
-  
   
   <!-- Project Libraries -->
   
@@ -111,9 +82,6 @@
   <dirname property="module.noted.basedir" file="${ant.file}"/>
   
   
-  <property name="module.jdk.home.noted" value="${project.jdk.home}"/>
-  <property name="module.jdk.bin.noted" value="${project.jdk.bin}"/>
-  <property name="module.jdk.classpath.noted" value="${project.jdk.classpath}"/>
   
   <property name="compiler.args.noted" value="-encoding UTF-8 -source 1.7 ${compiler.args}"/>
   
@@ -125,7 +93,6 @@
   </path>
   
   <path id="noted.module.production.classpath">
-    <path refid="${module.jdk.classpath.noted}"/>
     <path refid="library.jmusic1.6.4.classpath"/>
     <path refid="library.junit-4.11.classpath"/>
     <path refid="library.hamcrest-core-1.3.classpath"/>
@@ -139,7 +106,6 @@
   </path>
   
   <path id="noted.module.classpath">
-    <path refid="${module.jdk.classpath.noted}"/>
     <pathelement location="${noted.output.dir}"/>
     <path refid="library.jmusic1.6.4.classpath"/>
     <path refid="library.junit-4.11.classpath"/>
@@ -180,7 +146,7 @@
   
   <target name="compile.module.noted.production" description="Compile module NotEd; production classes">
     <mkdir dir="${noted.output.dir}"/>
-    <javac destdir="${noted.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.noted}/javac">
+    <javac destdir="${noted.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true">
       <compilerarg line="${compiler.args.noted}"/>
       <bootclasspath refid="noted.module.bootclasspath"/>
       <classpath refid="noted.module.production.classpath"/>
@@ -198,7 +164,7 @@
   
   <target name="compile.module.noted.tests" depends="compile.module.noted.production" description="compile module NotEd; test classes" unless="skip.tests">
     <mkdir dir="${noted.testoutput.dir}"/>
-    <javac destdir="${noted.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.noted}/javac">
+    <javac destdir="${noted.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true">
       <compilerarg line="${compiler.args.noted}"/>
       <bootclasspath refid="noted.module.bootclasspath"/>
       <classpath refid="noted.module.classpath"/>
@@ -256,11 +222,12 @@
     <!-- Delete temporary files -->
     <delete dir="${artifacts.temp.dir}"/>
   </target>
-  <target name="zip.all.things">
-      <zip destfile="./NotEd.zip"
-            basedir="."
-            includes="assets/ lang/ NotEd.jar"/>
-  </target>
+
+    <target name="zip.all.things">
+        <zip destfile="./NotEd.zip"
+             basedir="."
+             includes="assets/ lang/ NotEd.jar"/>
+    </target>
 
   <target name="all" depends="build.modules, build.all.artifacts, zip.all.things" description="build all"/>
 </project>
