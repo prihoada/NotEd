@@ -237,6 +237,7 @@
 
         <test name="cz.cvut.fit.project.noted.localization.LocalizationManagerTest"/>
         <test name="cz.cvut.fit.project.noted.utils.FileUtilsTest"/>
+        <test name="cz.cvut.fit.project.noted.editor.CursorTest" />
     </junit>
     </target>
 
