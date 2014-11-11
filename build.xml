@@ -228,6 +228,17 @@
              basedir="."
              includes="assets/ lang/ NotEd.jar"/>
     </target>
+    <target name="test.all.things">
+    <junit showoutput="true" outputtoformatters="yes">
+        <classpath>
+            <path refid="noted.runtime.module.classpath"/>
+        </classpath>
+        <formatter usefile="false" type="plain"/>
 
-  <target name="all" depends="build.modules, build.all.artifacts, zip.all.things" description="build all"/>
+        <test name="cz.cvut.fit.project.noted.localization.LocalizationManagerTest"/>
+        <test name="cz.cvut.fit.project.noted.utils.FileUtilsTest"/>
+    </junit>
+    </target>
+
+  <target name="all" depends="build.modules, build.all.artifacts, test.all.things, zip.all.things" description="build all"/>
 </project>
