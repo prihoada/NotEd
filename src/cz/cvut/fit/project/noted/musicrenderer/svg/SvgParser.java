@@ -75,7 +75,7 @@ public class SvgParser {
             builder.append(svg.charAt(currentPosition));
             currentPosition++;
         }
-        return Integer.parseInt(builder.toString());
+        return (int) Double.parseDouble(builder.toString());
     }
     
     
@@ -92,11 +92,11 @@ public class SvgParser {
     
     private boolean isNumber(char c)
     {
-        return Character.isDigit(c) || c == '-';
+        return Character.isDigit(c) || c == '-' || c == '.';
     }
     private boolean isWhiteSpace(char c)
     {
-        return c == ' ' || c == '\n' || c == '\t' || c == '\r';
+        return c == ' ' || c == '\n' || c == '\t' || c == '\r' || c == ',';
     }
     private boolean isLetter(char c)
     {

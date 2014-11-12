@@ -7,6 +7,7 @@ import cz.cvut.fit.project.noted.model.Model;
 import cz.cvut.fit.project.noted.rendering.TabManager;
 import cz.cvut.fit.project.noted.toolbars.actions.PlayAction;
 import cz.cvut.fit.project.noted.toolbars.actions.StopAction;
+import cz.cvut.fit.project.noted.toolbars.actions.ZoomAction;
 import cz.cvut.fit.project.noted.utils.TabbedPaneDisableComponentChangeListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -49,6 +50,24 @@ public class Toolbar extends JToolBar
         JButton debugButton = new JButton("Debug trace");
         debugButton.addActionListener(new ActionListener() {
 
+        
+        addSeparator();
+        
+        
+        Image zoomInIcon = new ImageIcon("assets/images/ic_zoom_in.png").getImage().getScaledInstance(32,32, Image.SCALE_SMOOTH);
+        JButton zoomIn = new JButton();
+        tabManager.addChangeListener(new TabbedPaneDisableComponentChangeListener(zoomIn));
+        zoomIn.setAction(new ZoomAction(tabManager, ZoomAction.TYPE.Zoom_in, new ImageIcon(zoomInIcon)));
+        zoomIn.setText("");
+        this.add(zoomIn);
+        
+        Image zoomOutIcon = new ImageIcon("assets/images/ic_zoom_out.png").getImage().getScaledInstance(32,32, Image.SCALE_SMOOTH);
+        JButton zoomOut = new JButton();
+        tabManager.addChangeListener(new TabbedPaneDisableComponentChangeListener(zoomOut));
+        zoomOut.setAction(new ZoomAction(tabManager, ZoomAction.TYPE.Zoom_out, new ImageIcon(zoomOutIcon)));
+        zoomOut.setText("");
+        this.add(zoomOut);
+        
             @Override
             public void actionPerformed(ActionEvent e) {
                 
