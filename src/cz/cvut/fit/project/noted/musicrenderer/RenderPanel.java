@@ -122,7 +122,8 @@ public class RenderPanel extends JPanel{
         bar.addGlyph(number);
         
         
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 10; i++)
+        {
             
             NoteGlyph n = new NoteGlyph(getRandomDuration(), i);
             n.addAccidental(getRandomAccidental());
@@ -218,7 +219,8 @@ public class RenderPanel extends JPanel{
 
     //override this, so for example a scroll pane knows how big this panel is.
     @Override
-    public Dimension getPreferredSize() {
+    public Dimension getPreferredSize()
+    {
 
         int width = score.getGlyphWidth() + 2 * score.getPadding();
         return new Dimension((int) (width * scale), 300);
