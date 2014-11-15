@@ -74,7 +74,7 @@ public final class Cursor
     }
     
     
-    public void moveToRight()
+    public boolean moveToRight()
     {
         ScorePartwise.Part staff = model.getModelHierarchy().getPart().get(part);
         ScorePartwise.Part.Measure bar = staff.getMeasure().get(measure);
@@ -83,24 +83,26 @@ public final class Cursor
         //check if there is a space on the right
         if(position_x  >= symbols.size())
         {
-            moveToRightMeasure();
+            return moveToRightMeasure();
         }
         else
         {
             position_x++;
+            return true;
         }
     }
     
-    public void moveToLeft()
+    public boolean moveToLeft()
     {
         //check if there is a space on the left
         if(position_x <= 0)
         {
-            moveToLeftMeasure();
+            return moveToLeftMeasure();
         }
         else
         {
             position_x--;
+            return true;
         }
     }
  
@@ -114,26 +116,29 @@ public final class Cursor
         position_y++;
     }
     
-    public void moveToRightMeasure()
+    public boolean moveToRightMeasure()
     {
         ScorePartwise.Part staff = model.getModelHierarchy().getPart().get(part);
              
         if(measure + 1 >= staff.getMeasure().size())
         {
             //end of staff, do nothing
+            return false;
         }
         else
         {
             measure++;
             position_x = 0;
+            return true;
         }
     }
     
-    public void moveToLeftMeasure()
+    public boolean moveToLeftMeasure()
     {
         if(measure <= 0)
         {
             //do nothing
+            return false;
         }
         else
         {
@@ -143,6 +148,7 @@ public final class Cursor
             ScorePartwise.Part staff = model.getModelHierarchy().getPart().get(part);
             ScorePartwise.Part.Measure bar = staff.getMeasure().get(measure);
             position_x = bar.getNoteOrBackupOrForward().size();
+            return true;
         }
     }
 

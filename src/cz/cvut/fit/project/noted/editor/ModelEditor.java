@@ -29,7 +29,7 @@ public class ModelEditor
     private List<ScorePartwise.Part.Measure> measures;
     private List<Object> notes;
     
-    private ObjectFactory factory;
+    private final ObjectFactory factory;
     
     public ModelEditor(Model model)
     {
@@ -118,10 +118,61 @@ public class ModelEditor
         
     }
     
+
+    /**
+     * Remove the symbol to the left of the cursor.
+     */
+    public void removePrevious() {
+        
+        if(cursor.moveToLeft()) removeNext();
+    }
+    /**
+     * Removes the measure to the right of the cursor.
+     */
+    private void removeNextMeasure()
+    {
+        int numMeasures = modelHierarchy.getPart().get(cursor.getPart()).getMeasure().size();
+        if(cursor.getMeasure() >= numMeasures-1)
+        {
+            //do nothing, no measure to remove
+        }
+        else
+        {
+            Measure measure = modelHierarchy.getPart().get(cursor.getPart()).getMeasure().get(cursor.getMeasure());
+            Measure nextMeasure = modelHierarchy.getPart().get(cursor.getPart()).getMeasure().get(cursor.getMeasure() + 1);
+
+            //transfer objects from the next measure to the current measure.
+            measure.getNoteOrBackupOrForward().addAll(nextMeasure.getNoteOrBackupOrForward());
+            //remove the measure
+            modelHierarchy.getPart().get(cursor.getPart()).getMeasure().remove(nextMeasure);
+        }
+    }
+
+    /**
+     * Removes the symbol to the right of the cursor.
+     */
+    public void removeNext() {
+        
+        Measure measure = modelHierarchy.getPart().get(cursor.getPart()).getMeasure().get(cursor.getMeasure());
+        
+        if(cursor.getPosition_x() >= measure.getNoteOrBackupOrForward().size())
+        {
+            removeNextMeasure();
+        }
+        else
+        {
+            measure.getNoteOrBackupOrForward().remove(cursor.getPosition_x());
+        }
     
+    }
+    
+    /**
+     * Returns the cursor.
+     * @return current cursor.
+     */
     public Cursor getCursor() {
         return cursor;
     }
-    
+
         
 }

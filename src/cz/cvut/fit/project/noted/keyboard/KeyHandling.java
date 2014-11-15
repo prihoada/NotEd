@@ -55,6 +55,14 @@ public class KeyHandling extends KeyAdapter {
                 modelEditor.addRest(durationToolbar.getDuration());
                 modelEditor.getCursor().moveToRight();
             }
+            if(key == KeyEvent.VK_BACK_SPACE)
+            {
+                modelEditor.removePrevious();
+            }
+            if(key == KeyEvent.VK_DELETE)
+            {
+                modelEditor.removeNext();
+            }
             
             activeTab.getRenderPanel().rebuild();
         }
