@@ -2,8 +2,10 @@ package cz.cvut.fit.project.noted.musicrenderer;
 
 import com.audiveris.proxymusic.Attributes;
 import com.audiveris.proxymusic.Clef;
+import com.audiveris.proxymusic.Direction;
 import com.audiveris.proxymusic.Key;
 import com.audiveris.proxymusic.Note;
+import com.audiveris.proxymusic.ObjectFactory;
 import com.audiveris.proxymusic.Pitch;
 import com.audiveris.proxymusic.Rest;
 import com.audiveris.proxymusic.ScorePartwise;
@@ -22,6 +24,7 @@ import cz.cvut.fit.project.noted.musicrenderer.model.BarSeparatorType;
 import cz.cvut.fit.project.noted.musicrenderer.model.Duration;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -117,29 +120,41 @@ public class RenderBuilder {
         
         BarGlyph bar = new BarGlyph();
         
-        for (Object object : objects) {
-        
-            //System.out.println("Creating object " + object.getClass().getName());
+        for (int i = 0; i < objects.size(); i++)
+        {
+            Object object = objects.get(i);
             
-            //parse attributes, usually once per stave
             if(object instanceof Attributes)
             {
                 Attributes attributes = (Attributes) object;
-                       
-                buildClefs(bar, attributes.getClef());
-                buildKeySignature(bar, attributes.getKey());
-                buildTimeSignature(bar, attributes.getTime());
+                //remove the attributes from the model.
+                objects.remove(i);
+                
+                //add glyps to the render and model instead of attributes.
+                buildClefs(bar, attributes.getClef(), measure, i);
+                //move ahead of added clefs.
+                i += attributes.getClef().size();
+                
+                //buildKeySignature(bar, attributes.getKey());
+                //buildTimeSignature(bar, attributes.getTime());
+                
             }
-            //parse a note, contains rests as well
-            if(object instanceof Note)
+            
+            else if(object instanceof Note)
             {
                 buildNote(bar, (Note) object);
             }
-            if(object instanceof Clef)
+            else if(object instanceof Clef)
             {
                 ArrayList<Clef> clefs = new ArrayList<>();
                 clefs.add((Clef) object);
                 buildClefs(bar, clefs);
+            }
+            else
+            {
+                //remove unknown objects from the model.
+                LOG.info("Removing unknown object " + object.toString() + " from the model.");
+                objects.remove(i--);
             }
         }
 
@@ -213,7 +228,7 @@ public class RenderBuilder {
      * Builds the clefs.
      * @param clefs list of clefs of a measure
      */
-    private void buildClefs(BarGlyph bar, List<Clef> clefs) {
+    private void buildClefs(BarGlyph bar, List<Clef> clefs, ScorePartwise.Part.Measure measure, int index) {
         
         if(clefs == null) return;
         
@@ -224,16 +239,27 @@ public class RenderBuilder {
                 case G:
                     bar.addGlyph(new ClefGlyph(cz.cvut.fit.project.noted.musicrenderer.model.Clef.G2));
                     break;
-                    
+                case C:
+                    bar.addGlyph(new ClefGlyph(cz.cvut.fit.project.noted.musicrenderer.model.Clef.C3));
+                    break;
+                case F:
+                    bar.addGlyph(new ClefGlyph(cz.cvut.fit.project.noted.musicrenderer.model.Clef.F4));
+                    break;
                 //TODO other clefs
                     
                 default:
                     LOG.warning("Unknown clef type: " + clef.getSign());
                     break;
-                    
             }
         }
-        
+        if(measure != null)
+        {
+            measure.getNoteOrBackupOrForward().addAll(index, clefs);
+        }
+    }
+    private void buildClefs(BarGlyph bar, List<Clef> clefs)
+    {
+        buildClefs(bar, clefs, null, 0);
     }
 
     /**

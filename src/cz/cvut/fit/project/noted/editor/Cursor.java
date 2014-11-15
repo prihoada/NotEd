@@ -1,14 +1,15 @@
 package cz.cvut.fit.project.noted.editor;
 
+import com.audiveris.proxymusic.Attributes;
 import com.audiveris.proxymusic.ScorePartwise;
 import cz.cvut.fit.project.noted.model.Model;
 import java.util.List;
 
 /**
- *
- * @author david
+ * Represents current position in the model hierarchy.
+ * @author david, Adam Příhoda
  */
-public class Cursor
+public final class Cursor
 {
     private int part;
     private int measure;
@@ -20,7 +21,6 @@ public class Cursor
     private final List<ScorePartwise.Part> parts;
     
     
-    
     public Cursor(Model model)
     {
         this.setCursor(0, 0, 0, 0);
@@ -28,39 +28,27 @@ public class Cursor
         this.model = model;
         this.modelHierarchy = model.getModelHierarchy();
         parts = modelHierarchy.getPart();
-        
     }
-    
-    
-   
-    
     
     public int getMeasure()
     {
         return measure;
     }
-
-    
     public int getPart()
     {
         return part;
     }
-
     public int getPosition_x()
     {
         return position_x;
     }
-
     public int getPosition_y()
     {
         return position_y;
     }
 
 
-    
-    
-    public void setCursor(int part, int measure,
-            int position_x, int position_y)
+    public void setCursor(int part, int measure, int position_x, int position_y)
     {
         this.part = part;
         this.measure = measure;
@@ -72,32 +60,22 @@ public class Cursor
     {
         this.measure = measure;
     }
-
     public void setPart(int part)
     {
         this.part = part;
     }
-
     public void setPosition_x(int position_x)
     {
         this.position_x = position_x;
     }
-
     public void setPosition_y(int position_y)
     {
         this.position_y = position_y;
     }
     
     
-    
-    
-    
-    
-    
-    
     public void moveToRight()
     {
-
         ScorePartwise.Part staff = model.getModelHierarchy().getPart().get(part);
         ScorePartwise.Part.Measure bar = staff.getMeasure().get(measure);
         List<Object> symbols = bar.getNoteOrBackupOrForward();
@@ -111,12 +89,10 @@ public class Cursor
         {
             position_x++;
         }
-        
     }
     
     public void moveToLeft()
     {
-        
         //check if there is a space on the left
         if(position_x <= 0)
         {
@@ -126,10 +102,8 @@ public class Cursor
         {
             position_x--;
         }
-        
     }
  
-    
     public void moveUp()
     {
         position_y--;
@@ -139,7 +113,6 @@ public class Cursor
     {
         position_y++;
     }
-    
     
     public void moveToRightMeasure()
     {
@@ -154,12 +127,10 @@ public class Cursor
             measure++;
             position_x = 0;
         }
-
     }
     
     public void moveToLeftMeasure()
     {
-    
         if(measure <= 0)
         {
             //do nothing
@@ -173,16 +144,10 @@ public class Cursor
             ScorePartwise.Part.Measure bar = staff.getMeasure().get(measure);
             position_x = bar.getNoteOrBackupOrForward().size();
         }
-            
     }
 
     @Override
     public String toString() {
         return "Cursor{" + "part=" + part + ", measure=" + measure + ", position_x=" + position_x + ", position_y=" + position_y + ", model=" + model + ", modelHierarchy=" + modelHierarchy + ", parts=" + parts + '}';
     }
-   
-    
-    
-    
-    
 }
