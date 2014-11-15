@@ -48,6 +48,7 @@ class MainFrame extends JFrame implements Runnable
         this.setJMenuBar(new MainMenuBar(xmlFileChooser, proxyMusicHandler, localizationManager, tabManager));
         this.add(new MainPanel(xmlFileChooser, proxyMusicHandler, tabManager));
         
+        this.setFocusTraversalKeysEnabled(false);
         this.setVisible(true);
     }
     

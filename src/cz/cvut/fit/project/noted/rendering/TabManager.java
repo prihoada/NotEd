@@ -1,7 +1,6 @@
 package cz.cvut.fit.project.noted.rendering;
 
 import cz.cvut.fit.project.noted.localization.LocalizationManager;
-import cz.cvut.fit.project.noted.menus.actions.SaveProjectAction;
 import java.awt.BorderLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -27,6 +26,8 @@ public class TabManager extends JPanel
         this.tabs = new JTabbedPane();
         this.tabs.setTabLayoutPolicy(JTabbedPane.WRAP_TAB_LAYOUT);
         this.add(tabs, BorderLayout.CENTER);
+        
+        tabs.setFocusable(false);
     }
     
     /**
@@ -134,5 +135,5 @@ public class TabManager extends JPanel
     {
         this.tabs.removeChangeListener(listener);
     }
-    
+
 }

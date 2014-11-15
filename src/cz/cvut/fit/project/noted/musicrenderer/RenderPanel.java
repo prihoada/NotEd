@@ -13,11 +13,9 @@ import cz.cvut.fit.project.noted.musicrenderer.glyphs.ClefGlyph;
 import cz.cvut.fit.project.noted.musicrenderer.glyphs.RestGlyph;
 import cz.cvut.fit.project.noted.musicrenderer.glyphs.BarGlyph;
 import cz.cvut.fit.project.noted.musicrenderer.glyphs.BarSeparator;
-import cz.cvut.fit.project.noted.musicrenderer.glyphs.CursorGlyph;
 import cz.cvut.fit.project.noted.musicrenderer.glyphs.FooterGlyph;
 import cz.cvut.fit.project.noted.musicrenderer.glyphs.KeySignatureGlyph;
 import cz.cvut.fit.project.noted.musicrenderer.glyphs.NoteGlyph;
-import cz.cvut.fit.project.noted.musicrenderer.glyphs.NoteHeadGlyph;
 import cz.cvut.fit.project.noted.musicrenderer.glyphs.NumberGlyph;
 import cz.cvut.fit.project.noted.musicrenderer.glyphs.TimeSignatureGlyph;
 import cz.cvut.fit.project.noted.musicrenderer.glyphs.base.ScoreGlyph;
@@ -27,6 +25,8 @@ import cz.cvut.fit.project.noted.musicrenderer.model.BarSeparatorType;
 import cz.cvut.fit.project.noted.musicrenderer.model.BeamDirection;
 import cz.cvut.fit.project.noted.musicrenderer.model.Clef;
 import cz.cvut.fit.project.noted.musicrenderer.model.Duration;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 /**
  * Main panel for the renderer.
@@ -46,8 +46,6 @@ public class RenderPanel extends JPanel{
     
     public RenderPanel() {
 
-        
-        
         //createDummyScore();
     }
     
@@ -188,7 +186,7 @@ public class RenderPanel extends JPanel{
         bar4.addGlyph(new AccidentalGlyph(AccidentalType.Sharp));
         bar4.addGlyph(new AccidentalGlyph(AccidentalType.DoubleFlat));
         bar4.addGlyph(new AccidentalGlyph(AccidentalType.DoubleSharp));
-        bar4.addGlyph(new BarSeparator(BarSeparatorType.SINGLE));;
+        bar4.addGlyph(new BarSeparator(BarSeparatorType.SINGLE));
         stave.addGlyph(bar4);
 
     }

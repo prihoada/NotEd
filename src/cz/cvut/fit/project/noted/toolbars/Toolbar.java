@@ -9,6 +9,7 @@ import cz.cvut.fit.project.noted.toolbars.actions.PlayAction;
 import cz.cvut.fit.project.noted.toolbars.actions.StopAction;
 import cz.cvut.fit.project.noted.toolbars.actions.ZoomAction;
 import cz.cvut.fit.project.noted.utils.TabbedPaneDisableComponentChangeListener;
+import java.awt.Component;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -30,6 +31,7 @@ public class Toolbar extends JToolBar
         
         this.setRollover(true);
         this.setFloatable(false);
+        this.setFocusable(false);
         
         
         //PLAY
@@ -89,6 +91,12 @@ public class Toolbar extends JToolBar
             
         
         this.add(debugButton);
+        
+        
+        Component[] components = getComponents();
+        for (Component component : components) {
+            component.setFocusable(false);
+        }
     }
   
     
