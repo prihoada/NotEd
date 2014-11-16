@@ -1,6 +1,7 @@
 package cz.cvut.fit.project.noted.rendering;
 
 import cz.cvut.fit.project.noted.localization.LocalizationManager;
+import cz.cvut.fit.project.noted.modelplayer.Player;
 import java.awt.BorderLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -17,11 +18,13 @@ public class TabManager extends JPanel
     private final JTabbedPane tabs;
 
     private final LocalizationManager localizationManager;
-
+    private Player player;
+    
     public TabManager(LocalizationManager localizationManager)
     {
         this.localizationManager = localizationManager;
-
+        this.player = new Player();
+        
         this.setLayout(new BorderLayout());
         this.tabs = new JTabbedPane();
         this.tabs.setTabLayoutPolicy(JTabbedPane.WRAP_TAB_LAYOUT);
@@ -136,4 +139,11 @@ public class TabManager extends JPanel
         this.tabs.removeChangeListener(listener);
     }
 
+    /**
+     * Returns the music player.
+     * @return 
+     */
+    public Player getPlayer() {
+        return player;
+    }
 }

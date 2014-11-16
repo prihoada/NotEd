@@ -5,12 +5,10 @@ import cz.cvut.fit.project.noted.editor.ModelEditor;
 import cz.cvut.fit.project.noted.menus.XMLFileChooser;
 import cz.cvut.fit.project.noted.model.Model;
 import cz.cvut.fit.project.noted.model.ProxyMusicHandler;
-import cz.cvut.fit.project.noted.modelplayer.ModelPlayer;
 import cz.cvut.fit.project.noted.musicrenderer.RenderPanel;
 import cz.cvut.fit.project.noted.utils.FileUtils;
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -28,7 +26,6 @@ public class Tab extends JPanel
     private File saveFile;
 
     private Model model;
-    private ModelPlayer player;
     private RenderPanel renderPanel;
     private ModelEditor editor;
 
@@ -57,18 +54,12 @@ public class Tab extends JPanel
         pane.getVerticalScrollBar().setUnitIncrement(25);
         this.add(pane, BorderLayout.CENTER);
 
-        player = new ModelPlayer(model);
-        
         this.setModel(proxyMusicHandler.createEmptyModel());
     }
 
     public Model getModel()
     {
         return model;
-    }
-    public ModelPlayer getPlayer()
-    {
-        return player;
     }
     public RenderPanel getRenderPanel() {
         return renderPanel;
@@ -81,7 +72,6 @@ public class Tab extends JPanel
     public Tab setModel(Model model)
     {
         this.model = model;
-        this.player = new ModelPlayer(model);
         this.editor = new ModelEditor(model);
         renderPanel.buildFromModel(model, editor.getCursor());
         

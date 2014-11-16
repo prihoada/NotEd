@@ -11,6 +11,8 @@ import cz.cvut.fit.project.noted.rendering.TabManager;
 
 import java.awt.Dimension;
 import javax.swing.JFrame;
+import jm.music.data.Score;
+import jm.util.Play;
 
 /**
  *
@@ -35,6 +37,16 @@ class MainFrame extends JFrame implements Runnable
         TabManager tabManager = new TabManager(localizationManager);
         XMLFileChooser xmlFileChooser = new XMLFileChooser(localizationManager);
         ProxyMusicHandler proxyMusicHandler = new ProxyMusicHandler();
+        
+        //init jMusic playback synthetizer to minimize lag on playback start
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Play.midi(new Score());
+            }
+        }).start();
+        
+        
         /*
          * end of setup
          */

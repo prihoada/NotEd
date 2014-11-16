@@ -35,20 +35,26 @@ public class Toolbar extends JToolBar
         
         
         //PLAY
-        JButton playButton = new JButton(new ImageIcon("assets/images/playButton.png"));
+        JButton playButton = new JButton();
         playButton.setFocusPainted(false);
         this.add(playButton);
         tabManager.addChangeListener(new TabbedPaneDisableComponentChangeListener(playButton));
-        playButton.addActionListener(new PlayAction(tabManager));
+        PlayAction playAction = new PlayAction(tabManager);
+        playButton.setAction(playAction);
         
         
         //STOP
-        JButton stopButton = new JButton(new ImageIcon("assets/images/stopButton.png"));
+        JButton stopButton = new JButton();
         stopButton.setFocusPainted(false);
         this.add(stopButton);
         tabManager.addChangeListener(new TabbedPaneDisableComponentChangeListener(stopButton));
-        stopButton.addActionListener(new StopAction(tabManager));
+        StopAction stopAction = new StopAction(tabManager);
+        stopButton.setAction(stopAction);
+        //stopButton.getAction().setEnabled(false);
      
+        //this can be used to give the player control over the buttons. 
+        //However JMusic currently does not support events or callbacks so there is no way of knowing the playback finished.
+        //tabManager.getPlayer().setActions(playAction, stopAction);
         
         JButton debugButton = new JButton("Debug trace");
         debugButton.addActionListener(new ActionListener() {
