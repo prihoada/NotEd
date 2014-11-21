@@ -10,6 +10,7 @@ import com.audiveris.proxymusic.ScorePartwise;
 import com.audiveris.proxymusic.Step;
 import com.audiveris.proxymusic.Time;
 import cz.cvut.fit.project.noted.model.Model;
+import cz.cvut.fit.project.noted.musicrenderer.glyphs.AccidentalGlyph;
 import cz.cvut.fit.project.noted.musicrenderer.glyphs.BarGlyph;
 import cz.cvut.fit.project.noted.musicrenderer.glyphs.BarSeparator;
 import cz.cvut.fit.project.noted.musicrenderer.glyphs.ClefGlyph;
@@ -18,6 +19,7 @@ import cz.cvut.fit.project.noted.musicrenderer.glyphs.NoteGlyph;
 import cz.cvut.fit.project.noted.musicrenderer.glyphs.RestGlyph;
 import cz.cvut.fit.project.noted.musicrenderer.glyphs.base.ScoreGlyph;
 import cz.cvut.fit.project.noted.musicrenderer.glyphs.base.StaveGlyph;
+import cz.cvut.fit.project.noted.musicrenderer.model.AccidentalType;
 import cz.cvut.fit.project.noted.musicrenderer.model.BarSeparatorType;
 import cz.cvut.fit.project.noted.musicrenderer.model.Duration;
 import java.math.BigDecimal;
@@ -165,6 +167,29 @@ public class RenderBuilder {
           
             int convertedIndex = ProxymusicConverter.noteYtoRendererY(note);
             NoteGlyph noteGlyph = new NoteGlyph(ProxymusicConverter.typeToDuration(note.getType().getValue()), convertedIndex);
+            if(note.getAccidental() != null)
+            {
+                AccidentalType type = null;
+                switch (note.getAccidental().getValue())
+                {
+                    case NATURAL:
+                        type = AccidentalType.Natural;
+                        break;
+                    case FLAT:
+                        type = AccidentalType.Flat;
+                        break;
+                    case SHARP:
+                        type = AccidentalType.Sharp;
+                        break;
+                    case DOUBLE_SHARP:
+                        type = AccidentalType.DoubleSharp;
+                        break;
+                    case FLAT_FLAT:
+                        type = AccidentalType.DoubleFlat;
+                        break;
+                }
+                if(type != null) noteGlyph.addAccidental(new AccidentalGlyph(type));
+            }
             bar.addGlyph(noteGlyph);
         }
     }

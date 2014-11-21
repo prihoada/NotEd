@@ -84,6 +84,7 @@ public class AccidentalToolbar extends JToolBar
      */
     public void unselect()
     {
+        System.out.println("unselecting");
         this.selectedType = null;
         group.clearSelection();
     }

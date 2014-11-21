@@ -41,6 +41,9 @@ public class AddNote implements ActionListener
            modelEditor.addNote(accToolbar.getSelectedType(), durToolbar.getDuration());
            modelEditor.getCursor().moveToRight();
            
+           //accidentals are generally not added that often so unselect the toolbar for convenience
+           accToolbar.unselect();
+           
            activeTab.getRenderPanel().rebuild();
            
            

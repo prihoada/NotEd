@@ -76,18 +76,24 @@ public class ModelEditor
 
             switch(accType)
             {
-                case Natural:       acc.setValue(NATURAL);
-                         break;
-                case Sharp:         acc.setValue(SHARP);
-                         break;
-                case DoubleSharp:   acc.setValue(DOUBLE_SHARP);
-                         break;
-                case Flat:          acc.setValue(FLAT);
-                         break;
-                case DoubleFlat:    acc.setValue(FLAT_FLAT); //TODO adame mrkni na to, nevim zda to ma byt FLAT_FLAT nebo FLAT_2 -> ref.: https://proxymusic.kenai.com/apidocs/com/audiveris/proxymusic/AccidentalValue.html
-                         break;
-                default:            acc.setValue(NATURAL);
-                         break; 
+                case Natural:       
+                    acc.setValue(NATURAL);
+                    break;
+                case Sharp:         
+                    acc.setValue(SHARP);
+                    break;
+                case DoubleSharp:
+                    acc.setValue(DOUBLE_SHARP);
+                    break;
+                case Flat:          
+                    acc.setValue(FLAT);
+                    break;
+                case DoubleFlat:
+                    acc.setValue(FLAT_FLAT);
+                    break;
+                default:            
+                    acc.setValue(NATURAL);
+                    break; 
             }
 
             note.setAccidental(acc);
