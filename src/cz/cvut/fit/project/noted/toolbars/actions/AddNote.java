@@ -4,6 +4,7 @@ import cz.cvut.fit.project.noted.editor.ModelEditor;
 import cz.cvut.fit.project.noted.model.Model;
 import cz.cvut.fit.project.noted.rendering.Tab;
 import cz.cvut.fit.project.noted.rendering.TabManager;
+import cz.cvut.fit.project.noted.toolbars.AccidentalToolbar;
 import cz.cvut.fit.project.noted.toolbars.DurationToolbar;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,11 +16,15 @@ public class AddNote implements ActionListener
 {
 
     private final TabManager tabManager;
-    private final DurationToolbar toolbar;
+    private final AccidentalToolbar accToolbar;
+    private final DurationToolbar durToolbar;
     
-    public AddNote(TabManager tabManager, DurationToolbar toolbar) {
+    public AddNote(TabManager tabManager,
+            AccidentalToolbar accToolbar, DurationToolbar durToolbar)
+    {
         this.tabManager = tabManager;
-        this.toolbar = toolbar;
+        this.accToolbar = accToolbar;
+        this.durToolbar = durToolbar;
     }
 
     @Override
@@ -33,7 +38,7 @@ public class AddNote implements ActionListener
            Model model = activeTab.getModel();
            ModelEditor modelEditor = activeTab.getEditor();
             
-           modelEditor.addNote(toolbar.getDuration());
+           modelEditor.addNote(accToolbar.getSelectedType(), durToolbar.getDuration());
            modelEditor.getCursor().moveToRight();
            
            activeTab.getRenderPanel().rebuild();

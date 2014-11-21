@@ -60,64 +60,47 @@ public class ModelEditor
     }
     
     
-    private Note createNote(int cursorY, Duration duration)
+    
+    private Note createNote(int cursorY, AccidentalType accType, Duration duration)
     {
         Note note = factory.createNote();
         
-        //take the pitch from the cursor
-        //IMPORTANT - every note must have a pitch (with a step and octave) and a type. Renderer needs these values.
         Pitch pitch = ProxymusicConverter.renderYtoNoteY(cursorY);
         note.setPitch(pitch);
         
         note.setType(ProxymusicConverter.durationToType(duration));
-        
-        return note;
-    }
-    
-    private Note createAccidental(int cursorY, AccidentalType accType, Duration duration)
-    {
-        Note note = factory.createNote();
-        
-        Pitch pitch = ProxymusicConverter.renderYtoNoteY(cursorY);
-        note.setPitch(pitch);
-        
-        
-        Accidental acc = new Accidental();
-        
-        switch(accType)
+
+        if(accType != null)
         {
-            case Natural:       acc.setValue(NATURAL);
-                     break;
-            case Sharp:         acc.setValue(SHARP);
-                     break;
-            case DoubleSharp:   acc.setValue(DOUBLE_SHARP);
-                     break;
-            case Flat:          acc.setValue(FLAT);
-                     break;
-            case DoubleFlat:    acc.setValue(FLAT_FLAT); //TODO adame mrkni na to, nevim zda to ma byt FLAT_FLAT nebo FLAT_2 -> ref.: https://proxymusic.kenai.com/apidocs/com/audiveris/proxymusic/AccidentalValue.html
-                     break;
-            default:            acc.setValue(NATURAL);
-                     break; 
+            Accidental acc = new Accidental();
+
+            switch(accType)
+            {
+                case Natural:       acc.setValue(NATURAL);
+                         break;
+                case Sharp:         acc.setValue(SHARP);
+                         break;
+                case DoubleSharp:   acc.setValue(DOUBLE_SHARP);
+                         break;
+                case Flat:          acc.setValue(FLAT);
+                         break;
+                case DoubleFlat:    acc.setValue(FLAT_FLAT); //TODO adame mrkni na to, nevim zda to ma byt FLAT_FLAT nebo FLAT_2 -> ref.: https://proxymusic.kenai.com/apidocs/com/audiveris/proxymusic/AccidentalValue.html
+                         break;
+                default:            acc.setValue(NATURAL);
+                         break; 
+            }
+
+            note.setAccidental(acc);
         }
-                
-        note.setAccidental(acc);
-        note.setType(ProxymusicConverter.durationToType(duration));
         
         return note;
     }
     
-    public void addNote(Duration duration)
+    public void addNote(AccidentalType accType, Duration duration)
     {
         this.loadStuff();
-        Note note = createNote(this.getCursor().getPosition_y(), duration); 
+        Note note = createNote(this.getCursor().getPosition_y(), accType, duration);
         this.notes.add(this.cursor.getPosition_x(), note);  
-    }
-    
-    public void addAccidental(AccidentalType accType, Duration duration)
-    {
-        this.loadStuff();
-        Note acc = createAccidental(this.getCursor().getPosition_y(), accType, duration);
-        this.notes.add(this.cursor.getPosition_x(), acc);
     }
     
  

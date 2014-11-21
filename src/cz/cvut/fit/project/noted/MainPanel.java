@@ -48,7 +48,7 @@ public class MainPanel extends JPanel
         tabManager.addTab("Unnamed song", tab);
         
         this.setFocusable(true);
-        this.addKeyListener(new KeyHandling(tabManager, durationToolbar));
+        this.addKeyListener(new KeyHandling(tabManager, accidentalToolbar, durationToolbar));
         
     }  
     

@@ -4,6 +4,7 @@ import cz.cvut.fit.project.noted.editor.Cursor;
 import cz.cvut.fit.project.noted.editor.ModelEditor;
 import cz.cvut.fit.project.noted.rendering.Tab;
 import cz.cvut.fit.project.noted.rendering.TabManager;
+import cz.cvut.fit.project.noted.toolbars.AccidentalToolbar;
 import cz.cvut.fit.project.noted.toolbars.DurationToolbar;
 import java.awt.event.*;
 
@@ -15,10 +16,12 @@ public class KeyHandling extends KeyAdapter {
     
     private final TabManager tabManager;
     private final DurationToolbar durationToolbar;
+    private final AccidentalToolbar accToolbar;
     
-    public KeyHandling(TabManager tabManager, DurationToolbar durationToolbar){   
+    public KeyHandling(TabManager tabManager, AccidentalToolbar accToolbar, DurationToolbar durationToolbar){   
         this.tabManager = tabManager;
         this.durationToolbar = durationToolbar;
+        this.accToolbar = accToolbar;
     }
     
 
@@ -48,7 +51,7 @@ public class KeyHandling extends KeyAdapter {
                 modelEditor.getCursor().moveDown();
             }
             if (key == KeyEvent.VK_ENTER) {
-                modelEditor.addNote(durationToolbar.getDuration());
+                modelEditor.addNote(accToolbar.getSelectedType(), durationToolbar.getDuration());
                 modelEditor.getCursor().moveToRight();
             }
             if (key == KeyEvent.VK_SPACE) {

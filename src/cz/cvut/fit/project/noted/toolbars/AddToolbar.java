@@ -15,7 +15,6 @@ import cz.cvut.fit.project.noted.rendering.TabManager;
 import cz.cvut.fit.project.noted.toolbars.AccidentalToolbar;
 import cz.cvut.fit.project.noted.toolbars.DurationToolbar;
 import cz.cvut.fit.project.noted.toolbars.GlyphButton;
-import cz.cvut.fit.project.noted.toolbars.actions.AddAccidental;
 import cz.cvut.fit.project.noted.toolbars.actions.AddClef;
 import cz.cvut.fit.project.noted.toolbars.actions.AddMeasure;
 import cz.cvut.fit.project.noted.toolbars.actions.AddNote;
@@ -53,18 +52,8 @@ public class AddToolbar extends JToolBar
             addNote.setPreferredSize(buttonSize);
             this.add(addNote);
             tabManager.addChangeListener(new TabbedPaneDisableComponentChangeListener(addNote));
-            addNote.addActionListener(new AddNote(tabManager, durationToolbar));
+            addNote.addActionListener(new AddNote(tabManager, accToolbar, durationToolbar));
             
-        //ACCIDENTAL
-        GlyphButton addAccidental = new GlyphButton();
-            addAccidental.setGlyph(new AccidentalGlyph(AccidentalType.Sharp)); // Adame pripadne to zmen na Flat, DoubleSharp nebo ja nevim
-            addAccidental.setGlyphScale(0.9f);
-            addAccidental.setPreferredSize(buttonSize);
-            this.add(addAccidental);
-            tabManager.addChangeListener(new TabbedPaneDisableComponentChangeListener(addAccidental));
-            addAccidental.addActionListener(new AddAccidental(tabManager, accToolbar, durationToolbar)); 
-        
-        
         //ADD REST
         GlyphButton addRest = new GlyphButton();
             addRest.setGlyph(new RestGlyph(Duration.Quarter));
