@@ -1,6 +1,14 @@
 
 package cz.cvut.fit.project.noted.editor;
 
+import com.audiveris.proxymusic.Accidental;
+import com.audiveris.proxymusic.AccidentalValue;
+import static com.audiveris.proxymusic.AccidentalValue.DOUBLE_SHARP;
+import static com.audiveris.proxymusic.AccidentalValue.FLAT;
+import static com.audiveris.proxymusic.AccidentalValue.FLAT_FLAT;
+import static com.audiveris.proxymusic.AccidentalValue.NATURAL;
+import static com.audiveris.proxymusic.AccidentalValue.SHARP;
+import com.audiveris.proxymusic.Attributes;
 import com.audiveris.proxymusic.Note;
 import com.audiveris.proxymusic.Clef;
 import com.audiveris.proxymusic.ClefSign;
@@ -11,6 +19,7 @@ import com.audiveris.proxymusic.ScorePartwise;
 import com.audiveris.proxymusic.ScorePartwise.Part.Measure;
 import cz.cvut.fit.project.noted.model.Model;
 import cz.cvut.fit.project.noted.musicrenderer.ProxymusicConverter;
+import cz.cvut.fit.project.noted.musicrenderer.model.AccidentalType;
 import cz.cvut.fit.project.noted.musicrenderer.model.Duration;
 import java.util.List;
 
@@ -48,28 +57,55 @@ public class ModelEditor
     }
     
     
-    private Note createNote(int cursorY, Duration duration)
+    
+    private Note createNote(int cursorY, AccidentalType accType, Duration duration)
     {
         Note note = factory.createNote();
         
-        //take the pitch from the cursor
-        //IMPORTANT - every note must have a pitch (with a step and octave) and a type. Renderer needs these values.
         Pitch pitch = ProxymusicConverter.renderYtoNoteY(cursorY);
         note.setPitch(pitch);
         
         note.setType(ProxymusicConverter.durationToType(duration));
+
+        if(accType != null)
+        {
+            Accidental acc = new Accidental();
+
+            switch(accType)
+            {
+                case Natural:       
+                    acc.setValue(NATURAL);
+                    break;
+                case Sharp:         
+                    acc.setValue(SHARP);
+                    break;
+                case DoubleSharp:
+                    acc.setValue(DOUBLE_SHARP);
+                    break;
+                case Flat:          
+                    acc.setValue(FLAT);
+                    break;
+                case DoubleFlat:
+                    acc.setValue(FLAT_FLAT);
+                    break;
+                default:            
+                    acc.setValue(NATURAL);
+                    break; 
+            }
+
+            note.setAccidental(acc);
+        }
         
         return note;
     }
     
-    public void addNote(Duration duration)
+    public void addNote(AccidentalType accType, Duration duration)
     {
         this.loadStuff();
-        Note note = createNote(this.getCursor().getPosition_y(), duration); 
+        Note note = createNote(this.getCursor().getPosition_y(), accType, duration);
         this.notes.add(this.cursor.getPosition_x(), note);  
     }
     
-
  
     public void addClef()
     {

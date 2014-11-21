@@ -1,15 +1,18 @@
 
 package cz.cvut.fit.project.noted.toolbars;
 
+import cz.cvut.fit.project.noted.musicrenderer.glyphs.AccidentalGlyph;
 import cz.cvut.fit.project.noted.musicrenderer.glyphs.BarSeparator;
 import cz.cvut.fit.project.noted.musicrenderer.glyphs.ClefGlyph;
 import cz.cvut.fit.project.noted.musicrenderer.glyphs.NoteGlyph;
 import cz.cvut.fit.project.noted.musicrenderer.glyphs.RestGlyph;
 import cz.cvut.fit.project.noted.musicrenderer.glyphs.base.StaveGlyph;
+import cz.cvut.fit.project.noted.musicrenderer.model.AccidentalType;
 import cz.cvut.fit.project.noted.musicrenderer.model.BarSeparatorType;
 import cz.cvut.fit.project.noted.musicrenderer.model.Clef;
 import cz.cvut.fit.project.noted.musicrenderer.model.Duration;
 import cz.cvut.fit.project.noted.rendering.TabManager;
+import cz.cvut.fit.project.noted.toolbars.AccidentalToolbar;
 import cz.cvut.fit.project.noted.toolbars.DurationToolbar;
 import cz.cvut.fit.project.noted.toolbars.GlyphButton;
 import cz.cvut.fit.project.noted.toolbars.actions.AddClef;
@@ -30,7 +33,7 @@ import javax.swing.JToolBar;
 public class AddToolbar extends JToolBar
 {
 
-    public AddToolbar(TabManager tabManager, DurationToolbar durationToolbar, String name) {
+    public AddToolbar(TabManager tabManager, AccidentalToolbar accToolbar, DurationToolbar durationToolbar, String name) {
     
         super(name);
         
@@ -49,8 +52,8 @@ public class AddToolbar extends JToolBar
             addNote.setPreferredSize(buttonSize);
             this.add(addNote);
             tabManager.addChangeListener(new TabbedPaneDisableComponentChangeListener(addNote));
-            addNote.addActionListener(new AddNote(tabManager, durationToolbar));
-        
+            addNote.addActionListener(new AddNote(tabManager, accToolbar, durationToolbar));
+            
         //ADD REST
         GlyphButton addRest = new GlyphButton();
             addRest.setGlyph(new RestGlyph(Duration.Quarter));
@@ -79,8 +82,8 @@ public class AddToolbar extends JToolBar
             addMeasure.setPreferredSize(new Dimension(40, 40));
             this.add(addMeasure);
             tabManager.addChangeListener(new TabbedPaneDisableComponentChangeListener(addMeasure));
-            addMeasure.addActionListener(new AddMeasure(tabManager));   
-        
+            addMeasure.addActionListener(new AddMeasure(tabManager));
+            
         
         Component[] components = getComponents();
         for (Component component : components) {

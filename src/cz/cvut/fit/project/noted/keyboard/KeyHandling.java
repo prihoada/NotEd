@@ -4,6 +4,7 @@ import cz.cvut.fit.project.noted.editor.ModelEditor;
 import cz.cvut.fit.project.noted.keyboard.actions.CursorMoveAction;
 import cz.cvut.fit.project.noted.rendering.Tab;
 import cz.cvut.fit.project.noted.rendering.TabManager;
+import cz.cvut.fit.project.noted.toolbars.AccidentalToolbar;
 import cz.cvut.fit.project.noted.toolbars.DurationToolbar;
 import java.awt.event.*;
 import javax.swing.ActionMap;
