@@ -31,6 +31,8 @@ public class Tab extends JPanel
     private ModelPlayer player;
     private RenderPanel renderPanel;
     private ModelEditor editor;
+    
+    private JScrollPane pane;
 
     private final XMLFileChooser xmlFileChooser;
     private final ProxyMusicHandler proxyMusicHandler;
@@ -52,11 +54,11 @@ public class Tab extends JPanel
         this.setLayout(new BorderLayout());
         
         renderPanel = new RenderPanel();
-        JScrollPane pane = new JScrollPane(renderPanel);
+        pane = new JScrollPane(renderPanel);
         pane.getHorizontalScrollBar().setUnitIncrement(30);
         pane.getVerticalScrollBar().setUnitIncrement(25);
         this.add(pane, BorderLayout.CENTER);
-
+        
         player = new ModelPlayer(model);
         
         this.setModel(proxyMusicHandler.createEmptyModel());
@@ -75,6 +77,10 @@ public class Tab extends JPanel
     }
     public ModelEditor getEditor() {
         return editor;
+    }
+    
+    public void scrollToRight() {
+          pane.getHorizontalScrollBar().setValue(pane.getHorizontalScrollBar().getMaximum());
     }
     
     

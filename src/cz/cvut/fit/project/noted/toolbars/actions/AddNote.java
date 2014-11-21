@@ -43,6 +43,10 @@ public class AddNote implements ActionListener
            
            activeTab.getRenderPanel().rebuild();
            
+           
+           //posunuti doprava
+           activeTab.scrollToRight();
+           
         }
         
     }
