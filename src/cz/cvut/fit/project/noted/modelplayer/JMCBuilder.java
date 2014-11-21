@@ -69,10 +69,12 @@ public class JMCBuilder {
         {
             jm.music.data.Note jmcNote = new jm.music.data.Note();
 
-            int convertPitch = JMCConverter.convertPitch(note.getPitch());
+            int convertPitch = JMCConverter.convertPitch(note.getPitch(), note.getAccidental());
             jmcNote.setPitch(convertPitch);
             double duration = JMCConverter.proxyTypeToJMCDuration(note.getType().getValue());
             jmcNote.setLength(duration);
+            
+            
 
             phrase.add(jmcNote);
         }
