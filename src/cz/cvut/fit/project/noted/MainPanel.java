@@ -39,7 +39,7 @@ public class MainPanel extends JPanel
             AccidentalToolbar accidentalToolbar = new AccidentalToolbar(tabManager, "Set accidental");
             bottomToolbars.add(accidentalToolbar);
             
-            AddToolbar addToolbar = new AddToolbar(tabManager, durationToolbar, "Add symbols");
+            AddToolbar addToolbar = new AddToolbar(tabManager, accidentalToolbar, durationToolbar, "Add symbols");
             bottomToolbars.add(addToolbar);
         
         

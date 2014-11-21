@@ -1,6 +1,13 @@
 
 package cz.cvut.fit.project.noted.editor;
 
+import com.audiveris.proxymusic.Accidental;
+import com.audiveris.proxymusic.AccidentalValue;
+import static com.audiveris.proxymusic.AccidentalValue.DOUBLE_SHARP;
+import static com.audiveris.proxymusic.AccidentalValue.FLAT;
+import static com.audiveris.proxymusic.AccidentalValue.FLAT_FLAT;
+import static com.audiveris.proxymusic.AccidentalValue.NATURAL;
+import static com.audiveris.proxymusic.AccidentalValue.SHARP;
 import com.audiveris.proxymusic.Attributes;
 import com.audiveris.proxymusic.Note;
 import com.audiveris.proxymusic.Clef;
@@ -15,6 +22,7 @@ import com.audiveris.proxymusic.Step;
 import com.audiveris.proxymusic.YesNo;
 import cz.cvut.fit.project.noted.model.Model;
 import cz.cvut.fit.project.noted.musicrenderer.ProxymusicConverter;
+import cz.cvut.fit.project.noted.musicrenderer.model.AccidentalType;
 import cz.cvut.fit.project.noted.musicrenderer.model.Duration;
 import java.util.List;
 
@@ -66,6 +74,38 @@ public class ModelEditor
         return note;
     }
     
+    private Note createAccidental(int cursorY, AccidentalType accType, Duration duration)
+    {
+        Note note = factory.createNote();
+        
+        Pitch pitch = ProxymusicConverter.renderYtoNoteY(cursorY);
+        note.setPitch(pitch);
+        
+        
+        Accidental acc = new Accidental();
+        
+        switch(accType)
+        {
+            case Natural:       acc.setValue(NATURAL);
+                     break;
+            case Sharp:         acc.setValue(SHARP);
+                     break;
+            case DoubleSharp:   acc.setValue(DOUBLE_SHARP);
+                     break;
+            case Flat:          acc.setValue(FLAT);
+                     break;
+            case DoubleFlat:    acc.setValue(FLAT_FLAT); //TODO adame mrkni na to, nevim zda to ma byt FLAT_FLAT nebo FLAT_2 -> ref.: https://proxymusic.kenai.com/apidocs/com/audiveris/proxymusic/AccidentalValue.html
+                     break;
+            default:            acc.setValue(NATURAL);
+                     break; 
+        }
+                
+        note.setAccidental(acc);
+        note.setType(ProxymusicConverter.durationToType(duration));
+        
+        return note;
+    }
+    
     public void addNote(Duration duration)
     {
         this.loadStuff();
@@ -73,7 +113,13 @@ public class ModelEditor
         this.notes.add(this.cursor.getPosition_x(), note);  
     }
     
-
+    public void addAccidental(AccidentalType accType, Duration duration)
+    {
+        this.loadStuff();
+        Note acc = createAccidental(this.getCursor().getPosition_y(), accType, duration);
+        this.notes.add(this.cursor.getPosition_x(), acc);
+    }
+    
  
     public void addClef()
     {
