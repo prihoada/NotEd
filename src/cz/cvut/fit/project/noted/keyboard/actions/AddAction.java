@@ -36,8 +36,9 @@ public class AddAction extends AbstractAction
         switch (type)
         {
             case ADD_NOTE:
-                editor.addNote(durationToolbar.getDuration());
+                editor.addNote(accidentalToolbar.getSelectedType(), durationToolbar.getDuration());
                 editor.getCursor().moveToRight();
+                accidentalToolbar.unselect();
                 break;
                 
             case ADD_REST:
