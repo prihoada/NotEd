@@ -1,5 +1,6 @@
 package cz.cvut.fit.project.noted.modelplayer;
 
+import com.audiveris.proxymusic.Accidental;
 import com.audiveris.proxymusic.Pitch;
 import com.audiveris.proxymusic.Step;
 import com.sun.istack.internal.logging.Logger;
@@ -35,9 +36,42 @@ public class JMCConverter {
      */
     public static int convertPitch(Pitch pitch)
     {
+        return convertPitch(pitch, null);
+    }
+    
+    /**
+     * Converts the proxyMusic pitch to JMC pitch value.
+     * @param pitch
+     * @param accidental
+     * @return 
+     */
+    static int convertPitch(Pitch pitch, Accidental accidental) {
         Integer tone = pitchMap.get(pitch.getStep());
         tone += (pitch.getOctave() * 12);
+        
+        if(accidental != null)
+        {
+            switch (accidental.getValue())
+            {
+                case FLAT:
+                    tone--;
+                    break;
+                case SHARP:
+                    tone++;
+                    break;
+                case DOUBLE_SHARP:
+                    tone += 2;
+                    break;
+                case FLAT_FLAT:
+                    tone -= 2;
+                    break;
+                default:
+                    break;
+            }
+        
+        }
         return tone;
+        
     }
     
     
@@ -65,4 +99,5 @@ public class JMCConverter {
                 return JMC.QUARTER_NOTE;
         }
     }
+
 }

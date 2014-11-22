@@ -86,13 +86,15 @@ public class RenderBuilder {
      * @param x
      * @param y 
      */
-    public void addCursor(int staff, int measure, int x, int y)
+    public CursorGlyph addCursor(int staff, int measure, int x, int y)
     {
         CursorGlyph cursor = new CursorGlyph(y);
         StaveGlyph stave = score.getGlyphs().get(0);
         BarGlyph bar = stave.getGlyphs().get(measure);
         
         bar.addGlyphAt(cursor, x);
+        
+        return cursor;
     }
 
     /**
