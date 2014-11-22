@@ -10,7 +10,8 @@ import javax.swing.*;
  *
  * @author Adam Příhoda
  */
-public class OpenAboutAction implements ActionListener
+public class OpenAboutAction extends JPanel
+                      implements ActionListener 
 {
 
     public OpenAboutAction()
@@ -20,18 +21,24 @@ public class OpenAboutAction implements ActionListener
     @Override
     public void actionPerformed(ActionEvent e)
     {
-        //Create and set up the window.
-        JFrame frame = new JFrame("About");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        JLabel textLabel = new JLabel("<html><hl>NotEd</hl><br><p>Simple music editor that displays and edits music</p><br>Created by:<br>Adam Příhoda,"
-                + "<br>David Vavřička,<br>Ondřej Altman,<br>Karel Šmejkal<br><br>Copyright 2014 NotEd team all rights reserved</html>",SwingConstants.CENTER);
-        textLabel.setPreferredSize(new Dimension(300, 100));
-        frame.getContentPane().add(textLabel, BorderLayout.CENTER);
+            createAndShowGUI();
+
+    }
+    
+     private static void createAndShowGUI() {
         
-        //Display the window.
-        frame.setLocationRelativeTo(null);
-        frame.pack();
-        frame.setVisible(true);    
+        JDialog dialog = new JDialog();
+               
+         
+        JOptionPane.showMessageDialog(dialog, ""
+                + "<html><font size=+2>NotEd</font><br>"
+                + "Simple music editor that displays and edits music<br><br>"
+                + "Created by:<br>Adam Příhoda,<br>David Vavřička,<br>Ondřej Altman,<br>Karel Šmejkal<br><br>"
+                + "Additional help by: "
+                + "<br>Petr Prokop,<br> Nguyen Viet Bach<br>"
+                + "<br><i>Copyright 2014 NotEd team all rights reserved</i></html>", "About", JOptionPane.PLAIN_MESSAGE);
+           
+      
     }
     
 }
