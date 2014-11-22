@@ -13,6 +13,7 @@ import cz.cvut.fit.project.noted.musicrenderer.glyphs.ClefGlyph;
 import cz.cvut.fit.project.noted.musicrenderer.glyphs.RestGlyph;
 import cz.cvut.fit.project.noted.musicrenderer.glyphs.BarGlyph;
 import cz.cvut.fit.project.noted.musicrenderer.glyphs.BarSeparator;
+import cz.cvut.fit.project.noted.musicrenderer.glyphs.CursorGlyph;
 import cz.cvut.fit.project.noted.musicrenderer.glyphs.FooterGlyph;
 import cz.cvut.fit.project.noted.musicrenderer.glyphs.KeySignatureGlyph;
 import cz.cvut.fit.project.noted.musicrenderer.glyphs.NoteGlyph;
@@ -43,6 +44,7 @@ public class RenderPanel extends JPanel{
     private RenderBuilder builder;
     private Model model;
     private Cursor cursor;
+    private CursorGlyph addCursor;
     
     public RenderPanel() {
 
@@ -64,7 +66,7 @@ public class RenderPanel extends JPanel{
         builder = new RenderBuilder(score);
         builder.buildFromModel(model);
 
-        builder.addCursor(cursor.getPart(), cursor.getMeasure(), cursor.getPosition_x(), cursor.getPosition_y());
+        addCursor = builder.addCursor(cursor.getPart(), cursor.getMeasure(), cursor.getPosition_x(), cursor.getPosition_y());
         
         score.setY(150);
         score.doLayout();
@@ -79,6 +81,12 @@ public class RenderPanel extends JPanel{
     public void rebuild()
     {
         buildFromModel(model, cursor);
+    }
+    
+    
+    public int getCursorScreenX()
+    {
+        return (int) (addCursor.getScreenX() * scale);
     }
     
     

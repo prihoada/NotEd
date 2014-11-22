@@ -147,6 +147,11 @@ public abstract class Glyph {
         if(parent != null) return parent.getStave();
         else return null;
     }
-    
-    
+
+    public int getScreenX()
+    {
+        int screenX = this.getX();
+        if(parent != null) screenX += parent.getScreenX();
+        return screenX;
+    }
 }
