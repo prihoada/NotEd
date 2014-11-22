@@ -37,6 +37,8 @@ public class ZoomAction extends AbstractAction{
         
         tabManager.getActiveTab().getRenderPanel().repaint();
         tabManager.getActiveTab().getRenderPanel().revalidate();
+        tabManager.getActiveTab().getRenderPanel().scrollToCursor();
+
     }
     
     

@@ -19,7 +19,7 @@ public final class Cursor
     private final Model model;
     private final ScorePartwise modelHierarchy;
     private final List<ScorePartwise.Part> parts;
-        
+    
     
     public Cursor(Model model)
     {

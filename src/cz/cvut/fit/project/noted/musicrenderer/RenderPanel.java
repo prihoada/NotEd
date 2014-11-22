@@ -26,6 +26,7 @@ import cz.cvut.fit.project.noted.musicrenderer.model.BarSeparatorType;
 import cz.cvut.fit.project.noted.musicrenderer.model.BeamDirection;
 import cz.cvut.fit.project.noted.musicrenderer.model.Clef;
 import cz.cvut.fit.project.noted.musicrenderer.model.Duration;
+import java.awt.Rectangle;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -81,6 +82,7 @@ public class RenderPanel extends JPanel{
     public void rebuild()
     {
         buildFromModel(model, cursor);
+        this.scrollToCursor();
     }
     
     
@@ -104,6 +106,13 @@ public class RenderPanel extends JPanel{
         builder = new RenderBuilder(score);
         builder.addCursor(0,0,0,0);
     }
+    
+    public void scrollToCursor()
+    {
+        Rectangle tmp = new Rectangle(this.getCursorScreenX(), 0, 50, 50);
+        this.scrollRectToVisible(tmp);
+    }
+    
     
     /**
      * Creates a set of test bars.

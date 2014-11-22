@@ -3,6 +3,7 @@ package cz.cvut.fit.project.noted.keyboard.actions;
 import cz.cvut.fit.project.noted.editor.ModelEditor;
 import cz.cvut.fit.project.noted.keyboard.KeyMappings;
 import cz.cvut.fit.project.noted.rendering.TabManager;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 

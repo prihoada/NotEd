@@ -60,6 +60,11 @@ public class Tab extends JPanel
         this.setModel(proxyMusicHandler.createEmptyModel());
     }
 
+    public JScrollPane getPane()
+    {
+        return pane;
+    }
+
     public Model getModel()
     {
         return model;
@@ -94,7 +99,7 @@ public class Tab extends JPanel
         this.saved = saved;
         return this;
     }
-    
+        
 
     /**
      * Marshals the model to a file. Asks for file destination if saveAs is true or if the tab has not yet been saved.
