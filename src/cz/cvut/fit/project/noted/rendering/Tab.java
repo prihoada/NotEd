@@ -15,6 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.Scrollable;
 
 /**
  * Panel containing rendered sheet music, associated midi player and model.
@@ -55,7 +56,7 @@ public class Tab extends JPanel
         pane.getHorizontalScrollBar().setUnitIncrement(30);
         pane.getVerticalScrollBar().setUnitIncrement(25);
         this.add(pane, BorderLayout.CENTER);
-
+        
         this.setModel(proxyMusicHandler.createEmptyModel());
     }
 

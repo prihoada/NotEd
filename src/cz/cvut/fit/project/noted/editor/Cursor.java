@@ -19,7 +19,7 @@ public final class Cursor
     private final Model model;
     private final ScorePartwise modelHierarchy;
     private final List<ScorePartwise.Part> parts;
-    
+        
     
     public Cursor(Model model)
     {
@@ -56,22 +56,6 @@ public final class Cursor
         this.position_y = position_y;
     }
     
-    public void setMeasure(int measure)
-    {
-        this.measure = measure;
-    }
-    public void setPart(int part)
-    {
-        this.part = part;
-    }
-    public void setPosition_x(int position_x)
-    {
-        this.position_x = position_x;
-    }
-    public void setPosition_y(int position_y)
-    {
-        this.position_y = position_y;
-    }
     
     
     public boolean moveToRight()
