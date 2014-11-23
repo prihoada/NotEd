@@ -16,7 +16,7 @@ import javax.swing.JTextArea;
  *
  * @author Myri
  */
-public class About extends JDialog {
+public class Help extends JDialog {
      static void createAndShowGUI() {
 
         JDialog dialog = new JDialog();

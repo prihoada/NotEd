@@ -6,20 +6,18 @@ import javax.swing.JOptionPane;
 import java.awt.*; 
 import javax.swing.*; 
 
-public class OpenAboutAction extends JPanel
+public class OpenHelpAction extends JPanel
                       implements ActionListener 
 {
 
-    public OpenAboutAction()
+    public OpenHelpAction()
     {
     }
 
     @Override
     public void actionPerformed(ActionEvent e)
     {
-            About.createAndShowGUI();
+            Help.createAndShowGUI();
 
     }
-         
-    
 }
