@@ -47,11 +47,11 @@ public class OpenHelpAction extends JDialog implements ActionListener {
                         "V prvním toolbaru vyberete délku noty\n" +
                         "V druhém poté k případnému výběru posuvky\n" +
                          "\n" +
-                   " K editaci také můžete použít zkratky (enter na přidání noty\n"
-                 + " mezerník na přidání pomlky, šipkama pohybujete kurzorem,\n"
-                 + " backspace maže symbol před kurzorem, delete maže symbol\n"
-                 + " za kurzorem,\n"
-                 + " tabulátor vloží oddělovač taktu)",5,20);
+                   "K editaci také můžete použít zkratky (enter na přidání noty\n"
+                 + "mezerník na přidání pomlky, šipkama pohybujete kurzorem,\n"
+                 + "backspace maže symbol před kurzorem, delete maže symbol\n"
+                 + "za kurzorem,\n"
+                 + "tabulátor vloží oddělovač taktu)",5,20);
       textArea.setEditable(false);
 
       JScrollPane scrollPane = new JScrollPane(textArea);            
