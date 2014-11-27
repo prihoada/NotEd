@@ -3,6 +3,7 @@ package cz.cvut.fit.project.noted.menus.actions;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -27,20 +28,25 @@ public class OpenHelpAction extends JDialog implements ActionListener {
    private JLabel statusLabel;
    private JPanel closePanel;
     
-    
   public OpenHelpAction(JFrame parent, String title) {
   }
   @Override
+    
   public void actionPerformed(ActionEvent e) {
     createGUI();
   }
   
   private void createGUI(){
       mainFrame = new JFrame("Help"); 
-      mainFrame.setLayout(new GridLayout(3, 1));
+      mainFrame.setLayout(new BorderLayout());
       mainFrame.setSize(350, 400);
        
+      JPanel top = new JPanel();
       statusLabel = new JLabel("Help for NotEd", JLabel.CENTER);    
+      top.add(statusLabel);
+      top.setBorder(BorderFactory.createEmptyBorder(20,0,0,0));
+      
+      mainFrame.add(top, BorderLayout.NORTH);
       
       final JTextArea textArea = 
          new JTextArea("Editace se provádí v dolní části aplikace v toolbaru s notami\n" +
@@ -53,8 +59,14 @@ public class OpenHelpAction extends JDialog implements ActionListener {
                  + "za kurzorem,\n"
                  + "tabulátor vloží oddělovač taktu)",5,20);
       textArea.setEditable(false);
+      textArea.setOpaque(false);
+      textArea.setFont(new Font("serif", Font.PLAIN, 15));
 
       JScrollPane scrollPane = new JScrollPane(textArea);            
+      scrollPane.setPreferredSize(new Dimension(800,600));
+      
+      mainFrame.add(scrollPane, BorderLayout.CENTER);
+      scrollPane.setBorder(BorderFactory.createEmptyBorder(20,20,20,20));
       
       closePanel = new JPanel();
       
@@ -68,9 +80,8 @@ public class OpenHelpAction extends JDialog implements ActionListener {
       
       closePanel.add(button);
        
-      mainFrame.add(statusLabel);
-      mainFrame.add(scrollPane);
-      mainFrame.add(closePanel);
+      mainFrame.add(closePanel, BorderLayout.SOUTH);
+      mainFrame.pack();
       mainFrame.setLocationRelativeTo(null);
       mainFrame.setVisible(true);  
    }
