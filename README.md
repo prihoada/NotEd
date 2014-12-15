@@ -1,1 +1,24 @@
-SP2 project with Slack integrationJak spustit testy:   stahnout a do libs složky přidat `junit.jar` a `hamcrest-core.jar`   link tady (https://github.com/junit-team/junit/wiki/Download-and-Install)   v IDE označit složku `tests` jako složku s testama a spustit testy (tady nevim jak přesně se dělá v NetBeans)   EDIT: postup pro netbeans: vlastnosti projektu > zalozka sources > pridat slozku tests do boxu Test Package Folders.                              zalozka libraries > karta Compile Tests > Add Library > JUnit 4.x                              spousteni vsech testu: alt-f6 nebo Run > Test project                              plugin na code coverage (ukaze kolik % kodu je pokryto testy)                                tools > plugins > available plugins > najit TikiOne JaCoCoverage
+# NotEd
+
+* Software vyvinutý v NetBeans IDE v rámci předmětu Softwarový projekt 1+2
+* Cílem projektu je implementovat jednoduchý, avšak lehce rozšiřitelný, notový editor.
+
+## Hlavní požadavky
+
+* Zobrazení a editace běžného západního notového zápisu
+  * [http://en.wikipedia.org/wiki/Musical_notation#Modern_staff_notation]
+* Ukládání ve formátech MusicXML a případně MIDI
+* Přehrávání notového zápisu
+
+Více informací na WIKI
+* https://github.com/prihoada/NotEd/wiki
+
+## Členové týmu
+| Jméno | Uživatelské jméno | školní email | osobní email |
+|---------------|-----------------|---------------------|------------------|
+| Adam Příhoda | prihoada | prihoada@fit.cvut.cz | prihoda.adam@gmail.com |
+| David Vavřička | vavridav | vavridav@fit.cvut.cz | vavricka.d@gmail.com |
+| Karel Šmejkal | smejkka3 | smejkka3@fit.cvut.cz | xpfunky@gmail.com |
+| Ondřej Altman | altmaon1 | altmaon1@fit.cvut.cz | o1.altman@gmail.com |
+| | | | |
+| Ivan Ryant | ryantiva | ryantiva@fit.cvut.cz | v nouzi mobil 723365938 |
