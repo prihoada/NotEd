@@ -238,6 +238,12 @@
         <test name="cz.cvut.fit.project.noted.localization.LocalizationManagerTest"/>
         <test name="cz.cvut.fit.project.noted.utils.FileUtilsTest"/>
         <test name="cz.cvut.fit.project.noted.editor.CursorTest" />
+        <test name="cz.cvut.fit.project.noted.model.ProxyMusicHandlerTest" />
+        <test name="cz.cvut.fit.project.noted.musicrenderer.ProxyMusicConverterTest" />
+        <test name="cz.cvut.fit.project.noted.musicrenderer.RenderBuilderTest" />
+        <test name="cz.cvut.fit.project.noted.musicrenderer.TestPaint" />
+        <test name="cz.cvut.fit.project.noted.rendering.TabManagerTest" />
+        <test name="cz.cvut.fit.project.noted.rendering.TabTest" />
     </junit>
     </target>
 
