@@ -3,7 +3,7 @@ package cz.cvut.fit.project.noted.modelplayer;
 import com.audiveris.proxymusic.Accidental;
 import com.audiveris.proxymusic.Pitch;
 import com.audiveris.proxymusic.Step;
-import com.sun.istack.internal.logging.Logger;
+//import com.sun.istack.internal.logging.Logger;
 import java.util.HashMap;
 import java.util.Map;
 import jm.JMC;
@@ -95,7 +95,6 @@ public class JMCConverter {
             case "64th":
                 return 1/64;
             default:
-                Logger.getLogger(JMCBuilder.class).warning("Unknown duration type: " + type);
                 return JMC.QUARTER_NOTE;
         }
     }
